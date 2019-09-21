@@ -1,0 +1,144 @@
+#cabecalho{
+    background-color: #3c6178;
+    text-align: center;
+}
+
+#div_esquerda{
+    height: 100vh;
+}
+
+#div_centro{
+    height: 100vh;
+}
+.btnEntrar, p{
+    text-align: center;
+}
+
+p{
+    margin-top: 10px;
+}
+
+#div_direita{
+    height: 100vh;
+}
+
+#formLogin{
+    width: 500px;    
+    margin: 0 auto;
+    margin-top: 15%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+#linkCadastre{
+    text-decoration: none;
+    color: white;
+}
+
+#cabecalho2{
+    margin: 10px;
+}
+
+#content{
+    background-image: url("img/fundo_study.jpg");
+    background-size: 100%;
+}
+
+#painel_controle_menu_esquerda{
+    height: 100vh;
+}
+
+#menu{
+
+    padding-top: 10%;    
+    
+}
+
+#menu ul li a{
+
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    transition: 0.5s;
+}
+
+#menu ul li a:hover{
+    transition: 0.5s;
+    color: #3c6178;
+    font-size: 20px;
+}
+
+#menu ul li{
+    text-align: left;
+    text-decoration: none;
+    margin: 10%;
+    list-style-type: none;    
+}
+
+#formCadastroEvento{
+    margin: 20px;
+    
+}
+
+.form-inline label{
+
+    padding: 5px;
+}
+
+#formCadastroEvento{
+    padding-top: 10px;
+}
+#divBtnCadastrarEvento{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+#divBtnCadastrarEvento button{
+    margin: 10px;
+    background-color: #3c6178 !important;
+    border-color: #3c6178 !important;
+    box-shadow: none !important;
+}
+
+.itensCadastroEvento{
+    margin-top: 10px;
+}
+
+.itensCadastro{
+    padding-top: 10px;
+}
+
+.itensCadastro label{
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+}
+
+#formCadastroUsuario{
+    padding-top: 3%; 
+    padding-left: 4%;   
+}
+
+.formCadastroUsuarioProfessor{
+    padding-top: 10px;
+}
+
+.formCadastroUsuarioProfessor label{
+    width: 100px;
+    text-align: right;
+}
+
+#divBtnCadastrarUsuario button{
+    margin: 10px;
+    background-color: #3c6178 !important;
+    border-color: #3c6178 !important;
+    box-shadow: none !important;
+}
+
+#divBtnCadastrarUsuario{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
