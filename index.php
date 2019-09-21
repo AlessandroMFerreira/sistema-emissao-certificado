@@ -1,7 +1,7 @@
 <?php
     session_start();
-    include_once 'header.html';
-    include_once 'usuario.class.php';
+    require_once 'header.html';
+    require_once 'classes/usuario.class.php';
 
     $usuario = new usuario();
 ?>
@@ -51,5 +51,5 @@
             $_SESSION['tipo'] = "participante";
         }
     }
-    include_once 'footer.html';
+    require_once 'footer.html';
 ?>

@@ -1,7 +1,7 @@
 <?php
     session_start();
-    include 'certificado.class.php';
-    include 'evento.class.php';
+    require_once 'classes/certificado.class.php';
+    require_once 'classes/evento.class.php';
     $evento = new evento();
     $certificado = new certificado();
 

@@ -1,6 +1,6 @@
 <?php
 
-include_once 'conexao.class.php';
+require_once 'conexao.class.php';
 
 class evento extends conexao{
 
