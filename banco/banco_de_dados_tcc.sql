@@ -26,6 +26,7 @@ create table usuario (
 create table evento(
 	idEvento int primary key auto_increment,
     validado boolean not null,
+    permiteemimssaocertificado boolean not null,
     descricao varchar(250) not null,
     carga_horaria time,
     data_inicio date not null,
@@ -69,8 +70,7 @@ create table evento(
 
 /*ATENÇÃO!!!! Monitores e palestrantes terão que ter seu cadastro feito como um usuario seja de qual natureza for para evitar cadastros desnecessários e uma tabela somente para cadastrar esses usuarios*/
 create table participanteevento(
-	idParticipante int primary key auto_increment,
-    tipo enum ('monitor', 'palestrante','ouvinte') not null,
+	idParticipanteEvento int primary key auto_increment,
     data_inscricao date,
     entrada time,
     saida time,
@@ -78,6 +78,44 @@ create table participanteevento(
     id_evento int not null
 );
 
+create table planilhaparticipante(
+
+    idPlanilhaParticipante int primary key auto_increment,
+    tipo varchar(250) not null,
+    curso_nome varchar(250),
+    curso_nome_curso varchar(250),
+    curso_periodo_realizacao_inicio date,
+    curso_periodo_realizacao_fim date,
+    curso_carga_horaria time,
+    evento_nome_avaliador varchar(250),
+    evento_nome varchar (250),
+    evento_periodo_realizacao_inicio date,
+    evento_periodo_realizacao_fim date,
+    evento_numero_posteres_avaliados int,
+    projeto_nome_professor_orientador varchar(250),
+    projeto_nome_bolsista varchar(250),
+    projeto_titulo varchar(250),
+    projeto_mes_inicial date,
+    projeto_mes_final date,
+    projeto_ano date,
+    ic_noome_orientador varchar(250),
+    ic_nome_bolsiste varchar(250),
+    ic_instituicao_fomento varchar(250),
+    ic_titulo_projeto varchar(250),
+    ic_mes_inicial date,
+    ic_mes_final date,
+    ic_ano date,
+    ic_noome_orientador varchar(250),
+    icj_nome_bolsiste varchar(250),
+    icj_instituicao_fomento varchar(250),
+    icj_titulo_projeto varchar(250),
+    icj_mes_inicial date,
+    icj_mes_final date,
+    icj_ano date,
+    id_evento int,
+    id_usuario int,
+
+);
 
 
 /*FOREIGN KEYS*/
@@ -85,3 +123,5 @@ create table participanteevento(
 alter table evento add constraint fk_id_usuario_responsavel_evento foreign key(id_usuario_responsavel) references usuario(idUsuario);
 alter table participanteevento add constraint fk_id_usuario_participanteevento foreign key(id_usuario) references usuario(idUsuario);
 alter table participanteevento add constraint fk_id_evento_participanteevento foreign key(id_evento) references evento(idEvento);
+alter table planilhaparticipante add constraint fk_id_evento_planilhaparticipante foreign key(id_evento) references evento(idEvento);
+alter table planilhaparticipante add constraint fk_id_usuario_planilhaparticipante foreign key(id_usuario) references usuario(idUsuario);
