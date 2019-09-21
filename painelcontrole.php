@@ -5,8 +5,7 @@
 
     //include de arquivos 
     require_once 'header.html';
-    require_once 'classes/evento.class.php';
-    require_once 'classes/usuario.class.php';
+    require __DIR__."/vendor/autoload.php";
 
     //Verificação de segurança
     if(!isset($_SESSION['tipo']) && !isset($_SESSION['idUsuario']) || $_SESSION['tipo'] != 'administrador'){
@@ -197,7 +196,7 @@
                             <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=exibirEventosValidados' style='text-decoration: none; color:white;'>Listar eventos validados</a></button>
                             <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=exibirEventosNaoValidados' style='text-decoration: none; color:white;'>Listar eventos não validados</a></button>
                     </div>";
-                require_once "Formularios/cadastroevento.html";
+                require_once "formulariocadastroevento.html";
                 
                 if(isset($_POST['cadastrarEvento'])){
 
@@ -713,7 +712,7 @@
                             <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=cadastrarUsuario' style='text-decoration: none; color:white;'>Cadastrar Usuario</a></button>
                     </div>";
                 
-                require_once 'Formularios/cadastrousuario.html';
+                require_once 'formulariocadastrousuario.html';
 
                 if(isset($_POST['cadastrar'])){
                     $nome = $_POST['nome'];
@@ -743,7 +742,7 @@
                             <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;'><a href='#' style='text-decoration: none; color:white;'>Cadastrar Usuario</a></button>
                     </div>";
 
-                    require_once 'Formularios/cadastrousuario.html';
+                    require_once 'formulariocadastrousuario.html';
 
                     if(isset($_POST['cadastrar'])){
                         $nome = $_POST['nome'];

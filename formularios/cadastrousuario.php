@@ -1,5 +1,5 @@
 <?php
-    require_once '../classes/usuario.class.php';
+    require __DIR__."/vendor/autoload.php";
 
     $usuario = new usuario();
 

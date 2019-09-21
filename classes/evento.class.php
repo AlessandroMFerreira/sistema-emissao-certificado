@@ -1,6 +1,6 @@
 <?php
 
-require_once 'conexao.class.php';
+require __DIR__."/vendor/autoload.php";
 
 class evento extends conexao{
 

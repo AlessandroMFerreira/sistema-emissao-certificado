@@ -1,6 +1,6 @@
 <?php
     
-    require_once '../fpdf/fpdf.php';
+    require __DIR__."/vendor/autoload.php";
 
     class certificado extends fpdf{
 

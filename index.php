@@ -1,7 +1,6 @@
 <?php
     session_start();
-    require_once 'header.html';
-    require_once 'classes/usuario.class.php';
+    require __DIR__."/vendor/autoload.php";
 
     $usuario = new usuario();
 ?>
@@ -24,7 +23,7 @@
                 </div>
                 <p><strong>ou</strong></p>
                 <div class="btnEntrar">
-                    <a href="Formularios/cadastrousuario.php" id="linkCadastre">Cadastre-se</a>
+                    <a href="formulariocadastrousuario.php" id="linkCadastre">Cadastre-se</a>
                 </div>
             </form>
             </div>

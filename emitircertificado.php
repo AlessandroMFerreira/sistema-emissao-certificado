@@ -1,7 +1,7 @@
 <?php
     session_start();
-    require_once 'classes/certificado.class.php';
-    require_once 'classes/evento.class.php';
+    require __DIR__."/vendor/autoload.php";
+    
     $evento = new evento();
     $certificado = new certificado();
 
@@ -11,7 +11,7 @@
     $dataFim = '';
     $cargaHoraria = '';
 
-    $data = $evento->ExibeEventoExpecifico($idEvento,);
+    $data = $evento->ExibeEventoExpecifico($idEvento);
     foreach($data as $row){
         $nomeEvento = $row['descricao'];
         $dataInicio  = $row['data_inicio'];

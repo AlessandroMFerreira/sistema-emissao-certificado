@@ -1,0 +1,24 @@
+{
+    "name": "AlessandroMFerreira/sistema-emissao-certificado",
+    "description": "Sistema para emissão de certificados e gerenciamento de eventos acadêmicos",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alessandro de Medeiros Ferreira",
+            "email": "alessandrodemedeirosf@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "config": {
+        "vendor-dir": "vendor"
+    },
+    "autoload": {
+        "psr-4": {
+            "Source\\": "classes"
+        }
+    },
+    "require": {
+        "fpdf/fpdf": "^1.81"
+    }
+}
