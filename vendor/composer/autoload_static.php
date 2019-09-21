@@ -7,10 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInit80593d8e0c89c2bc769d627ae64b4752
 {
     public static $prefixLengthsPsr4 = array (
-        'S' => 
-        array (
-            'Source\\' => 7,
-        ),
         'F' => 
         array (
             'Fpdf\\' => 5,
@@ -18,10 +14,6 @@ class ComposerStaticInit80593d8e0c89c2bc769d627ae64b4752
     );
 
     public static $prefixDirsPsr4 = array (
-        'Source\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/classes',
-        ),
         'Fpdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf',
