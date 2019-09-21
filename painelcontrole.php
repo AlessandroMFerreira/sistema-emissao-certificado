@@ -112,7 +112,7 @@
                         <tr>
                             <td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=validarEvento><i class='far fa-check-square' title='Validar evento'></i><a></td>";
                             echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=permitirCertificado style='color:red;'><i class='far fa-file-alt' title='Permitir emissão de certificado'></i><a></td>";
-                            echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=emitirCertificado><i class='fas fa-print' title='Emitir Certificado></i></a></td>";
+                            echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=emitirCertificado><i class='fas fa-print' title='Emitir Certificado'></i></a></td>";
                             echo "<td>".$rowEvento['curso']."</td>";
                             echo "<td>".$rowEvento['descricao']."</td>
                             <td>".$rowEvento['carga_horaria']."</td>
