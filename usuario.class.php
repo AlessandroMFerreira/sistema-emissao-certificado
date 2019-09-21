@@ -1,5 +1,5 @@
 <?php
-    require_once 'conexao.class.php';
+    include_once 'conexao.class.php';
 
     class usuario extends conexao{
 
@@ -21,7 +21,7 @@
         private $telefone;
 
         private function VerificaSeUsuarioCpfEmailJaCadastrados($nome, $usuario, $sexo, $senha, $cpf, $email, $endereco, $numero, $bairro, $cidade, $estado, $cep, $telefone){
-            $data = $this->ControleListaTodosOsUsuarios();
+            $data = $this->ListaTodosOsUsuarios();
             $verificaCampos = array('usuario' => 0, 'cpf' => 0, 'email' => 0);
 
             foreach($data as $row){

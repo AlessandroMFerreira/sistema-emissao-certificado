@@ -1,7 +1,7 @@
 <?php
     session_start();
-    require_once 'header.html';
-    require_once 'classes/usuario.class.php';
+    include_once 'header.html';
+    include_once 'usuario.class.php';
 
     $usuario = new usuario();
 ?>

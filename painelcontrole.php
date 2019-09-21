@@ -4,9 +4,9 @@
 
 
     //include de arquivos 
-    require_once 'header.html';
-    require_once 'classes/evento.class.php';
-    require_once 'classes/usuario.class.php';
+    include_once 'header.html';
+    include_once 'evento.class.php';
+    include_once 'usuario.class.php';
 
     //Verificação de segurança
     if(!isset($_SESSION['tipo']) && !isset($_SESSION['idUsuario']) || $_SESSION['tipo'] != 'administrador'){
@@ -24,6 +24,7 @@
     $acao = '';
     $idEvento = '';
     $idUsuario = $_SESSION['idUsuario'];
+    $nomeUsuario = $_SESSION['nomeUsuario'];
     $tela = '';
 
     //Verifica se as variáveis de controle foram passadas na URL
@@ -63,7 +64,7 @@
 
             if($id == '' && $acao == ''){
                 echo "<div class='inicioDiv' style='margin-top: 7%;text-align: center; font-size: 25px;'>
-                        Bem vindo <strong>".$_SESSION['nomeUsuario']."</strong> este é seu painel de controle!<br><br>
+                        Bem vindo <strong>".$nomeUsuario."</strong> este é seu painel de controle!<br><br>
                         Use o menu a sua esquerda para fazer a administração dos eventos cadastrados nesta plataforma!<br>
                         <img src='img/seta.png' style='width: 200px; heigth: 200px;'>
                     </div>";
@@ -93,6 +94,8 @@
                 echo "<table class='table'>
                     <tr>
                         <th></th>
+                        <th></th>
+                        <th></th>
                         <th scope='col'>Curso</th>
                         <th scope='col'>Descrição</th>
                         <th scope='col'>Carga horária</th>
@@ -100,6 +103,7 @@
                         <th scope='col'>Data fim</th>
                         <th scope='col'>Responsável</th>
                         <th scope='col'>Validado</th>
+                        <th scope='col'>Permite emissão de certificado</th>
                         <th></th>
                     </tr>            
                 ";
@@ -107,6 +111,8 @@
                     echo "
                         <tr>
                             <td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=validarEvento><i class='far fa-check-square' title='Validar evento'></i><a></td>";
+                            echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=permitirCertificado style='color:red;'><i class='far fa-file-alt' title='Permitir emissão de certificado'></i><a></td>";
+                            echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=emitirCertificado><i class='fas fa-print' title='Emitir Certificado></i></a></td>";
                             echo "<td>".$rowEvento['curso']."</td>";
                             echo "<td>".$rowEvento['descricao']."</td>
                             <td>".$rowEvento['carga_horaria']."</td>
@@ -118,6 +124,11 @@
                                 }
                             }
                             if($rowEvento['validado'] == 0){
+                                echo "<td>Não</td>";
+                            }else{
+                                echo "<td>Sim</td>";
+                            }
+                            if($rowEvento['permiteemimssaocertificado'] == 0){
                                 echo "<td>Não</td>";
                             }else{
                                 echo "<td>Sim</td>";
@@ -186,7 +197,7 @@
                             <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=exibirEventosValidados' style='text-decoration: none; color:white;'>Listar eventos validados</a></button>
                             <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=exibirEventosNaoValidados' style='text-decoration: none; color:white;'>Listar eventos não validados</a></button>
                     </div>";
-                require_once "Formularios/cadastroevento.html";
+                include_once "Formularios/cadastroevento.html";
                 
                 if(isset($_POST['cadastrarEvento'])){
 
@@ -526,6 +537,50 @@
                     header('Location: painelcontrole.php?id=1');
                 }
             }
+            if($acao == 'emitirCertificado'){
+                header('Location: emitircertificado.php?idEvento='.$idEvento);
+            }
+
+            if($acao == 'permitirCertificado'){
+                $data = $evento->ExibeEventoExpecifico($idEvento);
+                foreach($data as $row){
+                    if($row['validado'] == 1){
+                        $evento->PermiteEmissaoDeCertificado($idEvento);
+                        if($tela == 'validado'){
+                            echo "
+                                <script>
+                                    alert('A emissão de certificados para o evento ".$row['descricao']." está liberada!');
+                                    window.location.href='painelcontrole.php?acao=exibirEventosValidados';
+                                </script>
+                            ";
+                        }else{
+                            echo "
+                                <script>
+                                    alert('A emissão de certificados para o evento ".$row['descricao']." está liberada!');
+                                    window.location.href='painelcontrole.php?id=1';
+                                </script>
+                            ";
+                        }
+                    }else{
+                        if($tela == 'validado'){
+                            echo "
+                                <script>
+                                    alert('Valide o evento antes de permitir a emissão de certificados');
+                                    window.location.href='painelcontrole.php?acao=exibirEventosValidados';
+                                </script>
+                            ";
+                        }
+                        else{
+                            echo "
+                            <script>
+                                alert('Valide o evento antes de permitir a emissão de certificados');
+                                window.location.href='painelcontrole.php?id=1';
+                            </script>
+                            ";
+                        }
+                    }
+                }
+            }
 
             //Estrutura para exibir apenas os eventos que foram validados.
 
@@ -542,6 +597,7 @@
 
                 echo "<table class='table'>
                     <tr>
+                        <th></th>
                         <th scope='col'>Curso</th>
                         <th scope='col'>Descrição</th>
                         <th scope='col'>Carga horária</th>
@@ -549,13 +605,14 @@
                         <th scope='col'>Data fim</th>
                         <th scope='col'>Responsável</th>
                         <th scope='col'>Validado</th>
+                        <th scope='col'>Permite emissão de certificado</th>
                         <th></th>
                     </tr>            
                 ";
                 foreach($dataEvento as $rowEvento){
                     echo "
-                        <tr>";
-                
+                        <tr>
+                            <td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=permitirCertificado&tela=validado style='color:red;'><i class='far fa-file-alt' title='Permitir emissão de certificado'></i><a></td>";
                             echo "<td>".$rowEvento['curso']."</td>";
                             echo "<td>".$rowEvento['descricao']."</td>
                             <td>".$rowEvento['carga_horaria']."</td>
@@ -567,6 +624,11 @@
                                 }
                             }
                             if($rowEvento['validado'] == 0){
+                                echo "<td>Não</td>";
+                            }else{
+                                echo "<td>Sim</td>";
+                            } 
+                            if($rowEvento['permiteemimssaocertificado'] == 0){
                                 echo "<td>Não</td>";
                             }else{
                                 echo "<td>Sim</td>";
@@ -600,6 +662,7 @@
                         <th scope='col'>Data fim</th>
                         <th scope='col'>Responsável</th>
                         <th scope='col'>Validado</th>
+                        <th scope='col'>Permite emissão de certificado</th>
                         <th></th>
                     </tr>            
                 ";
@@ -618,6 +681,11 @@
                                 }
                             }
                             if($rowEvento['validado'] == 0){
+                                echo "<td>Não</td>";
+                            }else{
+                                echo "<td>Sim</td>";
+                            }
+                            if($rowEvento['permiteemimssaocertificado'] == 0){
                                 echo "<td>Não</td>";
                             }else{
                                 echo "<td>Sim</td>";
@@ -645,7 +713,7 @@
                             <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=cadastrarUsuario' style='text-decoration: none; color:white;'>Cadastrar Usuario</a></button>
                     </div>";
                 
-                require_once 'Formularios/cadastrousuario.html';
+                include_once 'Formularios/cadastrousuario.html';
 
                 if(isset($_POST['cadastrar'])){
                     $nome = $_POST['nome'];
@@ -675,7 +743,7 @@
                             <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;'><a href='#' style='text-decoration: none; color:white;'>Cadastrar Usuario</a></button>
                     </div>";
 
-                    require_once 'Formularios/cadastrousuario.html';
+                    include_once 'Formularios/cadastrousuario.html';
 
                     if(isset($_POST['cadastrar'])){
                         $nome = $_POST['nome'];
@@ -805,5 +873,5 @@
         </div>
     ";
 
-    require_once 'footer.html';
+    include_once 'footer.html';
 ?>

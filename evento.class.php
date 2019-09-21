@@ -1,6 +1,6 @@
 <?php
 
-require_once 'conexao.class.php';
+include_once 'conexao.class.php';
 
 class evento extends conexao{
 
@@ -41,7 +41,7 @@ class evento extends conexao{
 
     public function NovoEvento($descricao,$cargahoraria,$datainicio,$datafim,$datacriacao,$tipo,$extensao,$pesquisa,$bolsista_projeto,$orientador_projeto,$voluntario_projeto,$colaborador_projeto,$organizador_evento,$palestrante_evento,$ministrante_evento,$apresentador_evento,$monitor_evento,$mediador_evento,$participante_evento,$avaliador_evento,$organizador_curso,$ministrante_curso,$participante_curso,$orientador_iniciacao_cientifica,$bolsista_iniciacao_cientifica,$voluntario_iniciacao_cientifica,$orientador_iniciacao_cientifica_jr,$bolsista_iniciacao_cientifica_jr,$voluntario_iniciacao_cientifica_jr,$sigaextensao,$idsiga,$map,$idmap,$colegiado,$numeroata,$dataata,$outrasocorrencias,$curso,$iduser)
     {
-        $sql = "INSERT INTO evento(validado,descricao,carga_horaria,data_inicio,data_fim,data_criacao,tipo,extensao,pesquisa,projeto_bolsista,projeto_orientador,projeto_voluntario,projeto_colaborador,evento_organizador,evento_palestrante,evento_ministrante,evento_apresentador,evento_monitor,evento_mediador,evento_participante,evento_avaliador,curso_organizador,curso_ministrante,curso_participante,pesquisa_projeto_ic_orientador,pesquisa_projeto_ic_bolsista,pesquisa_projeto_ic_voluntario,pesquisa_projeto_icj_orientador,pesquisa_projeto_icj_bolsista,pesquisa_projeto_icj_voluntario,sigaextensao,id_siga_extansao,map,idmap,informado_ao_colegiado_do_curso,numero_ata,data_ata,outras_ocorrencias,curso,id_usuario_responsavel) VALUES(0,"."'".$descricao."',"."'".$cargahoraria."',"."'".$datainicio."',"."'".$datafim."',"."'".$datacriacao."',"."'".$tipo."',"."'".$extensao."',"."'".$pesquisa."',".$bolsista_projeto.",".$orientador_projeto.",".$voluntario_projeto.",".$colaborador_projeto.",".$organizador_evento.",".$palestrante_evento.",".$ministrante_evento.",".$apresentador_evento.",".$monitor_evento.",".$mediador_evento.",".$participante_evento.",".$avaliador_evento.",".$organizador_curso.",".$ministrante_curso.",".$participante_curso.",".$orientador_iniciacao_cientifica.",".$bolsista_iniciacao_cientifica.",".$voluntario_iniciacao_cientifica.",".$orientador_iniciacao_cientifica_jr.",".$bolsista_iniciacao_cientifica_jr.",".$voluntario_iniciacao_cientifica_jr.",".$sigaextensao.","."'".$idsiga."',".$map.","."'".$idmap."',".$colegiado.","."'".$numeroata."',"."'".$dataata."',"."'".$outrasocorrencias."',"."'".$curso."',".$iduser.")";
+        $sql = "INSERT INTO evento(validado,permiteemimssaocertificado,descricao,carga_horaria,data_inicio,data_fim,data_criacao,tipo,extensao,pesquisa,projeto_bolsista,projeto_orientador,projeto_voluntario,projeto_colaborador,evento_organizador,evento_palestrante,evento_ministrante,evento_apresentador,evento_monitor,evento_mediador,evento_participante,evento_avaliador,curso_organizador,curso_ministrante,curso_participante,pesquisa_projeto_ic_orientador,pesquisa_projeto_ic_bolsista,pesquisa_projeto_ic_voluntario,pesquisa_projeto_icj_orientador,pesquisa_projeto_icj_bolsista,pesquisa_projeto_icj_voluntario,sigaextensao,id_siga_extansao,map,idmap,informado_ao_colegiado_do_curso,numero_ata,data_ata,outras_ocorrencias,curso,id_usuario_responsavel) VALUES(0,0,"."'".$descricao."',"."'".$cargahoraria."',"."'".$datainicio."',"."'".$datafim."',"."'".$datacriacao."',"."'".$tipo."',"."'".$extensao."',"."'".$pesquisa."',".$bolsista_projeto.",".$orientador_projeto.",".$voluntario_projeto.",".$colaborador_projeto.",".$organizador_evento.",".$palestrante_evento.",".$ministrante_evento.",".$apresentador_evento.",".$monitor_evento.",".$mediador_evento.",".$participante_evento.",".$avaliador_evento.",".$organizador_curso.",".$ministrante_curso.",".$participante_curso.",".$orientador_iniciacao_cientifica.",".$bolsista_iniciacao_cientifica.",".$voluntario_iniciacao_cientifica.",".$orientador_iniciacao_cientifica_jr.",".$bolsista_iniciacao_cientifica_jr.",".$voluntario_iniciacao_cientifica_jr.",".$sigaextensao.","."'".$idsiga."',".$map.","."'".$idmap."',".$colegiado.","."'".$numeroata."',"."'".$dataata."',"."'".$outrasocorrencias."',"."'".$curso."',".$iduser.")";
         $stmt = $this->con()->prepare($sql);
         $stmt->execute();
     }
@@ -100,6 +100,12 @@ class evento extends conexao{
         $data = $stmt->fetchAll();
 
         return $data;
+    }
+
+    public function PermiteEmissaoDeCertificado($idEvento){
+        $sql = "UPDATE evento SET permiteemimssaocertificado = 1 WHERE idEvento = ".$idEvento;
+        $stmt = $this->con()->prepare($sql);
+        $stmt->execute();
     }
 
 }

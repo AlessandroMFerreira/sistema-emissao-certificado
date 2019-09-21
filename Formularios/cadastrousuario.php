@@ -1,5 +1,5 @@
 <?php
-    require_once '../classes/usuario.class.php';
+    include_once '../usuario.class.php';
 
     $usuario = new usuario();
 
