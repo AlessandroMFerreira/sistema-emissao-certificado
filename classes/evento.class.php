@@ -1,6 +1,6 @@
 <?php
 
-
+require_once "vendor/autoload.php";
 class evento extends conexao{
 
     private $descricao;

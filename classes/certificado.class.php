@@ -1,5 +1,5 @@
 <?php
-
+    require_once "vendor/autoload.php";
     class certificado extends fpdf{
 
         private function mes($mes){

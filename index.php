@@ -1,6 +1,7 @@
 <?php
     session_start();
-    require __DIR__."/vendor/autoload.php";
+    require_once __DIR__."/vendor/autoload.php";
+    require "header.html";
 
     $usuario = new usuario();
 ?>
@@ -50,5 +51,5 @@
             $_SESSION['tipo'] = "participante";
         }
     }
-    require_once 'footer.html';
+    require 'footer.html';
 ?>

@@ -1,5 +1,5 @@
 <?php
-
+    require_once "vendor/autoload.php";
     class usuario extends conexao{
 
         private $isadm;
