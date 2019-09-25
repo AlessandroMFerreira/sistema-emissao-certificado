@@ -71,6 +71,11 @@ create table evento(
 /*ATENÇÃO!!!! Monitores e palestrantes terão que ter seu cadastro feito como um usuario seja de qual natureza for para evitar cadastros desnecessários e uma tabela somente para cadastrar esses usuarios*/
 create table participanteevento(
 	idParticipanteEvento int primary key auto_increment,
+    tipo('orientador','bolsista','voluntario','calaborador','organizador','monitor','palestrante','mediador','ministrante','ouvinte','apresentador','avaliador',''),
+    orientador varchar(250),
+    mes_inicio varchar(250),
+    mes_fim varchar(250),
+    numero_posteres int,
     data_inscricao date,
     entrada time,
     saida time,
@@ -78,6 +83,12 @@ create table participanteevento(
     id_evento int not null
 );
 
+create table autor(
+    idAutor int primary key auto_increment,
+    nome varchar(250) not null,
+    id_evento int not null
+);
+alter table autor add constraint fk_is_evento_autor foreign key(id_evento) references evento(idEvento);
 
 
 /*FOREIGN KEYS*/

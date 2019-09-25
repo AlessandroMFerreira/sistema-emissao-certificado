@@ -115,14 +115,13 @@
                             }else{
                                 echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=validarEvento><i class='far fa-check-square' title='Validar evento'></i><a></td>";
                             }
-
                             if($rowEvento['permiteemimssaocertificado'] == 1){
                                 echo "<td><a href='#' style='color: grey;'><i class='far fa-file-alt' title='Permitir emissão de certificado'></i></a></td>";
                             }else{
                                 echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=permitirCertificado><i class='far fa-file-alt' title='Permitir emissão de certificado'></i></a></td>";
                             }
                             echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=emitirCertificado><i class='fas fa-print' title='Emitir Certificado'></i></a></td>";
-                            echo "<td><a href="."painelcontrole.php?=idEvento=".$rowEvento['idEvento']."&acao=cadastrarPlanilha><i class='fas fa-table' title='Cadastrar planilha de participantes'></i></a></td>";
+                            echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=cadastrarPlanilha><i class='fas fa-table' title='Cadastrar planilha de participantes'></i></a></td>";
                             echo "<td>".$rowEvento['curso']."</td>";
                             echo "<td>".$rowEvento['descricao']."</td>
                             <td>".$rowEvento['carga_horaria']."</td>
@@ -523,13 +522,7 @@
             //Cadastrar participantes (palestrante, apresentador, etc...)
 
             if($acao = 'cadastrarPlanilha'){
-                $data = $evento->ExibeEventoExpecifico($idEvento);
-
-                foreach($data as $row){
-                    if($row['projeto_bolsista'] == 1){
-                        require_once 
-                    }
-                }
+                
             }
 
             /*Esta estrutura exclui um evento em especícifo e retorna o usuário para a tela que
@@ -735,7 +728,7 @@
                             <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=cadastrarUsuario' style='text-decoration: none; color:white;'>Cadastrar Usuario</a></button>
                     </div>";
                 
-                require_once 'formulariocadastrousuario.html';
+                require_once 'formularios/cadastrousuario.html';
 
                 if(isset($_POST['cadastrar'])){
                     $nome = $_POST['nome'];
@@ -765,7 +758,7 @@
                             <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;'><a href='#' style='text-decoration: none; color:white;'>Cadastrar Usuario</a></button>
                     </div>";
 
-                    require_once 'formulariocadastrousuario.html';
+                    require_once 'formularios/cadastrousuario.html';
 
                     if(isset($_POST['cadastrar'])){
                         $nome = $_POST['nome'];
