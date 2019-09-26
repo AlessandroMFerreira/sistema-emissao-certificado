@@ -229,9 +229,13 @@
             $sql = "SELECT * FROM usuario WHERE cpf="."'".$cpf."'";
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();
+            $data = $stmt->fetchAll();
+            $arrayDados = array();
 
-            $data = $stmt->fetchAll(PDO::FETCH_OBJ);
-            return $data;
+            foreach($data as $row){
+                $arrayDados['nome'] = $row['nome'];
+            }
+            return $arrayDados;
         }
     }
 ?>

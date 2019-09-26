@@ -25,7 +25,6 @@
     $idUsuario = $_SESSION['idUsuario'];
     $nomeUsuario = $_SESSION['nomeUsuario'];
     $tela = '';
-    $cpf = '';
 
     //Verifica se as variáveis de controle foram passadas na URL
     if(array_key_exists('id', $_GET)){
@@ -39,9 +38,6 @@
     }
     if(array_key_exists('tela', $_GET)){
         $tela = $_GET['tela'];
-    }
-    if(array_key_exists('cpf',$_GET)){
-        $cpf = $_GET['cpf'];
     }
 
     //Conteudo do painel de controle do administrador
@@ -549,10 +545,6 @@
                         require_once "formularios/planilhaextensaoprojeto.html";
                     }
                 }
-            }
-            if($acao == 'buscaUsuario'){
-                $data = $usuario->BuscaUsuarioPorCpf($cpf);
-                echo json_encode($data);
             }
 
 

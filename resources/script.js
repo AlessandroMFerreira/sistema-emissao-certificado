@@ -715,18 +715,21 @@
     }
     function RetornaValorAjax(){
         let form = document.getElementById('formulario');
-        form.addEventListener('submit' ,function(event){
+    
+        form.addEventListener('submit', function(event){
             event.preventDefault();
-        })
-        console.log('Entrou');
-        /*console.log('entrei');
-        var cpf = document.getElementsByName('cpf');
-        var url = "../painelcontrole.php?acao=buscaUsuario&cpf="+cpf.value;
-        var nome = document.getElementsByName('nome');
-
-        fetch(url).then(function(response){
-            console.log(response);
-            //nome.value = response;
-        });*/
+            var cpf = document.getElementById('cpf');
+            var url = "../sistema-emissao-certificado/requisicao.php?cpf="+cpf.value+"&acao=buscaUsuario";
+            var nome = document.getElementById('nome');
+            fetch(url)
+            .then(function(res){
+               return res.json();
+            })
+            .then(function(res){
+                console.log(res.nome);
+                nome.value = res.nome;
+            })
+        });
+        
     }
     
