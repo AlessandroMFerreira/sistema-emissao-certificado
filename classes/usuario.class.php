@@ -97,7 +97,6 @@
                             </script>";
                     }
                 }
-                //fazer para professor
                 if($_SESSION['tipo'] == 'participante'){
                     if($verificaArray['usuario'] == 1){
                         echo "<script>
@@ -225,6 +224,14 @@
                     window.location.href='painelcontrole.php?id=2';
                 </script>
             ";
+        }
+        public function BuscaUsuarioPorCpf($cpf){
+            $sql = "SELECT * FROM usuario WHERE cpf="."'".$cpf."'";
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+
+            $data = $stmt->fetchAll(PDO::FETCH_OBJ);
+            return $data;
         }
     }
 ?>

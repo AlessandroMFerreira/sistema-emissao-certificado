@@ -713,4 +713,20 @@
         }
 
     }
+    function RetornaValorAjax(){
+        let form = document.getElementById('formulario');
+        form.addEventListener('submit' ,function(event){
+            event.preventDefault();
+        })
+        console.log('Entrou');
+        /*console.log('entrei');
+        var cpf = document.getElementsByName('cpf');
+        var url = "../painelcontrole.php?acao=buscaUsuario&cpf="+cpf.value;
+        var nome = document.getElementsByName('nome');
+
+        fetch(url).then(function(response){
+            console.log(response);
+            //nome.value = response;
+        });*/
+    }
     

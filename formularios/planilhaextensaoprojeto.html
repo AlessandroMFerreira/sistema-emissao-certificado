@@ -1,0 +1,32 @@
+<div class="planilha">
+    
+    <form action="#" method="post" id="formulario">
+        <div class="form-inline">
+            <label for="orientador"><strong>Informe o CPF do orientador</strong></label>
+            <input type="text" name="cpf" class="form-control" id="cpf">
+            <input type="text" name="nome" class="form-control" style="margin-left: 10px;" id="nome">
+            <button onclick="RetornaValorAjax()" id="botao">Buscar</button>
+        </div>
+    </form>    
+</div>
+<script>
+function RetornaValorAjax(){
+    let form = document.getElementById('formulario');
+
+    form.addEventListener('submit', function(event){
+        event.preventDefault();
+        var cpf = document.getElementById('cpf');
+        var url = "../certificado/teste.php?cpf="+cpf.value;
+        var nome = document.getElementById('nome');
+        fetch(url)
+        .then((response) =>{
+            console.log(response.json())
+            response.json()
+        })
+        .then((data)=>{
+            console.log(data[0][1])
+        })
+    });
+    
+}
+</script>

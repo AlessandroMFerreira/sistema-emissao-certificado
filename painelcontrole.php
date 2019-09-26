@@ -25,6 +25,7 @@
     $idUsuario = $_SESSION['idUsuario'];
     $nomeUsuario = $_SESSION['nomeUsuario'];
     $tela = '';
+    $cpf = '';
 
     //Verifica se as variáveis de controle foram passadas na URL
     if(array_key_exists('id', $_GET)){
@@ -38,6 +39,9 @@
     }
     if(array_key_exists('tela', $_GET)){
         $tela = $_GET['tela'];
+    }
+    if(array_key_exists('cpf',$_GET)){
+        $cpf = $_GET['cpf'];
     }
 
     //Conteudo do painel de controle do administrador
@@ -519,12 +523,6 @@
                 
             }
 
-            //Cadastrar participantes (palestrante, apresentador, etc...)
-
-            if($acao = 'cadastrarPlanilha'){
-                
-            }
-
             /*Esta estrutura exclui um evento em especícifo e retorna o usuário para a tela que
             lista todos os eventos*/
 
@@ -539,6 +537,24 @@
                     header('Location: painelcontrole.php?id=1');
                 }
             }
+
+            if($acao == 'cadastrarPlanilha'){
+                $dataEvento = $evento->ExibeEventoExpecifico($idEvento);
+                $dataUusario = $usuario->ListaTodosOsUsuarios();
+
+                foreach($dataEvento as $rowEvento){
+
+                    //verificando para Evento-Projeto
+                    if($rowEvento['tipo'] == 'extensao' && $rowEvento['extensao'] == 'projeto'){
+                        require_once "formularios/planilhaextensaoprojeto.html";
+                    }
+                }
+            }
+            if($acao == 'buscaUsuario'){
+                $data = $usuario->BuscaUsuarioPorCpf($cpf);
+                echo json_encode($data);
+            }
+
 
             /*Esta estrutura valida (seta o campo "validado" na tabela "evento" como "1") 
             um evento em especícifo e retorna o usuário para a tela que
