@@ -43,7 +43,7 @@
     //Conteudo do painel de controle do administrador
     echo "
         <div class='row'>
-            <div class='col-2' id='painel_controle_menu_esquerda'>
+            <div class='col-1' id='painel_controle_menu_esquerda'>
                 <div id='menu'>
                     <ul>
                         <li><a href='painelcontrole.php?id=1'>Eventos</a></li>
@@ -52,7 +52,7 @@
                     </ul>
                 </div>
             </div>
-            <div class='col-10'>";
+            <div class='col-11'>";
 
             /*==========================================================================================
             A PARTIR DAQUI É DECIDIDO O QUE SERÁ MOSTRADO NA TELA DEPENDENDO DA AÇÃO QUE O USUÁRIO FIZER
@@ -123,7 +123,7 @@
                             echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=emitirCertificado><i class='fas fa-print' title='Emitir Certificado'></i></a></td>";
                             echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=cadastrarPlanilha><i class='fas fa-table' title='Cadastrar planilha de participantes'></i></a></td>";
                             echo "<td>".$rowEvento['curso']."</td>";
-                            echo "<td>".$rowEvento['descricao']."</td>
+                            echo "<td><a href='#' title='Clique para ver a planilha de participantes associados ao evento'>".$rowEvento['descricao']."</a></td>
                             <td>".$rowEvento['carga_horaria']."</td>
                             <td>".date("d/m/Y",strtotime($rowEvento['data_inicio']))."</td>
                             <td>".date("d/m/Y",strtotime($rowEvento['data_fim']))."</td>";
