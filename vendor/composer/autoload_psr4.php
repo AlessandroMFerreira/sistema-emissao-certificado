@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Fpdf\\' => array($vendorDir . '/fpdf/fpdf/src/Fpdf'),
+    'Classes\\' => array($baseDir . '/classes'),
 );

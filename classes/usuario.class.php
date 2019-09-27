@@ -1,5 +1,6 @@
 <?php
-    require_once "vendor/autoload.php";
+    namespace Classes;
+    require_once __DIR__."/vendor/autoload.php";
     class usuario extends conexao{
 
         private $isadm;

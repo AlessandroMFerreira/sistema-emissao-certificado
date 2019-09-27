@@ -1,9 +1,9 @@
 <?php
     session_start();
-    require __DIR__."/vendor/autoload.php";
+    require_once __DIR__."/vendor/autoload.php";
     
-    $evento = new evento();
-    $certificado = new certificado();
+    $evento = new Classes\evento();
+    $certificado = new Classes\certificado();
 
     $idEvento = $_GET['idEvento'];
     $nomeEvento = '';

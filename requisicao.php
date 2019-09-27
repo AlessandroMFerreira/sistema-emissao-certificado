@@ -1,6 +1,6 @@
 <?php
 
-    require_once "vendor/autoload.php";
+    require_once __DIR__."/vendor/autoload.php";
 
     $cpf = '';
     $acao = '';
@@ -12,7 +12,7 @@
         $acao = $_GET['acao'];
     }
 
-    $usuario = new usuario();
+    $usuario = new Classes\usuario();
 
     if($acao == 'buscaUsuario'){
         $data = $usuario->BuscaUsuarioPorCpf($cpf);

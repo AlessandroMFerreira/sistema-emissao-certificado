@@ -1,7 +1,6 @@
 <?php
-    require_once "../vendor/autoload.php";
-
-    $usuario = new usuario();
+    require_once __DIR__."/vendor/autoload.php";
+    $usuario = new Classes\usuario();
 
 ?>
 

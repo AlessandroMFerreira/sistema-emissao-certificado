@@ -5,7 +5,7 @@
 
     //include de arquivos 
     require_once 'header.html';
-    require __DIR__."/vendor/autoload.php";
+    require_once __DIR__."/vendor/autoload.php";
 
     //Verificação de segurança
     if(!isset($_SESSION['tipo']) && !isset($_SESSION['idUsuario']) || $_SESSION['tipo'] != 'administrador'){
@@ -15,8 +15,8 @@
     
     
     //Instanciação de classes
-    $evento = new evento();
-     $usuario = new usuario();
+    $evento = new Classes\evento();
+    $usuario = new Classes\usuario();
 
     //Iniciação das variáveis de controle
     $id = '';
@@ -538,13 +538,7 @@
                 $dataEvento = $evento->ExibeEventoExpecifico($idEvento);
                 $dataUusario = $usuario->ListaTodosOsUsuarios();
 
-                foreach($dataEvento as $rowEvento){
-
-                    //verificando para Evento-Projeto
-                    if($rowEvento['tipo'] == 'extensao' && $rowEvento['extensao'] == 'projeto'){
-                        require_once "formularios/planilhaextensaoprojeto.html";
-                    }
-                }
+                
             }
 
 

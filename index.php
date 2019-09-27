@@ -1,9 +1,9 @@
 <?php
     session_start();
-    require_once "vendor/autoload.php";
+    require_once __DIR__."/vendor/autoload.php";
     require "header.html";
 
-    $usuario = new usuario();
+    $usuario = new Classes\usuario();
 ?>
         <div class="row" id="content">
             <div class="col-2" id="div_esquerda">

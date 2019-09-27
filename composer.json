@@ -1,6 +1,8 @@
 {
     "autoload": {
-        "classmap": ["classes"]
+        "psr-4": {
+            "Classes\\": "classes/"
+        }
     },
     "require": {
         "fpdf/fpdf": "^1.81"

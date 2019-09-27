@@ -11,6 +11,10 @@ class ComposerStaticInitace1a157ee50d06cb575f13b60da3402
         array (
             'Fpdf\\' => 5,
         ),
+        'C' => 
+        array (
+            'Classes\\' => 8,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -18,13 +22,18 @@ class ComposerStaticInitace1a157ee50d06cb575f13b60da3402
         array (
             0 => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf',
         ),
+        'Classes\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/classes',
+        ),
     );
 
     public static $classMap = array (
-        'certificado' => __DIR__ . '/../..' . '/classes/certificado.class.php',
-        'conexao' => __DIR__ . '/../..' . '/classes/conexao.class.php',
-        'evento' => __DIR__ . '/../..' . '/classes/evento.class.php',
-        'usuario' => __DIR__ . '/../..' . '/classes/usuario.class.php',
+        'Classes\\certificado' => __DIR__ . '/../..' . '/classes/certificado.class.php',
+        'Classes\\conexao' => __DIR__ . '/../..' . '/classes/conexao.class.php',
+        'Classes\\evento' => __DIR__ . '/../..' . '/classes/evento.class.php',
+        'Classes\\usuario' => __DIR__ . '/../..' . '/classes/usuario.class.php',
+        'Fpdf\\Fpdf' => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf/Fpdf.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

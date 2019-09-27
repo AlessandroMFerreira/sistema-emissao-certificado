@@ -6,8 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'certificado' => $baseDir . '/classes/certificado.class.php',
-    'conexao' => $baseDir . '/classes/conexao.class.php',
-    'evento' => $baseDir . '/classes/evento.class.php',
-    'usuario' => $baseDir . '/classes/usuario.class.php',
+    'Classes\\certificado' => $baseDir . '/classes/certificado.class.php',
+    'Classes\\conexao' => $baseDir . '/classes/conexao.class.php',
+    'Classes\\evento' => $baseDir . '/classes/evento.class.php',
+    'Classes\\usuario' => $baseDir . '/classes/usuario.class.php',
+    'Fpdf\\Fpdf' => $vendorDir . '/fpdf/fpdf/src/Fpdf/Fpdf.php',
 );
