@@ -1,6 +1,6 @@
 <?php
     namespace Classes;
-    require_once __DIR__."/vendor/autoload.php";
+    require_once __DIR__."\../vendor\autoload.php";
     class evento extends conexao{
 
         private $descricao;
