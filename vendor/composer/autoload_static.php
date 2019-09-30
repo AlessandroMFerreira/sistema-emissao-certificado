@@ -32,6 +32,7 @@ class ComposerStaticInitace1a157ee50d06cb575f13b60da3402
         'Classes\\certificado' => __DIR__ . '/../..' . '/classes/certificado.class.php',
         'Classes\\conexao' => __DIR__ . '/../..' . '/classes/conexao.class.php',
         'Classes\\evento' => __DIR__ . '/../..' . '/classes/evento.class.php',
+        'Classes\\participante' => __DIR__ . '/../..' . '/classes/participanteevento.class.php',
         'Classes\\usuario' => __DIR__ . '/../..' . '/classes/usuario.class.php',
         'Fpdf\\Fpdf' => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf/Fpdf.php',
     );

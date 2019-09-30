@@ -17,6 +17,7 @@
     //Instanciação de classes
     $evento = new Classes\evento();
     $usuario = new Classes\usuario();
+    $participante = new Classes\participante();
 
     //Iniciação das variáveis de controle
     $id = '';
@@ -95,7 +96,6 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th></th>
                         <th scope='col'>Curso</th>
                         <th scope='col'>Descrição</th>
                         <th scope='col'>Carga horária</th>
@@ -121,9 +121,8 @@
                                 echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=permitirCertificado><i class='far fa-file-alt' title='Permitir emissão de certificado'></i></a></td>";
                             }
                             echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=emitirCertificado><i class='fas fa-print' title='Emitir Certificado'></i></a></td>";
-                            echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=cadastrarPlanilha><i class='fas fa-table' title='Cadastrar planilha de participantes'></i></a></td>";
                             echo "<td>".$rowEvento['curso']."</td>";
-                            echo "<td><a href='#' title='Clique para ver a planilha de participantes associados ao evento'>".$rowEvento['descricao']."</a></td>
+                            echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=cadastrarPlanilha title='Clique para ver a planilha de participantes associados ao evento'>".$rowEvento['descricao']."</a></td>
                             <td>".$rowEvento['carga_horaria']."</td>
                             <td>".date("d/m/Y",strtotime($rowEvento['data_inicio']))."</td>
                             <td>".date("d/m/Y",strtotime($rowEvento['data_fim']))."</td>";
@@ -536,7 +535,24 @@
 
             if($acao == 'cadastrarPlanilha'){
                 $dataEvento = $evento->ExibeEventoExpecifico($idEvento);
-                $dataUusario = $usuario->ListaTodosOsUsuarios();
+                $dataUsario = $usuario->ListaTodosOsUsuarios();
+                $dataParticipante = $participante->ExibeTodosParticipantes();
+                echo "<div id=''>
+                            <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;'><a href='#' style='text-decoration: none; color:white;'>Participantes</a></button>
+                            <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;'><a href='painelcontrole.php?acao=cadastrarEvento' style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>
+                    </div>";
+
+                echo "<table class='table'>
+                        <thead>
+                            <tr>
+                                <th scope='col'>Nome</th>
+                                <th scope='col'>CPF</th>
+                                <th scope='col'>Tipo</th>
+                            </tr>
+                        </thead>";
+                
+
+                require_once "formularios/planilha.html";
 
                 
             }

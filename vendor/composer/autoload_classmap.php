@@ -9,6 +9,7 @@ return array(
     'Classes\\certificado' => $baseDir . '/classes/certificado.class.php',
     'Classes\\conexao' => $baseDir . '/classes/conexao.class.php',
     'Classes\\evento' => $baseDir . '/classes/evento.class.php',
+    'Classes\\participante' => $baseDir . '/classes/participanteevento.class.php',
     'Classes\\usuario' => $baseDir . '/classes/usuario.class.php',
     'Fpdf\\Fpdf' => $vendorDir . '/fpdf/fpdf/src/Fpdf/Fpdf.php',
 );

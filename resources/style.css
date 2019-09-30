@@ -144,5 +144,15 @@ p{
 }
 
 .planilha{
+    margin-top: 2%;
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+
+#msgPlanilha{
     margin-top: 5%;
+    display: flex;
+    position: relative;
+    justify-content: center;
 }

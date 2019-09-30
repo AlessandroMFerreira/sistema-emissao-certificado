@@ -713,21 +713,39 @@
         }
 
     }
-    function RetornaValorAjaxExtensaoProjeto(){
+    function RequisicaoAjaxUsuario(){
         let form = document.getElementById('formulario');
     
         form.addEventListener('submit', function(event){
             event.preventDefault();
-            var cpfOrientador = document.getElementById('cpfOrientador');            
-            var nomeOrientador = document.getElementById('nomeOrientador');
-            var url = "../sistema-emissao-certificado/requisicao.php?cpf="+cpfOrientador.value+"&acao=buscaUsuario";
+            var cpf = document.getElementById('cpf');            
+            var nome = document.getElementById('nome');
+            var url = "../sistema-emissao-certificado/requisicao.php?cpf="+cpf.value+"&acao=buscaUsuario";
             fetch(url)
             .then(function(res){
                return res.json();
             })
             .then(function(res){
-                console.log(res.nome);
-                nomeOrientador.value = res.nome;
+                nome.value = res.nome;
+            })
+        });
+        
+    }
+
+    function RequisicaoAjaxAutor(){
+        let form = document.getElementById('formulario');
+    
+        form.addEventListener('submit', function(event){
+            event.preventDefault();
+            var cpfAutor = document.getElementById('cpfAutor');            
+            var nomeAutor = document.getElementById('nomeAutor');
+            var url = "../sistema-emissao-certificado/requisicao.php?cpf="+cpfAutor.value+"&acao=buscaUsuario";
+            fetch(url)
+            .then(function(res){
+               return res.json();
+            })
+            .then(function(res){
+                nomeAutor.value = res.nome;
             })
         });
         
