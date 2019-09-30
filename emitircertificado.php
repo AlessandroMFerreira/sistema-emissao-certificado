@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once __DIR__."/vendor/autoload.php";
+    require_once dirname(__FILE__).DIRECTORY_SEPARATOR."vendor".DIRECTORY_SEPARATOR."autoload.php";
     
     $evento = new Classes\evento();
     $certificado = new Classes\certificado();

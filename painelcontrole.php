@@ -5,7 +5,7 @@
 
     //include de arquivos 
     require_once 'header.html';
-    require_once __DIR__."/vendor/autoload.php";
+    require_once dirname(__FILE__).DIRECTORY_SEPARATOR."vendor".DIRECTORY_SEPARATOR."autoload.php";
 
     //Verificação de segurança
     if(!isset($_SESSION['tipo']) && !isset($_SESSION['idUsuario']) || $_SESSION['tipo'] != 'administrador'){
