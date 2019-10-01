@@ -542,14 +542,7 @@
                 $mes_fim = '';
                 $posteres = '';
                 $dataInscricao = '';
-                echo "<div id='nomeCurso'>";
-                    foreach($dataEvento as $rowEvento){
-                        echo "<h2>".$rowEvento['descricao']."</h2>";
-                        $mes_inicio = explode("/",$rowEvento['data_inicio'],2);
-                        $mes_fim = explode("/",$rowEvento['data_fim'],2);
-                    }
-                
-                echo "</div>";
+
                 echo "<div id='btnPlhanilha'>
                             <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;'><a href='#' style='text-decoration: none; color:white;'>Participantes Organização</a></button>
                             <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href='painelcontrole.php?acao=todosInscritosPlanilha' style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>
@@ -576,7 +569,7 @@
                                     echo "</tr>
                                 </tbody>
                                 </table>";
-                               include "formularios/planilha.html";
+                               require_once "formularios/planilha.html";
                                
                                 echo "<div class='form-inline' style='margin-top: 20px; position: relative; display: flex; justify-content: center;'>
                                         <a href="."painelcontrole.php?acao=cadastrarAutor&idEvento=".$idEvento.">Vincular Autores do evento</a>
@@ -591,9 +584,6 @@
                             $posteres = $_POST['qntPosteres'];
                             $id = $usuario->BuscaUsuarioPorCpf($cpf);
 
-                            foreach($id as $row){
-                                $idUsuarioEvento = $row['idUsuario'];
-                            }
 
                             $participante->NovoParticipanteEvento($tipo,$nome,$mes_inicio,$mes_fim,$posteres,$idUsuarioEvento,$idEvento);
                         }

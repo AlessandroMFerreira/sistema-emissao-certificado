@@ -226,7 +226,7 @@
                 </script>
             ";
         }
-        public function BuscaUsuarioPorCpf($cpf){
+        public function BuscaUsuarioPorCpfParaRequisicao($cpf){
             $sql = "SELECT * FROM usuario WHERE cpf="."'".$cpf."'";
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();
@@ -237,6 +237,13 @@
                 $arrayDados['nome'] = $row['nome'];
             }
             return $arrayDados;
+        }
+        public function BuscaUsuarioPorCpf($cpf){
+            $sql = "SELECT * FROM usuario WHERE cpf="."'".$cpf."'";
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll();
+            return $data;
         }
     }
 ?>

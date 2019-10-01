@@ -15,7 +15,7 @@
     $usuario = new Classes\usuario();
 
     if($acao == 'buscaUsuario'){
-        $data = $usuario->BuscaUsuarioPorCpf($cpf);
+        $data = $usuario->BuscaUsuarioPorCpfParaRequisicao($cpf);
         echo json_encode($data);
     }
 
