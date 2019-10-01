@@ -73,8 +73,8 @@ create table participanteevento(
 	idParticipanteEvento int primary key auto_increment,
     tipo enum('orientador','bolsista','voluntario','calaborador','organizador','monitor','palestrante','mediador','ministrante','ouvinte','apresentador','avaliador',''),
     nome varchar(250),
-    mes_inicio varchar(250),
-    mes_fim varchar(250),
+    mes_inicio varchar(2),
+    mes_fim varchar(2),
     numero_posteres int,
     data_inscricao date,
     entrada time,
@@ -86,9 +86,12 @@ create table participanteevento(
 create table autor(
     idAutor int primary key auto_increment,
     nome varchar(250) not null,
-    id_evento int not null
+    id_evento int not null,
+    id_usuario int not null
 );
-alter table autor add constraint fk_is_evento_autor foreign key(id_evento) references evento(idEvento);
+alter table autor add constraint fk_id_evento_autor foreign key(id_evento) references evento(idEvento);
+alter table autor add constraint fk_id_usuario_autor foreign key(id_usuario) references usuario(idUsuario);
+
 
 
 /*FOREIGN KEYS*/

@@ -156,3 +156,19 @@ p{
     position: relative;
     justify-content: center;
 }
+
+#btnPlhanilha{
+    margin-top: 5%;
+    margin-bottom: 10px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+
+#nomeCurso{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    font-weight: bolder;
+    color: #3c6178;
+}

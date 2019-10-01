@@ -713,11 +713,11 @@
         }
 
     }
-    function RequisicaoAjaxUsuario(){
+    function RequisicaoUsuario(){
         let form = document.getElementById('formulario');
     
         form.addEventListener('submit', function(event){
-            event.preventDefault();
+            //event.preventDefault();
             var cpf = document.getElementById('cpf');            
             var nome = document.getElementById('nome');
             var url = "../sistema-emissao-certificado/requisicao.php?cpf="+cpf.value+"&acao=buscaUsuario";
@@ -732,7 +732,7 @@
         
     }
 
-    function RequisicaoAjaxAutor(){
+    function RequisicaoAutor(){
         let form = document.getElementById('formulario');
     
         form.addEventListener('submit', function(event){
@@ -749,5 +749,12 @@
             })
         });
         
+    }
+    
+    function imprimirTela(){
+        var btnImprimir = document.getElementById('btnImprimir');
+        btnImprimir.style.display = 'none';
+        window.print();
+
     }
     

@@ -29,6 +29,7 @@ class ComposerStaticInitace1a157ee50d06cb575f13b60da3402
     );
 
     public static $classMap = array (
+        'Classes\\autor' => __DIR__ . '/../..' . '/classes/autor.class.php',
         'Classes\\certificado' => __DIR__ . '/../..' . '/classes/certificado.class.php',
         'Classes\\conexao' => __DIR__ . '/../..' . '/classes/conexao.class.php',
         'Classes\\evento' => __DIR__ . '/../..' . '/classes/evento.class.php',

@@ -107,6 +107,58 @@
             $stmt->execute();
         }
 
+        public function mes($mes){
+            if($mes == '1' || $mes == 1){
+                $mes = "Janeiro";
+                return $mes;
+            }
+            else if($mes == '2' || $mes == 2){
+                $mes = "Fevereiro";
+                return $mes;
+            }
+            else if($mes == '3' || $mes == 3){
+                $mes = "Março";
+                return $mes;
+            }
+            else if($mes == '4' || $mes == 4){
+                $mes = "Abril";
+                return $mes;
+            }
+            else if($mes == '5' || $mes == 5){
+                $mes = "Maio"; 
+                return $mes; 
+            }
+            else if($mes == '6' || $mes == 6){
+                $mes = "Junho";
+                return $mes;
+            }
+            else if($mes == '7' || $mes == 7){
+                $mes = "Julho";
+                return $mes;
+            }
+            else if($mes == '8' || $mes == 8){
+                $mes = "Agosto";
+                return $mes;
+            }
+            else if($mes == '9' || $mes == 9){
+                $mes = "Setembro";
+                return $mes;
+            }
+            else if($mes == '10' || $mes == 10){
+                $mme = "Outubro";
+                return $mes;
+            }
+            else if($mes == '11' || $mes == 11){
+                $mme = "Novembro";
+                return $mes;
+            }
+            else if($mes == '12' || $mes == 12){
+                $mme = "Dezembro";
+                return $mes;
+            }
+        }
+
     }
+
 
 ?>
