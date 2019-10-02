@@ -1,6 +1,7 @@
 <?php
     //Iniciando a sessão
     session_start();
+    ob_start();
 
 
     //include de arquivos 
@@ -603,7 +604,7 @@
                         }
 
                         $participante->NovoParticipanteEvento($tipo,$posteres,$idUsuarioEvento,$eventoID);
-                        header("Location: painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$rowEvento['idEvento']);
+                        header("Location: painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$idEvento);
                     }
                 }
                                
@@ -639,20 +640,21 @@
                                 <tbody>";
                     foreach($dataParticipante as $rowParticipante){
                         foreach($dataUsario as $rowUsuario){
-                            if($rowParticipante['tipo'] == 'orientador' || $rowParticipante['tipo'] == 'bolsista' || $rowParticipante['tipo'] == 'voluntario' || $rowParticipante['tipo'] == 'calaborador' || $rowParticipante['tipo'] == 'organizador' || $rowParticipante['tipo'] == 'monitor' || $rowParticipante['tipo'] == 'palestrante' || $rowParticipante['tipo'] == 'mediador' || $rowParticipante['tipo'] == 'ministrante' || $rowParticipante['tipo'] == 'ouvinte' || $rowParticipante['tipo'] == 'apresentador' || $rowParticipante['tipo'] == 'avaliador'){
-                                if($rowParticipante['id_usuario'] == $rowUsuario['idUsuario']){
-                                    echo "<tr>";
-                                                echo "<td>".$rowUsuario['nome']."</td>";
-                                                echo "<td>".$rowUsuario['cpf']."</td>";
-                                                echo "<td>".$rowParticipante['tipo']."</td>";
-                                    echo "</tr>";
-                                }
+                            if($rowParticipante['id_usuario'] == $rowUsuario['idUsuario']){
+                                echo "<tr>";
+                                            echo "<td>".$rowUsuario['nome']."</td>";
+                                            echo "<td>".$rowUsuario['cpf']."</td>";
+                                            echo "<td>".$rowParticipante['tipo']."</td>";
+                                echo "</tr>";
                             }
                         }
                     }
                 
                         echo "</tbody>
-                            </table>";
+                            </table>
+                            <div class='form-inline' style='margin-top: 20px; position: relative; display: flex; justify-content: center;'>
+                                <a href='#' onclick='imprimirTela()' id='btnImprimir'>Imprmir</a>
+                            </div>";
                 }              
             }
             if($acao == 'cadastrarAutor'){

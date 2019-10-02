@@ -734,7 +734,6 @@
     
     function imprimirTela(){
         var btnImprimir = document.getElementById('btnImprimir');
-        btnImprimir.style.display = 'none';
         window.print();
 
     }
