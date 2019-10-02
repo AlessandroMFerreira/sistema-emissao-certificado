@@ -25,6 +25,7 @@
     $id = '';
     $acao = '';
     $idEvento = '';
+    $idAutor = '';
     $idUsuario = $_SESSION['idUsuario'];
     $nomeUsuario = $_SESSION['nomeUsuario'];
     $tela = '';
@@ -45,6 +46,9 @@
     }
     if(array_key_exists('idUsuarioPlanilha', $_GET)){
         $idUsuarioPlanilha = $_GET['idUsuarioPlanilha'];
+    }
+    if(array_key_exists('idAutor', $_GET)){
+        $idAutor = $_GET['idAutor'];
     }
 
     //Conteudo do painel de controle do administrador
@@ -519,7 +523,7 @@
                     $curso = $campos['cursos'];
                     $iduser = $_SESSION['idUsuario'];
                     $evento->NovoEvento($descricao,$cargahoraria,$datainicio,$datafim,$datacriacao,$tipo,$extensao,$pesquisa,$bolsista_projeto,$orientador_projeto,$voluntario_projeto,$colaborador_projeto,$organizador_evento,$palestrante_evento,$ministrante_evento,$apresentador_evento,$monitor_evento,$mediador_evento,$participante_evento,$avaliador_evento,$organizador_curso,$ministrante_curso,$participante_curso,$orientador_iniciacao_cientifica,$bolsista_iniciacao_cientifica,$voluntario_iniciacao_cientifica,$orientador_iniciacao_cientifica_jr,$bolsista_iniciacao_cientifica_jr,$voluntario_iniciacao_cientifica_jr,$sigaextensao,$idsiga,$map,$idmap,$colegiado,$numeroata,$dataata,$outrasocorrencias,$curso,$iduser);
-
+                    header("Location: painelcontrole.php?id=1");
                 }
                 
             }
@@ -542,7 +546,7 @@
             if($acao == 'cadastrarPlanilha'){
                 $dataEvento = $evento->ExibeEventoExpecifico($idEvento);
                 $dataUsario = $usuario->ListaTodosOsUsuarios();
-                $dataParticipante = $participante->ExibeTodosParticipantes();
+                $dataParticipante = $participante->ExibeParticipanteEventoEspecifico($idEvento);
                 $posteres = '';
                 $dataInscricao = '';
                 $idUsuarioEvento = '';
@@ -604,7 +608,7 @@
                         }
 
                         $participante->NovoParticipanteEvento($tipo,$posteres,$idUsuarioEvento,$eventoID);
-                        header("Location: painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$idEvento);
+                        header("Location: painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$eventoID);
                     }
                 }
                                
@@ -618,7 +622,7 @@
                 $eventoID = intval($idEvento);
                 $dataEvento = $evento->ExibeEventoExpecifico($eventoID);
                 $dataUsario = $usuario->ListaTodosOsUsuarios();
-                $dataParticipante = $participante->ExibeTodosParticipantes();
+                $dataParticipante = $participante->ExibeParticipanteEventoEspecifico($idEvento);
 
                 foreach($dataEvento as $rowEvento){
                     echo "<div class='form-inline' style='display: felx; position: relative; justify-content: center;'>";
@@ -659,7 +663,7 @@
             }
             if($acao == 'cadastrarAutor'){
                 $dataEvento = $evento->ExibeEventoExpecifico($idEvento);
-                $dataAutor = $autor->ExibeTodosAutores();
+                $dataAutor = $autor->ExibeAutorEventoEspecifico($idEvento);
 
                 echo "<div id='nomeCurso'>";
                     foreach($dataEvento as $rowEvento){
@@ -674,15 +678,17 @@
                     <thead>
                         <tr>
                             <th scope='col'>Nome</th>
+                            <th></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>";
+                    <tbody>";
                     foreach($dataAutor as $rowAutor){
+                        echo "<tr>";
                         echo "<td>".$rowAutor['nome']."</td>";
+                        echo "<td><a href="."painelcontrole.php?acao=excluirAutor&idAutor=".$rowAutor['idAutor']."&idEvento=".$idEvento."><i class='far fa-trash-alt' title='Excluir autor'></i></a></td>";
+                        echo "</tr>";
                     }
-                    echo "</tr>
-                        </tbody>
+                    echo "</tbody>
                     </table>";
                     include_once 'formularios/autor.html';
                     if(isset($_POST['vincularAutor'])){
@@ -695,6 +701,10 @@
                     echo "<div class='form-inline' style='margin-top: 20px; position: relative; display: flex; justify-content: center;'>
                             <a href='#' onclick='imprimirTela()' id='btnImprimir'>Imprmir</a>
                         </div>";                              
+            }
+            if($acao == 'excluirAutor'){
+                $autor->ExcluirAutor($idAutor);
+                header("Location:"."painelcontrole.php?acao=cadastrarAutor&idEvento=".$idEvento);
             }
 
             /*Esta estrutura valida (seta o campo "validado" na tabela "evento" como "1") 

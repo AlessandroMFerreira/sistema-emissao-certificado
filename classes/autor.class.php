@@ -15,12 +15,27 @@
             return $data;
         }
 
+        public function ExibeAutorEventoEspecifico($idEvento){
+            $sql = "SELECT * FROM autor WHERE id_evento = ".$idEvento;
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+
+            $data = $stmt->fetchALl();
+            return $data;
+        }
+
         public function NovoAutor($nome,$idEvento){
             $sql = "INSERT INTO autor (nome,id_evento) VALUES ("."'".$nome."',".$idEvento.")";
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();
 
             var_dump($sql);
+        }
+        
+        public function ExcluirAutor($idAutor){
+            $sql = "DELETE FROM autor WHERE idAutor = ".$idAutor;
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
         }
 
     }

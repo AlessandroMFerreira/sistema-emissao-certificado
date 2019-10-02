@@ -85,12 +85,10 @@ create table autor(
     nome varchar(250) not null,
     id_evento int not null
 );
-alter table autor add constraint fk_id_evento_autor foreign key(id_evento) references evento(idEvento);
-
-
 
 /*FOREIGN KEYS*/
 
-alter table evento add constraint fk_id_usuario_responsavel_evento foreign key(id_usuario_responsavel) references usuario(idUsuario);
-alter table participanteevento add constraint fk_id_usuario_participanteevento foreign key(id_usuario) references usuario(idUsuario);
-alter table participanteevento add constraint fk_id_evento_participanteevento foreign key(id_evento) references evento(idEvento);
+alter table evento add constraint fk_id_usuario_responsavel_evento foreign key(id_usuario_responsavel) references usuario(idUsuario) on delete cascade;
+alter table participanteevento add constraint fk_id_usuario_participanteevento foreign key(id_usuario) references usuario(idUsuario) on delete cascade;
+alter table participanteevento add constraint fk_id_evento_participanteevento foreign key(id_evento) references evento(idEvento) on delete cascade;
+alter table autor add constraint fk_id_evento_autor foreign key(id_evento) references evento(idEvento) on delete cascade;
