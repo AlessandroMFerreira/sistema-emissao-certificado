@@ -1,7 +1,8 @@
 <?php
     namespace Classes;
     require_once dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."vendor".DIRECTORY_SEPARATOR."autoload.php";
-    class certificado extends fpdf{
+    use Fpdf\Fpdf;
+    class certificado extends Fpdf{
 
         private function mes($mes){
 

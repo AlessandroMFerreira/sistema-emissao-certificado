@@ -11,10 +11,6 @@ class ComposerStaticInitace1a157ee50d06cb575f13b60da3402
         array (
             'Fpdf\\' => 5,
         ),
-        'C' => 
-        array (
-            'Classes\\' => 8,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -22,10 +18,10 @@ class ComposerStaticInitace1a157ee50d06cb575f13b60da3402
         array (
             0 => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf',
         ),
-        'Classes\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/classes',
-        ),
+    );
+
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/../..' . '/classes',
     );
 
     public static $classMap = array (
@@ -43,6 +39,7 @@ class ComposerStaticInitace1a157ee50d06cb575f13b60da3402
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitace1a157ee50d06cb575f13b60da3402::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitace1a157ee50d06cb575f13b60da3402::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitace1a157ee50d06cb575f13b60da3402::$fallbackDirsPsr4;
             $loader->classMap = ComposerStaticInitace1a157ee50d06cb575f13b60da3402::$classMap;
 
         }, null, ClassLoader::class);
