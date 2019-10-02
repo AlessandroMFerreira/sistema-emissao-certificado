@@ -731,25 +731,6 @@
         });
         
     }
-
-    function RequisicaoAutor(){
-        let form = document.getElementById('formulario');
-    
-        form.addEventListener('submit', function(event){
-            event.preventDefault();
-            var cpfAutor = document.getElementById('cpfAutor');            
-            var nomeAutor = document.getElementById('nomeAutor');
-            var url = "../sistema-emissao-certificado/requisicao.php?cpf="+cpfAutor.value+"&acao=buscaUsuario";
-            fetch(url)
-            .then(function(res){
-               return res.json();
-            })
-            .then(function(res){
-                nomeAutor.value = res.nome;
-            })
-        });
-        
-    }
     
     function imprimirTela(){
         var btnImprimir = document.getElementById('btnImprimir');

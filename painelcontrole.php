@@ -27,6 +27,7 @@
     $idUsuario = $_SESSION['idUsuario'];
     $nomeUsuario = $_SESSION['nomeUsuario'];
     $tela = '';
+    $idUsuarioPlanilha = '';
 
     //Verifica se as variáveis de controle foram passadas na URL
     if(array_key_exists('id', $_GET)){
@@ -40,6 +41,9 @@
     }
     if(array_key_exists('tela', $_GET)){
         $tela = $_GET['tela'];
+    }
+    if(array_key_exists('idUsuarioPlanilha', $_GET)){
+        $idUsuarioPlanilha = $_GET['idUsuarioPlanilha'];
     }
 
     //Conteudo do painel de controle do administrador
@@ -538,75 +542,93 @@
                 $dataEvento = $evento->ExibeEventoExpecifico($idEvento);
                 $dataUsario = $usuario->ListaTodosOsUsuarios();
                 $dataParticipante = $participante->ExibeTodosParticipantes();
-                $mes_inicio = '';
-                $mes_fim = '';
                 $posteres = '';
                 $dataInscricao = '';
+                $idUsuarioEvento = '';
+                foreach($dataEvento as $rowEvento){
+                    echo "<div class='form-inline' style='display: felx; position: relative; justify-content: center;'>";
+                        echo "<h1>".$rowEvento['descricao']."</h1>";                    
+                    echo "</div>";
 
-                echo "<div id='btnPlhanilha'>
-                            <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;'><a href='#' style='text-decoration: none; color:white;'>Participantes Organização</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href='painelcontrole.php?acao=todosInscritosPlanilha' style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>
-                    </div>";
-                foreach($dataParticipante as $rowParticipante){
-                    if($rowParticipante['tipo'] == 'orientador' || $rowParticipante['tipo'] == 'bolsista' || $rowParticipante['tipo'] == 'voluntario' || $rowParticipante['tipo'] == 'calaborador' || $rowParticipante['tipo'] == 'organizador' || $rowParticipante['tipo'] == 'monitor' || $rowParticipante['tipo'] == 'palestrante' || $rowParticipante['tipo'] == 'mediador' || $rowParticipante['tipo'] == 'ministrante' || $rowParticipante['tipo'] == 'ouvinte' || $rowParticipante['tipo'] == 'apresentador' || $rowParticipante['tipo'] == 'avaliador'){
-                        echo "<table class='table'>
+                    echo "<div id='btnPlhanilha'>
+                                <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;'><a href='#' style='text-decoration: none; color:white;'>Participantes Organização</a></button>
+                                <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href="."painelcontrole.php?acao=todosInscritosPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>
+                        </div>";
+                    echo   "<table class='table'>
                                 <thead>
                                     <tr>
                                         <th scope='col'>Nome</th>
                                         <th scope='col'>CPF</th>
                                         <th scope='col'>Tipo</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>";
-                                        foreach($dataUsario as $rowUsuario){
-                                            if($rowParticipante['id_usuario'] == $rowUsuario['idUsuario']){
+                                <tbody>";
+                    foreach($dataParticipante as $rowParticipante){
+                        foreach($dataUsario as $rowUsuario){
+                            if($rowParticipante['tipo'] == 'orientador' || $rowParticipante['tipo'] == 'bolsista' || $rowParticipante['tipo'] == 'voluntario' || $rowParticipante['tipo'] == 'calaborador' || $rowParticipante['tipo'] == 'organizador' || $rowParticipante['tipo'] == 'monitor' || $rowParticipante['tipo'] == 'palestrante' || $rowParticipante['tipo'] == 'mediador' || $rowParticipante['tipo'] == 'ministrante' || $rowParticipante['tipo'] == 'ouvinte' || $rowParticipante['tipo'] == 'apresentador' || $rowParticipante['tipo'] == 'avaliador'){
+                                if($rowParticipante['id_usuario'] == $rowUsuario['idUsuario']){
+                                    echo "<tr>";
                                                 echo "<td>".$rowUsuario['nome']."</td>";
                                                 echo "<td>".$rowUsuario['cpf']."</td>";
                                                 echo "<td>".$rowParticipante['tipo']."</td>";
-                                            }
-                                        }
-                                    echo "</tr>
-                                </tbody>
-                                </table>";
-                               require_once "formularios/planilha.html";
-                               
-                                echo "<div class='form-inline' style='margin-top: 20px; position: relative; display: flex; justify-content: center;'>
-                                        <a href="."painelcontrole.php?acao=cadastrarAutor&idEvento=".$idEvento.">Vincular Autores do evento</a>
-                                    </div>
-                                    <div class='form-inline' style='margin-top: 20px; position: relative; display: flex; justify-content: center;'>
-                                        <a href='#' onclick='imprimirTela()' id='btnImprimir'>Imprmir</a>
-                                    </div>";
-                        if(isset($_POST['btnVincular'])){
-                            $cpf = $_POST['cpf'];
-                            $tipo = $_POST['tipoUsuario'];
-                            $nome = $_POST['nome'];
-                            $posteres = $_POST['qntPosteres'];
-                            $id = $usuario->BuscaUsuarioPorCpf($cpf);
-
-
-                            $participante->NovoParticipanteEvento($tipo,$nome,$mes_inicio,$mes_fim,$posteres,$idUsuarioEvento,$idEvento);
+                                                echo "<td><a href="."painelcontrole.php?acao=excluirUsuarioPlanilha&idUsuarioPlanilha=".$rowParticipante['idParticipanteEvento']."&idEvento=".$rowEvento['idEvento']."><i class='far fa-trash-alt' title='Excluir usuario'></i></a></td>";
+                                    echo "</tr>";
+                                }
+                            }
                         }
-                    }else{
-                        echo "<h1>Não existem participantes </h1>";
                     }
-                }                
+                
+                        echo "</tbody>
+                            </table>";
+                        require_once "formularios/planilha.html";
+                                    
+                        echo "<div class='form-inline' style='margin-top: 20px; position: relative; display: flex; justify-content: center;'>
+                                <a href="."painelcontrole.php?acao=cadastrarAutor&idEvento=".$rowEvento['idEvento'].">Vincular Autores do evento</a>
+                            </div>
+                            <div class='form-inline' style='margin-top: 20px; position: relative; display: flex; justify-content: center;'>
+                                <a href='#' onclick='imprimirTela()' id='btnImprimir'>Imprmir</a>
+                            </div>";
+                
+                
+                    if(isset($_POST['btnVincular'])){
+                        $cpf = $_POST['cpf'];
+                        $tipo = $_POST['tipoUsuario'];
+                        $posteres = $_POST['qntPosteres'];
+                        $id = $usuario->BuscaUsuarioPorCpf($cpf);
+                        $eventoID = intval($idEvento);
+
+                        foreach($id as $row){
+                            $idUsuarioEvento = intval($row['idUsuario']);
+                        }
+
+                        $participante->NovoParticipanteEvento($tipo,$posteres,$idUsuarioEvento,$eventoID);
+                        header("Location: painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$rowEvento['idEvento']);
+                    }
+                }
+                               
+            }
+            if($acao == 'excluirUsuarioPlanilha'){
+                $evento = intval($idEvento);
+                $participante->ExcluirParticipante($evento, $idUsuarioPlanilha);
+                header("Location: painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$evento);
             }
             if($acao == 'todosInscritosPlanilha'){
-                $dataEvento = $evento->ExibeEventoExpecifico($idEvento);
+                $eventoID = intval($idEvento);
+                $dataEvento = $evento->ExibeEventoExpecifico($eventoID);
                 $dataUsario = $usuario->ListaTodosOsUsuarios();
                 $dataParticipante = $participante->ExibeTodosParticipantes();
-                echo "<div id='nomeCurso'>";
-                    foreach($dataEvento as $rowEvento){
-                        echo "<h2>".$rowEvento['descricao']."</h2>";
-                    }
-                echo "</div>";
-                echo "<div id='btnPlhanilha'>
-                            <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href='painelcontrole.php?acao=cadastrarPlanilha' style='text-decoration: none; color:white;'>Participantes Organização</a></button>
-                            <button type='button' class='btn btn-primary' style='margin-left: 5px;background-color: grey !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;'><a href='#' style='text-decoration: none; color:white;'><a href='#' style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>
-                    </div>";
-                foreach($dataParticipante as $rowParticipante){
-                        echo "<table class='table'>
+
+                foreach($dataEvento as $rowEvento){
+                    echo "<div class='form-inline' style='display: felx; position: relative; justify-content: center;'>";
+                        echo "<h1>".$rowEvento['descricao']."</h1>";                    
+                    echo "</div>";
+
+                    echo "<div id='btnPlhanilha'>
+                                <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;'><a href="."painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Participantes Organização</a></button>
+                                <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href='#' style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>
+                        </div>";
+                    echo   "<table class='table'>
                                 <thead>
                                     <tr>
                                         <th scope='col'>Nome</th>
@@ -614,22 +636,24 @@
                                         <th scope='col'>Tipo</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>";
-                                        foreach($dataUsario as $rowUsuario){
-                                            if($rowParticipante['id_usuario'] == $rowUsuario['idUsuario']){
+                                <tbody>";
+                    foreach($dataParticipante as $rowParticipante){
+                        foreach($dataUsario as $rowUsuario){
+                            if($rowParticipante['tipo'] == 'orientador' || $rowParticipante['tipo'] == 'bolsista' || $rowParticipante['tipo'] == 'voluntario' || $rowParticipante['tipo'] == 'calaborador' || $rowParticipante['tipo'] == 'organizador' || $rowParticipante['tipo'] == 'monitor' || $rowParticipante['tipo'] == 'palestrante' || $rowParticipante['tipo'] == 'mediador' || $rowParticipante['tipo'] == 'ministrante' || $rowParticipante['tipo'] == 'ouvinte' || $rowParticipante['tipo'] == 'apresentador' || $rowParticipante['tipo'] == 'avaliador'){
+                                if($rowParticipante['id_usuario'] == $rowUsuario['idUsuario']){
+                                    echo "<tr>";
                                                 echo "<td>".$rowUsuario['nome']."</td>";
                                                 echo "<td>".$rowUsuario['cpf']."</td>";
                                                 echo "<td>".$rowParticipante['tipo']."</td>";
-                                            }
-                                        }
-                                    echo "</tr>
-                                </tbody>
-                                </table>";
-                                echo "<div class='form-inline' style='margin-top: 20px; position: relative; display: flex; justify-content: center;'>
-                                        <a href='#' onclick='imprimirTela()' id='btnImprimir'>Imprmir</a>
-                                    </div>";
-                }                
+                                    echo "</tr>";
+                                }
+                            }
+                        }
+                    }
+                
+                        echo "</tbody>
+                            </table>";
+                }              
             }
             if($acao == 'cadastrarAutor'){
                 $dataEvento = $evento->ExibeEventoExpecifico($idEvento);

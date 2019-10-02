@@ -1,14 +1,12 @@
-
 <div id="msgPlanilha">
     <small style="color: red;">ATENÇÃO! Informe apenas o campo que deseja incluir.</small>
 </div>
 <div class="planilha">
-    <form action="#" method="post" id="formulario">
+    <form method="post" id="formulario">
         <div class="form-inline">
             <label for="orientador"><strong>Digite o CPF do usuario</strong></label>
             <input type="text" name="cpf" class="form-control" id="cpf" >
-            <input type="text" name="nome" class="form-control" style="margin-left: 10px;" id="nome" >
-            <button onclick="RequisicaoUsuario()" id="botao" class="btn btn-primary" style="margin-left: 10px; background-color: #3c6178 !important; box-shadow: none; border-color: #3c6178 !important;">Buscar</button>
+            <label for="tipo"><strong>Tipo:</strong></label>
             <select name="tipoUsuario" class="form-control" style="margin-left: 5px;" >
                 <option value=""></option>
                 <option value="orientador">orientador</option>

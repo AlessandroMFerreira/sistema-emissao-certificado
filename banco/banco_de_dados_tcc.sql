@@ -72,9 +72,6 @@ create table evento(
 create table participanteevento(
 	idParticipanteEvento int primary key auto_increment,
     tipo enum('orientador','bolsista','voluntario','calaborador','organizador','monitor','palestrante','mediador','ministrante','ouvinte','apresentador','avaliador',''),
-    nome varchar(250),
-    mes_inicio varchar(2),
-    mes_fim varchar(2),
     numero_posteres int,
     data_inscricao date,
     entrada time,
