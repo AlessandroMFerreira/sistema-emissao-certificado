@@ -606,9 +606,15 @@
                         foreach($id as $row){
                             $idUsuarioEvento = intval($row['idUsuario']);
                         }
-
-                        $participante->NovoParticipanteEvento($tipo,$posteres,$idUsuarioEvento,$eventoID);
-                        header("Location: painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$eventoID);
+                        if($cpf == '' || $cpf == null || $tipo == '' || $tipo == null){
+                            echo "<script>
+                                alert('Preencha os campos CPF e Tipo CORRETAMENTE!!');
+                                windows.location.href="."painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$eventoID.";
+                            </script>";
+                        }else{
+                            $participante->NovoParticipanteEvento($tipo,$posteres,$idUsuarioEvento,$eventoID);
+                            header("Location: painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$eventoID);
+                        }
                     }
                 }
                                
