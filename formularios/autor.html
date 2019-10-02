@@ -1,11 +1,10 @@
 
 <div class="planilha">
-    <form action="#" method="post" id="formulario">
+    <form method="post" id="formulario">
         <div class="form-inline" style="margin-top: 10px;">
-            <label for="autores"><strong>Autor</strong></label>
-            <input type="text" name="cpfAutor" class="form-control" id="cpfAutor">
-            <input type="text" name="nomeAutor" class="form-control" style="margin-left: 10px;" id="nomeAutor" disabled>
-            <button onclick="RequisicaoAutor()" id="botao" class="btn btn-primary" style="margin-left: 10px;">Buscar</button>
+            <label for="autores"><strong>Nome Autor</strong></label>
+            <input type="text" name="nomeAutor" class="form-control" id="cpfAutor" required>
+            <input type="submit" name="vincularAutor" value="Vincular" class="btn btn-primary" style="margin-left: 5px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;">
         </div>
     </form>    
 </div>

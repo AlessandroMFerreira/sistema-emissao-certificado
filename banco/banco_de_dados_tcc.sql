@@ -83,11 +83,9 @@ create table participanteevento(
 create table autor(
     idAutor int primary key auto_increment,
     nome varchar(250) not null,
-    id_evento int not null,
-    id_usuario int not null
+    id_evento int not null
 );
 alter table autor add constraint fk_id_evento_autor foreign key(id_evento) references evento(idEvento);
-alter table autor add constraint fk_id_usuario_autor foreign key(id_usuario) references usuario(idUsuario);
 
 
 

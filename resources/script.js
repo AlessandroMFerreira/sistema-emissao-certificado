@@ -713,24 +713,6 @@
         }
 
     }
-    function RequisicaoUsuario(){
-        let form = document.getElementById('formulario');
-    
-        form.addEventListener('submit', function(event){
-            event.preventDefault();
-            var cpf = document.getElementById('cpf');            
-            var nome = document.getElementById('nome');
-            var url = "../sistema-emissao-certificado/requisicao.php?cpf="+cpf.value+"&acao=buscaUsuario";
-            fetch(url)
-            .then(function(res){
-               return res.json();
-            })
-            .then(function(res){
-                nome.value = res.nome;
-            })
-        });
-        
-    }
     
     function imprimirTela(){
         var btnImprimir = document.getElementById('btnImprimir');

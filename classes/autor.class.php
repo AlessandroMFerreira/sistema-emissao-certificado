@@ -15,6 +15,14 @@
             return $data;
         }
 
+        public function NovoAutor($nome,$idEvento){
+            $sql = "INSERT INTO autor (nome,id_evento) VALUES ("."'".$nome."',".$idEvento.")";
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+
+            var_dump($sql);
+        }
+
     }
 
 ?>

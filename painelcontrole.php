@@ -659,41 +659,42 @@
             }
             if($acao == 'cadastrarAutor'){
                 $dataEvento = $evento->ExibeEventoExpecifico($idEvento);
-                $dataUsario = $usuario->ListaTodosOsUsuarios();
                 $dataAutor = $autor->ExibeTodosAutores();
 
                 echo "<div id='nomeCurso'>";
                     foreach($dataEvento as $rowEvento){
                         echo "<h2>".$rowEvento['descricao']."</h2>";
+                    
+                        echo "</div>";
+                        echo "<div class='form-inline' style='margin-top: 20px; position: relative; display: flex; justify-content: center;'>
+                                <h4>Autores</h4>
+                            </div>";
                     }
-                echo "</div>";
-                echo "<div class='form-inline' style='margin-top: 20px; position: relative; display: flex; justify-content: center;'>
-                        <h4>Autores</h4>
-                    </div>";
-                foreach($dataAutor as $rowAutor){
-                        echo "<table class='table'>
-                                <thead>
-                                    <tr>
-                                        <th scope='col'>Nome</th>
-                                        <th scope='col'>CPF</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>";
-                                        foreach($dataUsario as $rowUsuario){
-                                            if($dataAutor['id_usuario'] == $rowUsuario['idUsuario']){
-                                                echo "<td>".$rowUsuario['nome']."</td>";
-                                                echo "<td>".$rowUsuario['cpf']."</td>";
-                                            }
-                                        }
-                                    echo "</tr>
-                                </tbody>
-                                </table>";
-                                include_once 'formuarios/autor.html';
-                                echo "<div class='form-inline' style='margin-top: 20px; position: relative; display: flex; justify-content: center;'>
-                                        <a href='#' onclick='imprimirTela()' id='btnImprimir'>Imprmir</a>
-                                    </div>";
-                }                
+                    echo "<table class='table'>
+                    <thead>
+                        <tr>
+                            <th scope='col'>Nome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>";
+                    foreach($dataAutor as $rowAutor){
+                        echo "<td>".$rowAutor['nome']."</td>";
+                    }
+                    echo "</tr>
+                        </tbody>
+                    </table>";
+                    include_once 'formularios/autor.html';
+                    if(isset($_POST['vincularAutor'])){
+                        $nome = $_POST['nomeAutor'];
+                        $eventoID = $idEvento;
+
+                        $autor->NovoAutor($nome,$eventoID);
+                        header("Location:"."painelcontrole.php?acao=cadastrarAutor&idEvento=".$eventoID);
+                    }
+                    echo "<div class='form-inline' style='margin-top: 20px; position: relative; display: flex; justify-content: center;'>
+                            <a href='#' onclick='imprimirTela()' id='btnImprimir'>Imprmir</a>
+                        </div>";                              
             }
 
             /*Esta estrutura valida (seta o campo "validado" na tabela "evento" como "1") 
