@@ -26,8 +26,6 @@
             $sql = "INSERT INTO participanteevento (tipo,numero_posteres,data_inscricao,entrada,saida,id_usuario,id_evento) VALUES ("."'".$tipo."',"."'".$posteres."',"."'".\date('Y-m-d')."',"."'00:00:00','00:00:00',".$idUsuarioEvento.",".$idEvento.")";
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();
-
-            var_dump($sql);
             
         }
 
@@ -35,6 +33,13 @@
             $sql = "DELETE FROM participanteevento WHERE idParticipanteEvento = ".$idUsuarioPlanilha." AND id_evento = ".$idEvento;
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();
+        }
+        public function BuscaParticipanteExpecifico($idParticipante){
+            $sql = "SELECT * FROM participanteevento WHERE idParticipanteEvento = ".$idParticipante;
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchALl();
+            return $data;
         }
     }
 

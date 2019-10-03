@@ -153,7 +153,29 @@
         public function CertificadoProjetoOrientador($idEvento){
 
         }
-        public function CertificadoProjetoVoluntario($idEvento){
+        public function CertificadoProjetoVoluntario($orientador,$nomeEvento,$dataInicio,$dataFim){
+            $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
+            $idUsuario = $_SESSION['idUsuario'];
+            $mes = $this->mes(date('m'));
+            $mesInicio = $this->mes(explode("-",$dataInicio,1));
+            $mesFim = $this->mes(explode("-",$dataFim,1));
+            $ano = explode("-",$dataInicio,2);
+
+            $this->addPage("L");
+            $this->Image('img/logo_uemg.jpg',190,10,'JPG');
+            $this->SetFont('Arial', '', 10);
+            $texto = "Certificamos que ".$nomeUsuario." atuou como voluntário(a) no desenvolvimento do Projeto de Extensão intitulado ".$nomeEvento.", sob a orientação do(a) professor(a) ".$orientador.", durante o(s) mês(meses) de ".$mesInicio." a ".$mesFim." de ".$ano.", atuando 20 horas semanais para cumprimento das atividades do referido projeto.";
+            $this->SetXY(50,60);            
+            $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
+            $this->SetFont('Arial', 'B', 10);
+            $texto2 = "Ituiutaba, ".$mes." de ".date('Y');
+            $this->SetXY(125,115);
+            $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
+            $this->Image('img/ass_allison.png',40,140,'PNG');
+            $this->Image('img/ass_conrado.png',110,165,'PNG');
+            $this->Image('img/ass_amanda.png',200,142,'PNG');
+
+            $this->Output('I',true);
 
         }
         public function CertificadoIcBolsista($idEvento){
