@@ -43,6 +43,7 @@
     $pesquisa_projeto_icj_orientador = '';
     $pesquisa_projeto_icj_bolsista = '';
     $pesquisa_projeto_icj_voluntario = '';
+    $bolsista = '';
 
 
     $dataEvento = $evento->ExibeEventoExpecifico($idEvento);
@@ -63,6 +64,14 @@
             foreach($dataUsuario as $rowUsuario){
                 if($rowParticipanteAll['id_usuario'] == $rowUsuario['idUsuario']){
                     $orientador = $rowUsuario['nome'];
+                }
+            }
+        }
+        //bolsista
+        if($rowParticipanteAll['id_evento'] == $idEvento && $rowParticipanteAll['tipo'] == 'bolsista'){
+            foreach($dataUsuario as $rowUsuario){
+                if($rowParticipanteAll['id_usuario'] == $rowUsuario['idUsuario']){
+                    $bolsista = $rowUsuario['nome'];
                 }
             }
         }
@@ -102,8 +111,11 @@
         $pesquisa_projeto_icj_voluntario = $rowEvento['pesquisa_projeto_icj_voluntario'];
     }
 
-    if($tipoEvento == 'extensao' && $extensao == 'projeto' && $projeto_bolsista == 1 && $tipoParticipante == 'bolsista'){
+    if($tipoEvento == 'extensao' && $extensao == 'projeto' && $projeto_bolsista == 1 && $tipoParticipante == 'bolsista' && $validado == 1 && $permiteCertificado == 1){
         $certificado->CertificadoProjetoBolsista($nomeEvento,$orientador,$dataInicio,$dataFim);
+    }
+    else if($tipoEvento == 'extensao' && $extensao == 'projeto' && $projeto_orientador == 1 && $tipoParticipante == 'orientador' && $validado == 1 && $permiteCertificado == 1){
+        $certificado->CertificadoProjetoOrientador($nomeEvento, $orientador, $bolsista, $dataInicio, $dataFim);
     }
 
 
