@@ -43,15 +43,15 @@
                 return $mes;
             }
             else if($mes == '10' || $mes == 10){
-                $mme = "Outubro";
+                $mes = "Outubro";
                 return $mes;
             }
             else if($mes == '11' || $mes == 11){
-                $mme = "Novembro";
+                $mes = "Novembro";
                 return $mes;
             }
             else if($mes == '12' || $mes == 12){
-                $mme = "Dezembro";
+                $mes = "Dezembro";
                 return $mes;
             }
 
@@ -144,8 +144,31 @@
         public function CertificadoEventoPalestrante($idEvento){
 
         }
-        public function CertificadoProjetoBolsista($idEvento){
+        public function CertificadoProjetoBolsista($nomeEvento,$orientador,$dataInicio,$dataFim){
 
+            $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
+            $inicio = explode("-",$dataInicio);
+            $fim = explode("-",$dataFim);
+            $mesInicio = $this->mes($inicio[1]);
+            $mesFim = $this->mes($fim[1]);
+            $ano = explode("-",$dataInicio);
+            $anoRealizacao = $ano[0];
+            $mesEmissao = $this->mes(date('m'));
+
+            $this->addPage("L");
+            $this->Image('img/logo_uemg.jpg',190,10,'JPG');
+            $this->SetFont('Arial', '', 10);
+            $texto = "Certificamos que ".$nomeUsuario." atuou como bolsista pelo Programa Institucional de Apoio à Extensão (PAEx/UEMG) para desenvolvimento do Projeto de Extensão intitulado ".$nomeEvento.", sob a orientação do(a) professor(a) ".strtoupper($orientador).", durante o(s) mês(meses) de ".$mesInicio." a ".$mesFim." de ".$anoRealizacao.", atuando 20 horas semanais para cumprimento das atividades do referido projeto.";
+            $this->SetXY(50,60);            
+            $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
+            $this->SetFont('Arial', 'B', 10);
+            $texto2 = "Ituiutaba, ".$mesEmissao." de ".date('Y');
+            $this->SetXY(125,115);
+            $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
+            $this->Image('img/ass_allison.png',40,140,'PNG');
+            $this->Image('img/ass_conrado.png',180,142,'PNG');
+
+            $this->Output('I',true);
         }
         public function CertificadoProjetoColaborador($idEvento){
 
@@ -154,28 +177,6 @@
 
         }
         public function CertificadoProjetoVoluntario($orientador,$nomeEvento,$dataInicio,$dataFim){
-            $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
-            $idUsuario = $_SESSION['idUsuario'];
-            $mes = $this->mes(date('m'));
-            $mesInicio = $this->mes(explode("-",$dataInicio,1));
-            $mesFim = $this->mes(explode("-",$dataFim,1));
-            $ano = explode("-",$dataInicio,2);
-
-            $this->addPage("L");
-            $this->Image('img/logo_uemg.jpg',190,10,'JPG');
-            $this->SetFont('Arial', '', 10);
-            $texto = "Certificamos que ".$nomeUsuario." atuou como voluntário(a) no desenvolvimento do Projeto de Extensão intitulado ".$nomeEvento.", sob a orientação do(a) professor(a) ".$orientador.", durante o(s) mês(meses) de ".$mesInicio." a ".$mesFim." de ".$ano.", atuando 20 horas semanais para cumprimento das atividades do referido projeto.";
-            $this->SetXY(50,60);            
-            $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
-            $this->SetFont('Arial', 'B', 10);
-            $texto2 = "Ituiutaba, ".$mes." de ".date('Y');
-            $this->SetXY(125,115);
-            $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
-            $this->Image('img/ass_allison.png',40,140,'PNG');
-            $this->Image('img/ass_conrado.png',110,165,'PNG');
-            $this->Image('img/ass_amanda.png',200,142,'PNG');
-
-            $this->Output('I',true);
 
         }
         public function CertificadoIcBolsista($idEvento){

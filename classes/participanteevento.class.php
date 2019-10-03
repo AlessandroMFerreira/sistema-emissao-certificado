@@ -34,8 +34,8 @@
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();
         }
-        public function BuscaParticipanteExpecifico($idParticipante){
-            $sql = "SELECT * FROM participanteevento WHERE idParticipanteEvento = ".$idParticipante;
+        public function BuscaParticipanteExpecifico($idUsuario){
+            $sql = "SELECT * FROM participanteevento WHERE id_usuario = ".$idUsuario;
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();
             $data = $stmt->fetchALl();
