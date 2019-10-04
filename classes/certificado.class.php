@@ -174,7 +174,7 @@
 
             $this->Output('I',true);
         }
-        public function CertificadoProjetoColaborador($orientador,$nomeEvento,$dataInicio,$dataFim){
+        public function CertificadoProjetoColaborador($orientador,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria){
 
             $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
             $inicio = explode("-",$dataInicio);
@@ -192,7 +192,7 @@
             $textoCertificado = "CERTIFICADO";
             $this->MultiCell(200,10,utf8_decode($textoCertificado),'','J',0);
             $this->SetFont('Arial', '', 10);
-            $texto = "Certificamos que ".$nomeUsuario." atuou como voluntário(a) no desenvolvimento do Projeto de Extensão intitulado ".$nomeEvento.", sob a orientação do(a) professor(a) ".strtoupper($orientador).", durante o(s) mês(meses) de ".$mesInicio." a ".$mesFim." de ".$anoRealizacao.", atuando 20 horas semanais para cumprimento das atividades do referido projeto.";
+            $texto = "Certificamos que ".$nomeUsuario." atuou como colaborador(a) no desenvolvimento do Projeto de Extensão intitulado ".$nomeEvento.", sob a orientação do(a) professor(a) ".strtoupper($orientador).", durante o(s) mês(meses) de ".$mesInicio." a ".$mesFim." de ".$anoRealizacao.", atuando ".substr($cargaHoraria,0,5)." horas semanais para cumprimento das atividades do referido projeto.";
             $this->SetXY(50,64);            
             $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
             $this->SetFont('Arial', 'B', 10);

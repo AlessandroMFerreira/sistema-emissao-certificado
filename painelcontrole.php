@@ -9,7 +9,7 @@
     require_once dirname(__FILE__).DIRECTORY_SEPARATOR."vendor".DIRECTORY_SEPARATOR."autoload.php";
 
     //Verificação de segurança
-    if(!isset($_SESSION['tipo']) && !isset($_SESSION['idUsuario']) || $_SESSION['tipo'] != 'administrador'){
+    if(!isset($_SESSION['tipo']) && !isset($_SESSION['idUsuario']) && $_SESSION['tipo'] != 'administrador'){
         session_destroy();
         header('Location: index.php');
     }
@@ -571,7 +571,7 @@
                                 <tbody>";
                     foreach($dataParticipante as $rowParticipante){
                         foreach($dataUsario as $rowUsuario){
-                            if($rowParticipante['tipo'] == 'orientador' || $rowParticipante['tipo'] == 'bolsista' || $rowParticipante['tipo'] == 'voluntario' || $rowParticipante['tipo'] == 'calaborador' || $rowParticipante['tipo'] == 'organizador' || $rowParticipante['tipo'] == 'monitor' || $rowParticipante['tipo'] == 'palestrante' || $rowParticipante['tipo'] == 'mediador' || $rowParticipante['tipo'] == 'ministrante' || $rowParticipante['tipo'] == 'ouvinte' || $rowParticipante['tipo'] == 'apresentador' || $rowParticipante['tipo'] == 'avaliador'){
+                            if($rowParticipante['tipo'] == 'orientador' || $rowParticipante['tipo'] == 'bolsista' || $rowParticipante['tipo'] == 'voluntario' || $rowParticipante['tipo'] == 'colaborador' || $rowParticipante['tipo'] == 'organizador' || $rowParticipante['tipo'] == 'monitor' || $rowParticipante['tipo'] == 'palestrante' || $rowParticipante['tipo'] == 'mediador' || $rowParticipante['tipo'] == 'ministrante' || $rowParticipante['tipo'] == 'ouvinte' || $rowParticipante['tipo'] == 'apresentador' || $rowParticipante['tipo'] == 'avaliador'){
                                 if($rowParticipante['id_usuario'] == $rowUsuario['idUsuario']){
                                     echo "<tr>";
                                                 echo "<td>".$rowUsuario['nome']."</td>";

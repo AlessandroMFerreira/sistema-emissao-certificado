@@ -135,6 +135,8 @@
     //COLABORADOR
 
     else if($tipoEvento == 'extensao' && $extensao == 'projeto' && $projeto_colaborador == 1 && $tipoParticipante == 'colaborador' && $validado == 1 && $permiteCertificado == 1){
-        $certificado->CertificadoProjetoColaborador($orientador,$nomeEvento,$dataInicio,$dataFim);
+
+        $certificado->CertificadoProjetoColaborador($orientador,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria);
     }
+    
 ?>
