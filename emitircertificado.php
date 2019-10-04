@@ -47,7 +47,7 @@
 
 
     $dataEvento = $evento->ExibeEventoExpecifico($idEvento);
-    $dataParticipante = $participante->BuscaParticipanteExpecifico($idUsuario);
+    $dataParticipante = $participante->BuscaParticipanteExpecificoEventoExpecifico($idUsuario,$idEvento);
     $dataParticipanteAll = $participante->ExibeTodosParticipantes();
     $dataUsuario = $usuario->ListaTodosOsUsuarios();
 
@@ -110,17 +110,31 @@
         $pesquisa_projeto_icj_bolsista = $rowEvento['pesquisa_projeto_icj_bolsista'];
         $pesquisa_projeto_icj_voluntario = $rowEvento['pesquisa_projeto_icj_voluntario'];
     }
+    /*================================================================================
+    ABAIXO ESTÃO AS VALIDAÇÕES PARA O TIPO DE EXENTO "EXTENSÃO" ENQUADRAMENTO "PROJETO"
+    ================================================================================*/
+    
+    //BOLSISTA
 
     if($tipoEvento == 'extensao' && $extensao == 'projeto' && $projeto_bolsista == 1 && $tipoParticipante == 'bolsista' && $validado == 1 && $permiteCertificado == 1){
         $certificado->CertificadoProjetoBolsista($nomeEvento,$orientador,$dataInicio,$dataFim);
     }
+
+    //ORIENTADOR
+
     else if($tipoEvento == 'extensao' && $extensao == 'projeto' && $projeto_orientador == 1 && $tipoParticipante == 'orientador' && $validado == 1 && $permiteCertificado == 1){
-        $certificado->CertificadoProjetoOrientador($nomeEvento, $orientador, $bolsista, $dataInicio, $dataFim);
+        $certificado->CertificadoProjetoOrientador($nomeEvento, $bolsista, $dataInicio, $dataFim);
     }
 
+    //VOLUNTÁRIO
 
+    else if($tipoEvento == 'extensao' && $extensao == 'projeto' && $projeto_voluntario == 1 && $tipoParticipante == 'voluntario' && $validado == 1 && $permiteCertificado == 1){
+        $certificado->CertificadoProjetoVoluntario($orientador,$nomeEvento,$dataInicio,$dataFim);
+    }
     
-    
+    //COLABORADOR
 
-
+    else if($tipoEvento == 'extensao' && $extensao == 'projeto' && $projeto_colaborador == 1 && $tipoParticipante == 'colaborador' && $validado == 1 && $permiteCertificado == 1){
+        $certificado->CertificadoProjetoColaborador($orientador,$nomeEvento,$dataInicio,$dataFim);
+    }
 ?>
