@@ -64,7 +64,8 @@ create table evento(
     numero_ata varchar(250),
     data_ata date,
     outras_ocorrencias varchar(250),
-    curso varchar(250), 
+    curso varchar(250),
+    colaboracao enum('coordenacao','curso',''),
     id_usuario_responsavel int not null /*Id do usuario que criou o evento*/    
 );
 

@@ -557,8 +557,11 @@
 
                     echo "<div id='btnPlhanilha'>
                                 <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;'><a href='#' style='text-decoration: none; color:white;'>Participantes Organização</a></button>
-                                <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href="."painelcontrole.php?acao=todosInscritosPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>
-                        </div>";
+                                <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href="."painelcontrole.php?acao=todosInscritosPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>";
+                                if($rowEvento['extensao'] == 'evento'){
+                                   echo "<button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href="."painelcontrole.php?acao=colab&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Colaboração</a></button>";
+                                }                                
+                    echo  "</div>";
                     echo   "<table class='table'>
                                 <thead>
                                     <tr>
@@ -619,6 +622,45 @@
                 }
                                
             }
+            if($acao == 'colab'){
+
+                $dataEvento = $evento->ExibeEventoExpecifico($idEvento);
+                $dataUsario = $usuario->ListaTodosOsUsuarios();
+                $dataParticipante = $participante->ExibeParticipanteEventoEspecifico($idEvento);
+                $posteres = '';
+                $dataInscricao = '';
+                $idUsuarioEvento = '';
+                foreach($dataEvento as $rowEvento){
+                    if($rowEvento['extensao'] == 'evento'){
+                        if($rowEvento['colaboracao'] == '' || $rowEvento['colaboracao'] == null){
+                            echo "<div class='form-inline' style='display: felx; position: relative; justify-content: center;'>";
+                                echo "<h1>".$rowEvento['descricao']."</h1>";                    
+                            echo "</div>";
+
+                            echo "<div id='btnPlhanilha'>
+                            <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;'><a href="."painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Participantes Organização</a></button>
+                                        <button type='button' class='btn btn-primary' style='background-color: #3c6178 !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href='#' style='text-decoration: none; color:white;'><a href="."painelcontrole.php?acao=todosInscritosPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>
+                                        <button type='button' class='btn btn-primary' style='width: 250px;background-color: grey !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href="."painelcontrole.php?acao=colab&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Colaboração</a></button>                                
+                                </div>";   
+                            require_once "formularios/colaboracao.html";
+                            if(isset($_POST['bntColab'])){
+                                $colaboracao = $_POST['colab'];
+                                $evento->alterarColaboracao($idEvento,$colaboracao);
+                                header("Location:"."painelcontrole.php?acao=colab&idEvento=".$idEvento);
+                            }
+                        }else{
+                            echo "<div style='display: flex;position: relative;justify-content: center;margin-top:10px;'>
+                                <h4><strong>EVENTO JÁ VINCULADO AO SETOR</strong></h4>
+                            </div>";
+                        }
+                    }else{
+                        echo "<div style='display: flex;position: relative;justify-content: center;margin-top:10px;'>
+                                <h3><strong>OPÇÃO VÁLIDA SOMENTE PARA EVENTOS DO TIPO 'EVENTO'!!</strong></h3>
+                            </div>";
+                    }
+                }
+
+            }
             if($acao == 'excluirUsuarioPlanilha'){
                 $evento = intval($idEvento);
                 $participante->ExcluirParticipante($evento, $idUsuarioPlanilha);
@@ -637,8 +679,11 @@
 
                     echo "<div id='btnPlhanilha'>
                                 <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;'><a href="."painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Participantes Organização</a></button>
-                                <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href='#' style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>
-                        </div>";
+                                <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href='#' style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>";
+                                if($rowEvento['extensao'] == 'evento'){
+                                    echo "<button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href="."painelcontrole.php?acao=colab&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Colaboração</a></button>";
+                                 }        
+                    echo  "</div>";
                     echo   "<table class='table'>
                                 <thead>
                                     <tr>

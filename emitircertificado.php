@@ -109,9 +109,11 @@
         $pesquisa_projeto_icj_orientador = $rowEvento['pesquisa_projeto_icj_orientador'];
         $pesquisa_projeto_icj_bolsista = $rowEvento['pesquisa_projeto_icj_bolsista'];
         $pesquisa_projeto_icj_voluntario = $rowEvento['pesquisa_projeto_icj_voluntario'];
+        $colaboracao = $rowEvento['colaboracao'];
+        $cursoGraduacao = $rowEvento['curso'];
     }
     /*================================================================================
-    ABAIXO ESTÃO AS VALIDAÇÕES PARA O TIPO DE EXENTO "EXTENSÃO" ENQUADRAMENTO "PROJETO"
+    ABAIXO ESTÃO AS VALIDAÇÕES PARA O TIPO DE EVENTO "EXTENSÃO" ENQUADRAMENTO "PROJETO"
     ================================================================================*/
     
     //BOLSISTA
@@ -137,6 +139,17 @@
     else if($tipoEvento == 'extensao' && $extensao == 'projeto' && $projeto_colaborador == 1 && $tipoParticipante == 'colaborador' && $validado == 1 && $permiteCertificado == 1){
 
         $certificado->CertificadoProjetoColaborador($orientador,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria);
+    }
+
+    /*================================================================================
+    ABAIXO ESTÃO AS VALIDAÇÕES PARA O TIPO DE EVENTO "EXTENSÃO" ENQUADRAMENTO "EVENTO"
+    ================================================================================*/
+
+    //ORGANIZADOR
+
+    else if($tipoEvento == 'extensao' && $extensao == 'evento' && $evento_organizador == 1 && $tipoParticipante == 'organizador' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoEventoOrganizador($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
     }
     
 ?>
