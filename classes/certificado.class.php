@@ -130,7 +130,40 @@
 
         }
         public function CertificadoEventoMinistrante($idEvento){
+            $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
+            $inicio = explode("-",$dataInicio);
+            $fim = explode("-",$dataFim);
+            $mesInicio = $this->mes($inicio[1]);
+            $mesFim = $this->mes($fim[1]);
+            $ano = explode("-",$dataInicio);
+            $anoRealizacao = $ano[0];
+            $mesEmissao = $this->mes(date('m'));
 
+            $this->addPage("L");
+            $this->Image('img/logo_uemg.jpg',190,10,'JPG');
+            $this->SetFont('Arial', 'B', 30);
+            $this->SetXY(115,50);
+            $textoCertificado = "CERTIFICADO";
+            $this->MultiCell(200,10,utf8_decode($textoCertificado),'','J',0);
+            $this->SetFont('Arial', '', 10);
+            $textoExtra1 = "em parceria pela Coordenação de Extensão e Coordenação de Pesquisa";
+            $textoExtra2 = "pela Coordenação do Curso de Graduação em ".$cursoGraduacao;
+            if($colaboracao == "coordenacao"){
+                $texto = "Certificamos que ".$nomeUsuario." proferiu palestra intitulada ".$nomeEvento." durante o evento intitulado ".$nomeEvento.", promovido ".$textoExtra1." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".$cargaHoraria." horas.";
+            }else{
+                $texto = "Certificamos que ".$nomeUsuario." proferiu palestra intitulada ".$nomeEvento." durante o evento intitulado ".$nomeEvento.", promovido ".$textoExtra2." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".$cargaHoraria." horas.";
+            }
+            $this->SetXY(50,64);            
+            $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
+            $this->SetFont('Arial', 'B', 10);
+            $texto2 = "Ituiutaba, ".$mesEmissao." de ".date('Y');
+            $this->SetXY(125,119);
+            $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
+            $this->Image('img/ass_allison.png',40,140,'PNG');
+            $this->Image('img/ass_conrado.png',110,165,'PNG');
+            $this->Image('img/ass_amanda.png',200,142,'PNG');
+
+            $this->Output('I',true);
         }
         public function CertificadoEventoMonitor($idEvento){
 
@@ -176,8 +209,42 @@
         public function CertificadoEventoOuvinte($idEvento){
 
         }
-        public function CertificadoEventoPalestrante($idEvento){
+        public function CertificadoEventoPalestrante($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria){
 
+            $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
+            $inicio = explode("-",$dataInicio);
+            $fim = explode("-",$dataFim);
+            $mesInicio = $this->mes($inicio[1]);
+            $mesFim = $this->mes($fim[1]);
+            $ano = explode("-",$dataInicio);
+            $anoRealizacao = $ano[0];
+            $mesEmissao = $this->mes(date('m'));
+
+            $this->addPage("L");
+            $this->Image('img/logo_uemg.jpg',190,10,'JPG');
+            $this->SetFont('Arial', 'B', 30);
+            $this->SetXY(115,50);
+            $textoCertificado = "CERTIFICADO";
+            $this->MultiCell(200,10,utf8_decode($textoCertificado),'','J',0);
+            $this->SetFont('Arial', '', 10);
+            $textoExtra1 = "em parceria pela Coordenação de Extensão e Coordenação de Pesquisa";
+            $textoExtra2 = "pela Coordenação do Curso de Graduação em ".$cursoGraduacao;
+            if($colaboracao == "coordenacao"){
+                $texto = "Certificamos que ".$nomeUsuario." proferiu palestra intitulada ".$nomeEvento." durante o evento intitulado ".$nomeEvento.", promovido ".$textoExtra1." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".$cargaHoraria." horas.";
+            }else{
+                $texto = "Certificamos que ".$nomeUsuario." proferiu palestra intitulada ".$nomeEvento." durante o evento intitulado ".$nomeEvento.", promovido ".$textoExtra2." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".$cargaHoraria." horas.";
+            }
+            $this->SetXY(50,64);            
+            $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
+            $this->SetFont('Arial', 'B', 10);
+            $texto2 = "Ituiutaba, ".$mesEmissao." de ".date('Y');
+            $this->SetXY(125,119);
+            $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
+            $this->Image('img/ass_allison.png',40,140,'PNG');
+            $this->Image('img/ass_conrado.png',110,165,'PNG');
+            $this->Image('img/ass_amanda.png',200,142,'PNG');
+
+            $this->Output('I',true);
         }
         public function CertificadoProjetoBolsista($nomeEvento,$orientador,$dataInicio,$dataFim){
 

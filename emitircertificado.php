@@ -151,5 +151,22 @@
 
         $certificado->CertificadoEventoOrganizador($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
     }
+
+    //PALESTRANTE
+
+    else if($tipoEvento == 'extensao' && $extensao == 'evento' && $evento_palestrante == 1 && $tipoParticipante == 'palestrante' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoEventoPalestrante($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
+    }
+
+    //MINISTRANTE
+
+    else if($tipoEvento == 'extensao' && $extensao == 'evento' && $evento_ministrante == 1 && $tipoParticipante == 'ministrante' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoEventoPalestrante($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
+    }
+
+    //refazer o certificado de palestrante...vai ter que vincular a um evento maior e tbm a oficinas e minicursos
+
     
 ?>
