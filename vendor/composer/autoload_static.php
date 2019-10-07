@@ -7,6 +7,11 @@ namespace Composer\Autoload;
 class ComposerStaticInitace1a157ee50d06cb575f13b60da3402
 {
     public static $prefixLengthsPsr4 = array (
+        'c' => 
+        array (
+            'chillerlan\\Settings\\' => 20,
+            'chillerlan\\QRCode\\' => 18,
+        ),
         'F' => 
         array (
             'Fpdf\\' => 5,
@@ -18,6 +23,14 @@ class ComposerStaticInitace1a157ee50d06cb575f13b60da3402
     );
 
     public static $prefixDirsPsr4 = array (
+        'chillerlan\\Settings\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chillerlan/php-settings-container/src',
+        ),
+        'chillerlan\\QRCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chillerlan/php-qrcode/src',
+        ),
         'Fpdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf',
@@ -28,22 +41,11 @@ class ComposerStaticInitace1a157ee50d06cb575f13b60da3402
         ),
     );
 
-    public static $classMap = array (
-        'Classes\\autor' => __DIR__ . '/../..' . '/classes/autor.class.php',
-        'Classes\\certificado' => __DIR__ . '/../..' . '/classes/certificado.class.php',
-        'Classes\\conexao' => __DIR__ . '/../..' . '/classes/conexao.class.php',
-        'Classes\\evento' => __DIR__ . '/../..' . '/classes/evento.class.php',
-        'Classes\\participante' => __DIR__ . '/../..' . '/classes/participanteevento.class.php',
-        'Classes\\usuario' => __DIR__ . '/../..' . '/classes/usuario.class.php',
-        'Fpdf\\Fpdf' => __DIR__ . '/..' . '/fpdf/fpdf/src/Fpdf/Fpdf.php',
-    );
-
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitace1a157ee50d06cb575f13b60da3402::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitace1a157ee50d06cb575f13b60da3402::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitace1a157ee50d06cb575f13b60da3402::$classMap;
 
         }, null, ClassLoader::class);
     }

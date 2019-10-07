@@ -5,6 +5,8 @@
         }
     },
     "require": {
-        "fpdf/fpdf": "^1.81"
+        "fpdf/fpdf": "^1.81",
+        "ext-gd": "*",
+        "chillerlan/php-qrcode": "^3.1"
     }
 }
