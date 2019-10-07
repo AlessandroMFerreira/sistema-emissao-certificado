@@ -106,6 +106,7 @@
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th></th>
                         <th scope='col'>Curso</th>
                         <th scope='col'>Descrição</th>
                         <th scope='col'>Carga horária</th>
@@ -131,6 +132,7 @@
                                 echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=permitirCertificado><i class='far fa-file-alt' title='Permitir emissão de certificado'></i></a></td>";
                             }
                             echo "<td><a target='_blank' href="."emitircertificado.php?idEvento=".$rowEvento['idEvento']." style='color:red;'><i class='fas fa-print' title='Emitir Certificado'></i></a></td>";
+                            echo "<td><a target='_blank' href="."gerarqrcode.php?idEvento=".$rowEvento['idEvento']."&evento=".$rowEvento['descricao']." title='Emitir QRcode'><i class='fas fa-qrcode'></i></a></td>";
                             echo "<td>".$rowEvento['curso']."</td>";
                             echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=cadastrarPlanilha title='Clique para ver a planilha de participantes associados ao evento'>".$rowEvento['descricao']."</a></td>
                             <td>".$rowEvento['carga_horaria']."</td>
