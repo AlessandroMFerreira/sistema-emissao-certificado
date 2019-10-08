@@ -11,7 +11,7 @@
     //Verificação de segurança
     if(!isset($_SESSION['tipo']) && !isset($_SESSION['idUsuario']) && $_SESSION['tipo'] != 'administrador'){
         session_destroy();
-        header('Location: index.php');
+        header('Location: login.php');
     }
     
     

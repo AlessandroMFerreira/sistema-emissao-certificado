@@ -64,7 +64,7 @@
                     $stmt->execute();
                     echo "<script>
                         alert('Cadastro realizado com sucesso!');
-                        window.location.href='../index.php';
+                        window.location.href='../login.php';
                     </script>";
                 }
                 else if($_SESSION['tipo'] == 'administrador'){
@@ -204,7 +204,7 @@
                 }else{
                     echo "<script>
                             alert('Email ou senha incorretos');
-                            window.location.href='index.php';
+                            window.location.href='login.php';
                             </script>";
                     session_destroy();
                 }
@@ -212,7 +212,7 @@
         }
         public function UsuarioLogOut(){
             session_destroy();
-            header('Location: index.php');
+            header('Location: login.php');
         }
         public function EditarUsuario($idUsuario, $nome, $sexo, $cpf, $email, $endereco, $numero, $bairro, $cidade, $uf, $cep, $telefone){
             $sql = "UPDATE usuario set nome = "."'".$nome."'".",sexo = "."'".$sexo."'".", email = "."'".$email."'".", endereco = "."'".$endereco."'".", numero = "."'".$numero."'".", bairro = "."'".$bairro."'".", cidade = "."'".$cidade."'".", estado = "."'".$uf."'".", cep = "."'".$cep."'".", telefone = "."'".$telefone."'"." WHERE idUsuario = ".$idUsuario;
