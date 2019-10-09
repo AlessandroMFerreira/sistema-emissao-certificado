@@ -72,8 +72,9 @@ create table evento(
 /*ATENÇÃO!!!! Monitores e palestrantes terão que ter seu cadastro feito como um usuario seja de qual natureza for para evitar cadastros desnecessários e uma tabela somente para cadastrar esses usuarios*/
 create table participanteevento(
 	idParticipanteEvento int primary key auto_increment,
-    tipo enum('orientador','bolsista','voluntario','colaborador','organizador','monitor','palestrante','mediador','ministrante','ouvinte','apresentador','avaliador',''),
+    tipo enum('orientador','bolsista','voluntario','colaborador','organizador','monitor','palestrante','mediador', 'debatedor','ministrante','ouvinte','apresentador','avaliador',''),
     numero_posteres int,
+    tipoPoster enum('extensao','iniciacaoCientifica',''),
     data_inscricao date,
     entrada time,
     saida time,

@@ -17,13 +17,22 @@
                 <option value="monitor">monitor</option>
                 <option value="palestrante">palestrante</option>
                 <option value="mediador">mediador</option>
+                <option value="debatedor">debatedor</option>
                 <option value="ministrante">ministrante</option>
                 <option value="ouvinte">ouvinte</option>
                 <option value="apresentador">apresentador</option>
                 <option value="avaliador">avaliador</option>                
             </select>
-            <label for="posteres"><strong>Quantidade de posteres avaliados</strong></label>
+            <label for="posteres"><strong>Quantidade de pôsteres avaliados</strong></label>
             <input type="number" name="qntPosteres" class="form-control" value=0>        
+        </div>
+        <div class="form-inline">
+            <label for="tipoPoster"><strong>Natureza dos pôsteres</strong></label>
+            <select name="tipoPoster" class="form-control" style="width: 200px; margin-top: 5px;">
+                <option value=""></option>
+                <option value="extensao">Extensão</option>
+                <option value="iniciacaoCientifica">Iniciação Científica</option>
+            </select>
         </div>
         <div class="form-inline" style="margin-top: 20px; position: relative; display: flex; justify-content: center;">
             <input type="submit" name="btnVincular" value="Vincular ao evento" class="btn btn-primary" style="background-color: #3c6178 !important; box-shadow: none; border-color: #3c6178 !important;">

@@ -576,7 +576,7 @@
                                 <tbody>";
                     foreach($dataParticipante as $rowParticipante){
                         foreach($dataUsario as $rowUsuario){
-                            if($rowParticipante['tipo'] == 'orientador' || $rowParticipante['tipo'] == 'bolsista' || $rowParticipante['tipo'] == 'voluntario' || $rowParticipante['tipo'] == 'colaborador' || $rowParticipante['tipo'] == 'organizador' || $rowParticipante['tipo'] == 'monitor' || $rowParticipante['tipo'] == 'palestrante' || $rowParticipante['tipo'] == 'mediador' || $rowParticipante['tipo'] == 'ministrante' || $rowParticipante['tipo'] == 'ouvinte' || $rowParticipante['tipo'] == 'apresentador' || $rowParticipante['tipo'] == 'avaliador'){
+                            if($rowParticipante['tipo'] == 'orientador' || $rowParticipante['tipo'] == 'bolsista' || $rowParticipante['tipo'] == 'voluntario' || $rowParticipante['tipo'] == 'colaborador' || $rowParticipante['tipo'] == 'organizador' || $rowParticipante['tipo'] == 'monitor' || $rowParticipante['tipo'] == 'palestrante' || $rowParticipante['tipo'] == 'mediador' || $rowParticipante['tipo'] == 'debatedor' || $rowParticipante['tipo'] == 'ministrante' || $rowParticipante['tipo'] == 'ouvinte' || $rowParticipante['tipo'] == 'apresentador' || $rowParticipante['tipo'] == 'avaliador'){
                                 if($rowParticipante['id_usuario'] == $rowUsuario['idUsuario']){
                                     echo "<tr>";
                                                 echo "<td>".$rowUsuario['nome']."</td>";
@@ -605,6 +605,7 @@
                         $cpf = $_POST['cpf'];
                         $tipo = $_POST['tipoUsuario'];
                         $posteres = $_POST['qntPosteres'];
+                        $tipoPoster = $_POST['tipoPoster'];
                         $id = $usuario->BuscaUsuarioPorCpf($cpf);
                         $eventoID = intval($idEvento);
 
@@ -617,7 +618,7 @@
                                 windows.location.href="."painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$eventoID.";
                             </script>";
                         }else{
-                            $participante->NovoParticipanteEvento($tipo,$posteres,$idUsuarioEvento,$eventoID);
+                            $participante->NovoParticipanteEvento($tipo,$posteres,$tipoPoster,$idUsuarioEvento,$eventoID);
                             header("Location: painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$eventoID);
                         }
                     }

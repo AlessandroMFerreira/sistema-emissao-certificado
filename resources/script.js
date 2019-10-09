@@ -240,7 +240,7 @@
         checkboxEventoMediador.value = "mediador_evento";
         checkboxEventoMediador.className = "form-contol";
         checkboxEventoMediador.style = "margin-left: 10px;";
-        var textoCheckboxEventoMediador = document.createTextNode("Mediador");
+        var textoCheckboxEventoMediador = document.createTextNode("Debatedor/Mediador");
 
 
         var checkboxEventoParticipante = document.createElement("input");
@@ -249,7 +249,7 @@
         checkboxEventoParticipante.value = "participante_evento";
         checkboxEventoParticipante.className = "form-contol";
         checkboxEventoParticipante.style = "margin-left: 10px;";
-        var textoCheckboxEventoParticipante = document.createTextNode("Participante");
+        var textoCheckboxEventoParticipante = document.createTextNode("Ouvinte");
 
 
         var checkboxEventoAvaliador = document.createElement("input");

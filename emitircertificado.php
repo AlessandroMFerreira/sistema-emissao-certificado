@@ -55,7 +55,17 @@
 
     foreach($dataParticipante as $rowParticipante){
         $tipoParticipante = $rowParticipante['tipo'];
+        $entrada = $rowParticipante['entrada'];
+        $saida = $rowParticipante['saida'];
+        $tipoPoster = $rowParticipante['tipoPoster'];
+        $numeroPosteres = $rowParticipante['numero_posteres'];
     }
+    //calcula a quantidade de horas que o usuario obteve no evento
+    $d1 = new DateTime($entrada);
+    $d2 = new DateTime($saida);
+    $diferenca = $d1->diff($d2, true);
+    $cargaRealizada = $diferenca->format('%H:%i:%s');
+    
 
     //foreach para buscar o orientador
 
@@ -153,20 +163,66 @@
     }
 
     //PALESTRANTE
-
+    //REFAZER
     else if($tipoEvento == 'extensao' && $extensao == 'evento' && $evento_palestrante == 1 && $tipoParticipante == 'palestrante' && $validado == 1 && $permiteCertificado == 1){
 
         $certificado->CertificadoEventoPalestrante($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
     }
 
     //MINISTRANTE
-
+    //REFAZER
     else if($tipoEvento == 'extensao' && $extensao == 'evento' && $evento_ministrante == 1 && $tipoParticipante == 'ministrante' && $validado == 1 && $permiteCertificado == 1){
 
         $certificado->CertificadoEventoPalestrante($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
     }
 
     //refazer o certificado de palestrante...vai ter que vincular a um evento maior e tbm a oficinas e minicursos
+
+    //APRESENTADOR
+    //REFAZER
+    else if($tipoEvento == 'extensao' && $extensao == 'evento' && $evento_apresentador == 1 && $tipoParticipante == 'apresentador' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoEventoPalestrante($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
+    }
+
+    //MONITOR
+
+    else if($tipoEvento == 'extensao' && $extensao == 'evento' && $evento_monitor == 1 && $tipoParticipante == 'monitor' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoEventoMonitor($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria,$cargaRealizada);
+    }
+
+    //DEBATEDOR - MEDIADOR
+    //REFAZER
+    else if($tipoEvento == 'extensao' && $extensao == 'evento' && $evento_mediador == 1 && $tipoParticipante == 'mediador' || $tipoParticipante == 'debatedor' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoEventoDebatedorMediador($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria,$tipoParticipante);
+    }
+
+    //OUVINTE
+
+    else if($tipoEvento == 'extensao' && $extensao == 'evento' && $evento_participante == 1 && $tipoParticipante == 'ouvinte' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoEventoParticipante($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
+    }
+
+    //AVALIADOR
+
+    else if($tipoEvento == 'extensao' && $extensao == 'evento' && $evento_avaliador == 1 && $tipoParticipante == 'avaliador' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoEventoAvaliador($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$numeroPosteres,$tipoPoster);
+    }
+
+    /*================================================================================
+    ABAIXO ESTÃO AS VALIDAÇÕES PARA O TIPO DE EVENTO "EXTENSÃO" ENQUADRAMENTO "CURSO"
+    ================================================================================*/
+
+    //ORGANIZADOR
+
+    else if($tipoEvento == 'extensao' && $extensao == 'curso' && $curso_organizador == 1 && $tipoParticipante == 'organizador' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoCursoOrganizador($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$numeroPosteres,$tipoPoster);
+    }
 
     
 ?>
