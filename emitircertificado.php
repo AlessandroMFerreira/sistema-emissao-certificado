@@ -221,8 +221,27 @@
 
     else if($tipoEvento == 'extensao' && $extensao == 'curso' && $curso_organizador == 1 && $tipoParticipante == 'organizador' && $validado == 1 && $permiteCertificado == 1){
 
-        $certificado->CertificadoCursoOrganizador($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$numeroPosteres,$tipoPoster);
+        $certificado->CertificadoCursoOrganizador($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
     }
 
+    //MINISTRANTE
+
+    else if($tipoEvento == 'extensao' && $extensao == 'curso' && $curso_ministrante == 1 && $tipoParticipante == 'ministrante' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoCursoMinistrante($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
+    }
     
+    //OUVINTE
+
+    else if($tipoEvento == 'extensao' && $extensao == 'curso' && $curso_participante == 1 && $tipoParticipante == 'ouvinte' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoCursoOuvinte($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
+    }
+
+    /*============================================================================================
+    ABAIXO ESTÃO AS VALIDAÇÕES PARA O TIPO DE EVENTO "PESQUISA" ENQUADRAMENTO "INICIAÇÃO CINTÍFICA"
+    ============================================================================================*/
+
+    //ORIENTADOR
+
 ?>

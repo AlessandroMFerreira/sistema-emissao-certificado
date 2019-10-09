@@ -56,27 +56,111 @@
             }
 
         }
-        public function CertificadoCursoMinistrante($idEvento, $nomeEvento, $dataInicio, $dataFim, $cargaHoraria){
+        public function CertificadoCursoMinistrante($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria){
             
-
-        }
-        public function CertificadoCursoOrganizador($idEvento, $nomeEvento, $dataInicio, $dataFim, $cargaHoraria){
-            
-        }
-        public function CertificadoCursoOuvinte($idEvento, $nomeEvento, $dataInicio, $dataFim, $cargaHoraria){
             $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
-            $idUsuario = $_SESSION['idUsuario'];
-            $mes = $this->mes(date('m'));
+            $inicio = explode("-",$dataInicio);
+            $fim = explode("-",$dataFim);
+            $mesInicio = $this->mes($inicio[1]);
+            $mesFim = $this->mes($fim[1]);
+            $ano = explode("-",$dataInicio);
+            $anoRealizacao = $ano[0];
+            $mesEmissao = $this->mes(date('m'));
 
             $this->addPage("L");
             $this->Image('img/logo_uemg.jpg',190,10,'JPG');
+            $this->SetFont('Arial', 'B', 30);
+            $this->SetXY(115,50);
+            $textoCertificado = "CERTIFICADO";
+            $this->MultiCell(200,10,utf8_decode($textoCertificado),'','J',0);
             $this->SetFont('Arial', '', 10);
-            $texto = "Certificamos que ".$nomeUsuario." participou como ouvinte das atividades do curso intitulado ".$nomeEvento.", promovido em parceria pela Coordenação de Extensão e Coordenação de Pesquisa da UEMG, Unidade Ituiutaba. O curso ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).", perfazendo carga horária total de ".substr($cargaHoraria,0,5)." horas. ";
-            $this->SetXY(50,60);            
+            $textoExtra1 = "em parceria pela Coordenação de Extensão e Coordenação de Pesquisa";
+            $textoExtra2 = "pela Coordenação do Curso de Graduação em ".$cursoGraduacao;
+            if($colaboracao == "coordenacao"){
+                $texto = "Certificamos que ".$nomeUsuario." ministrou curso intitulado ".$nomeEvento.", promovido ".$textoExtra1." da UEMG, Unidade Ituiutaba. O curso ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da atividade foi de ".substr($cargaHoraria,0,5)." horas.";
+            }else{
+                $texto = "Certificamos que ".$nomeUsuario." ministrou curso intitulado ".$nomeEvento.", promovido ".$textoExtra2." da UEMG, Unidade Ituiutaba. O curso ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da atividade foi de ".substr($cargaHoraria,0,5)." horas.";
+            }
+            $this->SetXY(50,64);            
             $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
             $this->SetFont('Arial', 'B', 10);
-            $texto2 = "Ituiutaba, ".$mes." de ".date('Y');
-            $this->SetXY(125,115);
+            $texto2 = "Ituiutaba, ".$mesEmissao." de ".date('Y');
+            $this->SetXY(125,119);
+            $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
+            $this->Image('img/ass_allison.png',40,140,'PNG');
+            $this->Image('img/ass_conrado.png',110,165,'PNG');
+            $this->Image('img/ass_amanda.png',200,142,'PNG');
+
+            $this->Output('I',true);
+
+        }
+        public function CertificadoCursoOrganizador($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria){
+            
+            $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
+            $inicio = explode("-",$dataInicio);
+            $fim = explode("-",$dataFim);
+            $mesInicio = $this->mes($inicio[1]);
+            $mesFim = $this->mes($fim[1]);
+            $ano = explode("-",$dataInicio);
+            $anoRealizacao = $ano[0];
+            $mesEmissao = $this->mes(date('m'));
+
+            $this->addPage("L");
+            $this->Image('img/logo_uemg.jpg',190,10,'JPG');
+            $this->SetFont('Arial', 'B', 30);
+            $this->SetXY(115,50);
+            $textoCertificado = "CERTIFICADO";
+            $this->MultiCell(200,10,utf8_decode($textoCertificado),'','J',0);
+            $this->SetFont('Arial', '', 10);
+            $textoExtra1 = "em parceria pela Coordenação de Extensão e Coordenação de Pesquisa";
+            $textoExtra2 = "pela Coordenação do Curso de Graduação em ".$cursoGraduacao;
+            if($colaboracao == "coordenacao"){
+                $texto = "Certificamos que ".$nomeUsuario." atuou como organizador(a) do ".$nomeEvento.", promovido ".$textoExtra1." da UEMG, Unidade Ituiutaba. O curso ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).", perfazendo carga horária total de ".substr($cargaHoraria,0,5)." horas.";
+            }else{
+                $texto = "Certificamos que ".$nomeUsuario." atuou como organizador(a) do ".$nomeEvento.", promovido ".$textoExtra2." da UEMG, Unidade Ituiutaba. O curso ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).", perfazendo carga horária total de ".substr($cargaHoraria,0,5)." horas.";
+            }
+            $this->SetXY(50,64);            
+            $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
+            $this->SetFont('Arial', 'B', 10);
+            $texto2 = "Ituiutaba, ".$mesEmissao." de ".date('Y');
+            $this->SetXY(125,119);
+            $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
+            $this->Image('img/ass_allison.png',40,140,'PNG');
+            $this->Image('img/ass_conrado.png',110,165,'PNG');
+            $this->Image('img/ass_amanda.png',200,142,'PNG');
+
+            $this->Output('I',true);
+        }
+        public function CertificadoCursoOuvinte($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria){
+           
+            $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
+            $inicio = explode("-",$dataInicio);
+            $fim = explode("-",$dataFim);
+            $mesInicio = $this->mes($inicio[1]);
+            $mesFim = $this->mes($fim[1]);
+            $ano = explode("-",$dataInicio);
+            $anoRealizacao = $ano[0];
+            $mesEmissao = $this->mes(date('m'));
+
+            $this->addPage("L");
+            $this->Image('img/logo_uemg.jpg',190,10,'JPG');
+            $this->SetFont('Arial', 'B', 30);
+            $this->SetXY(115,50);
+            $textoCertificado = "CERTIFICADO";
+            $this->MultiCell(200,10,utf8_decode($textoCertificado),'','J',0);
+            $this->SetFont('Arial', '', 10);
+            $textoExtra1 = "em parceria pela Coordenação de Extensão e Coordenação de Pesquisa";
+            $textoExtra2 = "pela Coordenação do Curso de Graduação em ".$cursoGraduacao;
+            if($colaboracao == "coordenacao"){
+                $texto = "Certificamos que ".$nomeUsuario." participou como ouvinte das atividades do curso intitulado ".$nomeEvento.", promovido ".$textoExtra1." da UEMG, Unidade Ituiutaba. O curso ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).", perfazendo carga horária total de ".substr($cargaHoraria,0,5)." horas. ";
+            }else{
+                $texto = "Certificamos que ".$nomeUsuario." participou como ouvinte das atividades do curso intitulado ".$nomeEvento.", promovido ".$textoExtra2." da UEMG, Unidade Ituiutaba. O curso ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).", perfazendo carga horária total de ".substr($cargaHoraria,0,5)." horas. ";
+            }
+            $this->SetXY(50,64);            
+            $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
+            $this->SetFont('Arial', 'B', 10);
+            $texto2 = "Ituiutaba, ".$mesEmissao." de ".date('Y');
+            $this->SetXY(125,119);
             $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
             $this->Image('img/ass_allison.png',40,140,'PNG');
             $this->Image('img/ass_conrado.png',110,165,'PNG');

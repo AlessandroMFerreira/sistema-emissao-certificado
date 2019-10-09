@@ -560,7 +560,7 @@
                     echo "<div id='btnPlhanilha'>
                                 <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;'><a href='#' style='text-decoration: none; color:white;'>Participantes Organização</a></button>
                                 <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href="."painelcontrole.php?acao=todosInscritosPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>";
-                                if($rowEvento['extensao'] == 'evento'){
+                                if($rowEvento['extensao'] == 'evento' || $rowEvento['extensao'] == 'curso'){
                                    echo "<button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href="."painelcontrole.php?acao=colab&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Colaboração</a></button>";
                                 }                                
                     echo  "</div>";
@@ -634,7 +634,7 @@
                 $dataInscricao = '';
                 $idUsuarioEvento = '';
                 foreach($dataEvento as $rowEvento){
-                    if($rowEvento['extensao'] == 'evento'){
+                    if($rowEvento['extensao'] == 'evento' || $rowEvento['extensao'] == 'curso'){
                         if($rowEvento['colaboracao'] == '' || $rowEvento['colaboracao'] == null){
                             echo "<div class='form-inline' style='display: felx; position: relative; justify-content: center;'>";
                                 echo "<h1>".$rowEvento['descricao']."</h1>";                    
@@ -683,7 +683,7 @@
                     echo "<div id='btnPlhanilha'>
                                 <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;'><a href="."painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Participantes Organização</a></button>
                                 <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href='#' style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>";
-                                if($rowEvento['extensao'] == 'evento'){
+                                if($rowEvento['extensao'] == 'evento' || $rowEvento['extensao'] == 'curso'){
                                     echo "<button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href="."painelcontrole.php?acao=colab&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Colaboração</a></button>";
                                  }        
                     echo  "</div>";

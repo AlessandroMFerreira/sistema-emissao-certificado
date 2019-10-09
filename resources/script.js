@@ -313,7 +313,7 @@
         checkboxCursoParticipante.value = "participante_curso";
         checkboxCursoParticipante.className = "form-contol";
         checkboxCursoParticipante.style = "margin-left: 10px;";
-        var textoCheckboxCursoParticipante = document.createTextNode("Participante");
+        var textoCheckboxCursoParticipante = document.createTextNode("Ouvinte");
 
         solicitacaoDiv.appendChild(solicitacaoLabel);
         solicitacaoDiv.appendChild(checkboxCursoOrganizador);
