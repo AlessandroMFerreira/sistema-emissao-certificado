@@ -97,7 +97,7 @@
                             <label for="telefone"><strong>Telefone</strong></label>  
                             <input type="text" name="telefone" class="form-control" placeholder="Informe um telefone">
                             <input type="submit" name="cadastrar" class="btn btn-primary" id="btnCadastrarUsuario" style="margin-left: 5%;background-color: #3c6178 !important; border-color: #3c6178 !important; position: relative; display: flex; justify-content: center;" value="Cadastrar">
-                            <a href="../login.php" style="text-decoration:none; color: black; margin-left: 5%;">Voltar</a>
+                            <a href="../index.php" style="text-decoration:none; color: black; margin-left: 5%;">Voltar</a>
                         </div>
                     </form>
                 </div>
