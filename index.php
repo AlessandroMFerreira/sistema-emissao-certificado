@@ -20,7 +20,7 @@
                     <input name="senha" type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
                 </div>
                 <div class="btnEntrar">
-                    <button name="entrar" type="submit" class="btn btn-primary">Entrar</button>
+                    <button name="entrar" type="submit" class="btn btn-primary" style="background-color: #3c6178 !important; border-color: #3c6178 !important;">Entrar</button>
                 </div>
                 <p><strong>ou</strong></p>
                 <div class="btnEntrar">
