@@ -188,8 +188,18 @@
             return $data;
         }
 
+        private function ListaUsuarioPorLogin($login){
+
+            $sql = "SELECT * FROM usuario WHERE usuario = "."'".$login."'";
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll();
+
+            return $data;
+        }
+
         public function UsuarioLogin($login, $senha){
-            $validaLogin = $this->ListaTodosOsUsuarios();
+            $validaLogin = $this->ListaUsuarioPorLogin($login);
             $dadosUsuario = array('idUsuario' => '','nomeUsuario' => '', 'adm' => 0, 'professor' => 0, 'participante' => 0 );
 
             foreach($validaLogin as $row){
