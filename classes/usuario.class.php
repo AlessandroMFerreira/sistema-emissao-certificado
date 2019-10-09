@@ -194,13 +194,32 @@
 
             foreach($validaLogin as $row){
                 if($row['usuario'] == $login && password_verify($senha, $row['senha'])){
-                    header('Location: painelcontrole.php');
-                    $dadosUsuario['idUsuario'] = $row['idUsuario'];
-                    $dadosUsuario['nomeUsuario'] = $row['nome'];
-                    $dadosUsuario['adm'] = $row['isadm'];
-                    $dadosUsuario['professor'] = $row['isprofessor'];
-                    $dadosUsuario['participante'] = $row['isparticipante'];
-                    return $dadosUsuario;
+                    if($row['isadm'] == 1){
+                        header('Location: painelcontrole.php');
+                        $dadosUsuario['idUsuario'] = $row['idUsuario'];
+                        $dadosUsuario['nomeUsuario'] = $row['nome'];
+                        $dadosUsuario['adm'] = $row['isadm'];
+                        $dadosUsuario['professor'] = $row['isprofessor'];
+                        $dadosUsuario['participante'] = $row['isparticipante'];
+                        return $dadosUsuario;
+                    }else if($row['isprofessor'] == 1){
+                        header('Location: painelprofessor.php');
+                        $dadosUsuario['idUsuario'] = $row['idUsuario'];
+                        $dadosUsuario['nomeUsuario'] = $row['nome'];
+                        $dadosUsuario['adm'] = $row['isadm'];
+                        $dadosUsuario['professor'] = $row['isprofessor'];
+                        $dadosUsuario['participante'] = $row['isparticipante'];
+                        return $dadosUsuario;
+                    }
+                    else if($row['isparticipante'] == 1){
+                        header('Location: painelusuario.php');
+                        $dadosUsuario['idUsuario'] = $row['idUsuario'];
+                        $dadosUsuario['nomeUsuario'] = $row['nome'];
+                        $dadosUsuario['adm'] = $row['isadm'];
+                        $dadosUsuario['professor'] = $row['isprofessor'];
+                        $dadosUsuario['participante'] = $row['isparticipante'];
+                        return $dadosUsuario;
+                    }
                 }else{
                     echo "<script>
                             alert('Email ou senha incorretos');
