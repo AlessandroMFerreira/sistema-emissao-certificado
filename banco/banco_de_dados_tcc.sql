@@ -73,6 +73,7 @@ create table evento(
 create table eventopai(
     idEventopai int primary key auto_increment,
     descricao varchar(250),
+    codigo varchar(250),
     data_inicio date,
     data_fim date,
     curso varchar(250)
