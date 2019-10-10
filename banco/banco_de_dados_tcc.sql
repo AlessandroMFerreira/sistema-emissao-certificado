@@ -66,7 +66,16 @@ create table evento(
     outras_ocorrencias varchar(250),
     curso varchar(250),
     colaboracao enum('coordenacao','curso',''),
-    id_usuario_responsavel int not null /*Id do usuario que criou o evento*/    
+    id_usuario_responsavel int not null, /*Id do usuario que criou o evento*/ 
+    id_eventopai int   
+);
+
+create table eventopai(
+    idEventopai int primary key auto_increment,
+    descricao varchar(250),
+    data_inicio date,
+    data_fim date,
+    curso varchar(250)
 );
 
 /*ATENÇÃO!!!! Monitores e palestrantes terão que ter seu cadastro feito como um usuario seja de qual natureza for para evitar cadastros desnecessários e uma tabela somente para cadastrar esses usuarios*/
@@ -89,7 +98,7 @@ create table autor(
 );
 
 /*FOREIGN KEYS*/
-
+alter table evento add constraint fk_id_eventopai_evento foreign key(id_eventopai) references eventopai(idEventopai) on delete cascade;
 alter table evento add constraint fk_id_usuario_responsavel_evento foreign key(id_usuario_responsavel) references usuario(idUsuario) on delete cascade;
 alter table participanteevento add constraint fk_id_usuario_participanteevento foreign key(id_usuario) references usuario(idUsuario) on delete cascade;
 alter table participanteevento add constraint fk_id_evento_participanteevento foreign key(id_evento) references evento(idEvento) on delete cascade;
