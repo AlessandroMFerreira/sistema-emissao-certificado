@@ -15,7 +15,7 @@
             $letra1 = chr($parte2);
             $letra2 = chr($parte3);
             $letra3 = chr($parte4);
-            
+
             $codigo = parse_str($parte1.$letra1.$letra2.$letra3.$parte5);
 
             $verificaCodigo = $this->VerificaSeCodigoExiste($codigo);
@@ -43,6 +43,15 @@
             $sql = "INSERT INTO eventopai (descricao,codigo,data_inicio,data_fim,curso) VALUES ("."'".$descricao."',"."'".$codigo."',"."'".$dataInicio."',"."'".$dataFim."',"."'".$curso."'".")";
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();
+        }
+        public function ExibeTodosEventosPai(){
+            $sql = "SELECT * FROM eventopai";
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+
+            $data = $stmt->feetchAll();
+
+            return $data;
         }
     }
 
