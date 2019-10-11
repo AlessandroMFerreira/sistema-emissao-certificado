@@ -90,16 +90,25 @@ p{
 #formCadastroEvento{
     padding-top: 10px;
 }
-#divBtnCadastrarEvento{
+.divBtnCadastrarEvento{
     position: relative;
     display: flex;
     justify-content: center;
 }
-#divBtnCadastrarEvento button{
-    margin: 10px;
-    background-color: #3c6178 !important;
-    border-color: #3c6178 !important;
-    box-shadow: none !important;
+.linksMenuPrincipal{
+    margin: 20px;
+    transition: 1s;
+}
+.linksMenuPrincipalSelecionado{
+    text-shadow: 1px 1px 1px black !important;
+    color: white !important;
+    font-size: 25px;
+}
+.divBtnCadastrarEvento a:hover{
+    text-shadow: 1px 1px 1px black !important;
+    color: white !important;
+    font-size: 25px;
+    transition: 1s;
 }
 
 .itensCadastroEvento{

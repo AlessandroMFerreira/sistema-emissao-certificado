@@ -91,12 +91,12 @@
             //Exibe os eventos cadastrados, assim como permite fazer a adição de novos eventos, exclusão e validação
 
             if($id == 1){
-                echo "<div id='divBtnCadastrarEvento'>
-                            <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;'><a href='#' style='text-decoration: none; color:white;'>Eventos</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=eventoprincipal' style='text-decoration: none; color:white;'>Evento principal</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=cadastrarEvento' style='text-decoration: none; color:white;'>Cadastrar novo evento</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=exibirEventosValidados' style='text-decoration: none; color:white;'>Listar eventos validados</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=exibirEventosNaoValidados' style='text-decoration: none; color:white;'>Listar eventos não validados</a></button>
+                echo "<div class='divBtnCadastrarEvento'>
+                            <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Eventos</a>
+                            <a href='painelcontrole.php?acao=eventoprincipal' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Evento principal</a>
+                            <a href='painelcontrole.php?acao=cadastrarEvento' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar novo evento</a>
+                            <a href='painelcontrole.php?acao=exibirEventosValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos validados</a>
+                            <a href='painelcontrole.php?acao=exibirEventosNaoValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos não validados</a>
                     </div>";
                 
                 $dataEvento = $evento->ExibeTodosEventos();
@@ -166,10 +166,10 @@
             participanteevento, automaticamente esta tabela irá corromper-se.*/
 
             if($id == 2){
-                echo "<div id='divBtnCadastrarUsuario'>
-                            <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;'><a href='#' style='text-decoration: none; color:white;'>Usuarios</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=cadastrarProfessor' style='text-decoration: none; color:white;'>Cadastrar Professor</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=cadastrarUsuario' style='text-decoration: none; color:white;'>Cadastrar Usuario</a></button>
+                echo "<div class='divBtnCadastrarEvento'>
+                            <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Usuarios</a>
+                            <a href='painelcontrole.php?acao=cadastrarProfessor' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar Professor</a>
+                            <a href='painelcontrole.php?acao=cadastrarUsuario' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar Usuario</a>
                     </div>";
                 $data = $usuario->ListaTodosOsUsuarios();
 
@@ -212,12 +212,12 @@
             ============================================================*/
 
             if($acao ==  'eventoprincipal'){
-                echo "<div id='divBtnCadastrarEvento'>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?id=1' style='text-decoration: none; color:white;'>Eventos</a></button>
-                            <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;'><a href='#' style='text-decoration: none; color:white;'>Evento principal</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=cadastrarEvento' style='text-decoration: none; color:white;'>Cadastrar novo evento</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=exibirEventosValidados' style='text-decoration: none; color:white;'>Listar eventos validados</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=exibirEventosNaoValidados' style='text-decoration: none; color:white;'>Listar eventos não validados</a></button>
+                echo "<div class='divBtnCadastrarEvento'>
+                            <a href='painelcontrole.php?id=1' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Eventos</a>
+                            <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Evento principal</a>
+                            <a href='painelcontrole.php?acao=cadastrarEvento' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar novo evento</a>
+                            <a href='painelcontrole.php?acao=exibirEventosValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos validados</a>
+                            <a href='painelcontrole.php?acao=exibirEventosNaoValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos não validados</a>
                     </div>";
                     include_once "formularios/cadastroeventopai.html";
                     if(isset($_POST['cadastrar'])){
@@ -229,12 +229,12 @@
             }
 
             if($acao == 'cadastrarEvento'){
-                echo "<div id='divBtnCadastrarEvento'>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?id=1' style='text-decoration: none; color:white;'>Eventos</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=eventoprincipal' style='text-decoration: none; color:white;'>Evento principal</a></button>
-                            <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;'><a href='#' style='text-decoration: none; color:white;'>Cadastrar novo evento</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=exibirEventosValidados' style='text-decoration: none; color:white;'>Listar eventos validados</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=exibirEventosNaoValidados' style='text-decoration: none; color:white;'>Listar eventos não validados</a></button>
+                echo "<div class='divBtnCadastrarEvento'>
+                            <a href='painelcontrole.php?id=1' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Eventos</a>
+                            <a href='painelcontrole.php?acao=eventoprincipal' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Evento principal</a>
+                            <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Cadastrar novo evento</a>
+                            <a href='painelcontrole.php?acao=exibirEventosValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos validados</a>
+                            <a href='painelcontrole.php?acao=exibirEventosNaoValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos não validados</a>
                     </div>";
                 require_once "formularios/cadastroevento.php";
                 
@@ -576,11 +576,11 @@
                         echo "<h1>".$rowEvento['descricao']."</h1>";                    
                     echo "</div>";
 
-                    echo "<div id='btnPlhanilha'>
-                                <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;'><a href='#' style='text-decoration: none; color:white;'>Participantes Organização</a></button>
-                                <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href="."painelcontrole.php?acao=todosInscritosPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>";
+                    echo "<div class='divBtnCadastrarEvento'>
+                                <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Participantes Organização</a>
+                                <a href="."painelcontrole.php?acao=todosInscritosPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Todos os Inscritos</a>";
                                 if($rowEvento['extensao'] == 'evento' || $rowEvento['extensao'] == 'curso'){
-                                   echo "<button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href="."painelcontrole.php?acao=colab&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Colaboração</a></button>";
+                                   echo "<a href="."painelcontrole.php?acao=colab&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Colaboração</a>";
                                 }                                
                     echo  "</div>";
                     echo   "<table class='table'>
@@ -659,10 +659,10 @@
                                 echo "<h1>".$rowEvento['descricao']."</h1>";                    
                             echo "</div>";
 
-                            echo "<div id='btnPlhanilha'>
-                            <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;'><a href="."painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Participantes Organização</a></button>
-                                        <button type='button' class='btn btn-primary' style='background-color: #3c6178 !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href='#' style='text-decoration: none; color:white;'><a href="."painelcontrole.php?acao=todosInscritosPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>
-                                        <button type='button' class='btn btn-primary' style='width: 250px;background-color: grey !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href="."painelcontrole.php?acao=colab&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Colaboração</a></button>                                
+                            echo "<div class='divBtnCadastrarEvento'>
+                                        <a href="."painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Participantes Organização</a>
+                                        <a href="."painelcontrole.php?acao=todosInscritosPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Todos os Inscritos</a>
+                                        <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Colaboração</a>           
                                 </div>";   
                             require_once "formularios/colaboracao.html";
                             if(isset($_POST['bntColab'])){
@@ -699,11 +699,11 @@
                         echo "<h1>".$rowEvento['descricao']."</h1>";                    
                     echo "</div>";
 
-                    echo "<div id='btnPlhanilha'>
-                                <button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;'><a href="."painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Participantes Organização</a></button>
-                                <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href='#' style='text-decoration: none; color:white;'>Todos os Inscritos</a></button>";
+                    echo "<div class='divBtnCadastrarEvento'>
+                                <a href="."painelcontrole.php?acao=cadastrarPlanilha&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Participantes Organização</a>
+                                <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Todos os Inscritos</a>";
                                 if($rowEvento['extensao'] == 'evento' || $rowEvento['extensao'] == 'curso'){
-                                    echo "<button type='button' class='btn btn-primary' style='width: 250px;background-color: #3c6178 !important;border-color: #3c6178 !important;box-shadow: none !important;margin-left: 5px;'><a href="."painelcontrole.php?acao=colab&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:white;'>Colaboração</a></button>";
+                                    echo "<a href="."painelcontrole.php?acao=colab&idEvento=".$rowEvento['idEvento']." style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Colaboração</a>";
                                  }        
                     echo  "</div>";
                     echo   "<table class='table'>
@@ -837,12 +837,12 @@
             //Estrutura para exibir apenas os eventos que foram validados.
 
             if($acao == 'exibirEventosValidados'){
-                echo "<div id='divBtnCadastrarEvento'>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?id=1' style='text-decoration: none; color:white;'>Eventos</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=eventoprincipal' style='text-decoration: none; color:white;'>Evento principal</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=cadastrarEvento' style='text-decoration: none; color:white;'>Cadastrar novo evento</a></button>
-                            <button type='button' class='btn btn-primary' style='background-color: grey !important; width: 250px;'><a href='#' style='text-decoration: none; color:white;'>Listar eventos validados</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=exibirEventosNaoValidados' style='text-decoration: none; color:white;'>Listar eventos não validados</a></button>
+                echo "<div class='divBtnCadastrarEvento'>
+                            <a href='painelcontrole.php?id=1' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Eventos</a>
+                            <a href='painelcontrole.php?acao=eventoprincipal' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Evento principal</a>
+                            <a href='painelcontrole.php?acao=cadastrarEvento' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar novo evento</a>
+                            <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Listar eventos validados</a>
+                            <a href='painelcontrole.php?acao=exibirEventosNaoValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos não validados</a>
                     </div>";
 
                 $dataEvento = $evento->ListarEventosValidados();
@@ -895,12 +895,12 @@
             //Estrutura para exibir somente os eventos que ainda não foram validados.
 
             if($acao == 'exibirEventosNaoValidados'){
-                echo "<div id='divBtnCadastrarEvento'>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?id=1' style='text-decoration: none; color:white;'>Eventos</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=eventoprincipal' style='text-decoration: none; color:white;'>Evento principal</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=cadastrarEvento' style='text-decoration: none; color:white;'>Cadastrar novo evento</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=exibirEventosValidados' style='text-decoration: none; color:white;'>Listar eventos validados</a></button>
-                            <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;'><a href='#' style='text-decoration: none; color:white;'>Listar eventos não validados</a></button>
+                echo "<div class='divBtnCadastrarEvento'>
+                            <a href='painelcontrole.php?id=1' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Eventos</a>
+                            <a href='painelcontrole.php?acao=eventoprincipal' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Evento principal</a>
+                            <a href='painelcontrole.php?acao=cadastrarEvento' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar novo evento</a>
+                            <a href='painelcontrole.php?acao=exibirEventosValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos validados</a>
+                            <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Listar eventos não validados</a>
                     </div>";
 
                 $dataEvento = $evento->ListaEventosNaoValidados();
@@ -961,13 +961,13 @@
             poderá cadastrar um ADM.*/
 
             if($acao == 'cadastrarProfessor'){
-                echo "<div id='divBtnCadastrarUsuario'>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?id=2' style='text-decoration: none; color:white;'>Usuarios</a></button>
-                            <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;'><a href='#' style='text-decoration: none; color:white;'>Cadastrar Professor</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=cadastrarUsuario' style='text-decoration: none; color:white;'>Cadastrar Usuario</a></button>
+                echo "<div class='divBtnCadastrarEvento'>
+                            <a href='painelcontrole.php?id=2' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Usuarios</a>
+                            <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Cadastrar Professor</a>
+                            <a href='painelcontrole.php?acao=cadastrarUsuario' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar Usuario</a>
                     </div>";
                 
-                require_once 'formularios/cadastrousuario.html';
+                require_once 'formularios/cadastrousuarioadm.html';
 
                 if(isset($_POST['cadastrar'])){
                     $nome = $_POST['nome'];
@@ -991,13 +991,13 @@
             //Estrutura que permite ao ADM cadastrar um usuário comum.
 
             if($acao == 'cadastrarUsuario'){
-                echo "<div id='divBtnCadastrarUsuario'>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?id=2' style='text-decoration: none; color:white;'>Usuarios</a></button>
-                            <button type='button' class='btn btn-primary' style='width: 250px;'><a href='painelcontrole.php?acao=cadastrarProfessor' style='text-decoration: none; color:white;'>Cadastrar Professor</a></button>
-                            <button type='button' class='btn btn-primary' style='background-color: grey !important;width: 250px;'><a href='#' style='text-decoration: none; color:white;'>Cadastrar Usuario</a></button>
+                echo "<div class='divBtnCadastrarEvento'>
+                            <a href='painelcontrole.php?id=2' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Usuarios</a>
+                            <a href='painelcontrole.php?acao=cadastrarProfessor' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar Professor</a>
+                            <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Cadastrar Usuario</a>
                     </div>";
 
-                    require_once 'formularios/cadastrousuario.html';
+                    require_once 'formularios/cadastrousuarioadm.html';
 
                     if(isset($_POST['cadastrar'])){
                         $nome = $_POST['nome'];
