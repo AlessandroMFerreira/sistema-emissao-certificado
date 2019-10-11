@@ -17,6 +17,7 @@
     
     //Instanciação de classes
     $evento = new Classes\evento();
+    $eventopai = new Classes\eventopai();
     $usuario = new Classes\usuario();
     $participante = new Classes\participante();
     $autor = new Classes\autor();
@@ -225,6 +226,8 @@
                         $dataInicio = $_POST['data_inicio'];
                         $dataFim = $_POST['data_fim'];
                         $curso = $_POST['curso'];
+                        $eventopai->NovoEventoPai($descricao,$dataInicio,$dataFim,$curso);
+                        header("Location: painelcontrole.php?acao=eventoprincipal");
                     }
             }
 

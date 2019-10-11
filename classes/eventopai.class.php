@@ -12,15 +12,16 @@
             $parte4 = rand(65,90); //gera um numero aleatório de 65 a 90 correspondente ao decimal das letras A a Z da tabela ASCII
             $parte5 = rand(1,1000); //gera a parte fnal do código numero aleatório entre 1 e 1.000
 
+            
             $letra1 = chr($parte2);
             $letra2 = chr($parte3);
             $letra3 = chr($parte4);
 
-            $codigo = parse_str($parte1.$letra1.$letra2.$letra3.$parte5);
+            $codigo = $parte1.$letra1.$letra2.$letra3.$parte5;
 
             $verificaCodigo = $this->VerificaSeCodigoExiste($codigo);
             
-            if($verificaCodigo){
+            if(!$verificaCodigo){
                 return $codigo;
             }else{
                 $this->GerarCodigoAleatorio();
