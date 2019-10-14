@@ -27,7 +27,7 @@
                 $this->GerarCodigoAleatorio();
             }
         }
-        private function VerificaSeCodigoExiste($codigo){
+        public function VerificaSeCodigoExiste($codigo){
             $sql = "SELECT codigo FROM eventopai WHERE codigo = "."'".$codigo."'";
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();
@@ -39,9 +39,9 @@
                 return false;
             }
         }
-        public function NovoEventoPai($descricao,$dataInicio,$dataFim,$curso){
+        public function NovoEventoPai($descricao,$dataInicio,$dataFim,$curso,$idusuario){
             $codigo = $this->GerarCodigoAleatorio();
-            $sql = "INSERT INTO eventopai (descricao,codigo,data_inicio,data_fim,curso) VALUES ("."'".$descricao."',"."'".$codigo."',"."'".$dataInicio."',"."'".$dataFim."',"."'".$curso."'".")";
+            $sql = "INSERT INTO eventopai (descricao,codigo,data_inicio,data_fim,curso,id_usuario_responsavel) VALUES ("."'".$descricao."',"."'".$codigo."',"."'".$dataInicio."',"."'".$dataFim."',"."'".$curso."',".$idusuario.")";
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();
         }
@@ -50,9 +50,15 @@
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();
 
-            $data = $stmt->feetchAll();
+            $data = $stmt->fetchAll();
 
             return $data;
+        }
+
+        public function ExcluiEventoPai($idEventoPai){
+            $sql = "DELETE FROM eventopai WHERE idEventopai = ".$idEventoPai;
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
         }
     }
 

@@ -226,9 +226,44 @@
                         $dataInicio = $_POST['data_inicio'];
                         $dataFim = $_POST['data_fim'];
                         $curso = $_POST['curso'];
-                        $eventopai->NovoEventoPai($descricao,$dataInicio,$dataFim,$curso);
+                        $eventopai->NovoEventoPai($descricao,$dataInicio,$dataFim,$curso,$idUsuario);
                         header("Location: painelcontrole.php?acao=eventoprincipal");
                     }
+                    $exibeeventopai = $eventopai->ExibeTodosEventosPai();
+                    echo "<table class='table' style='margin-top: 10px;'>
+                            <thead>
+                                <tr>
+                                    <th scope='col'>Descrição</th>
+                                    <th scope='col'>Data Inicio</th>
+                                    <th scope='col'>Data Fim</th>
+                                    <th scope='col'>Codigo</th>
+                                    <th scope='col'>Responsável</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>";
+                            foreach($exibeeventopai as $roweventopai){
+                                $idusuarioresponsavel = $roweventopai['id_usuario_responsavel'];
+                                $usuarioResponsavel = $usuario->ListaUsuarioExpecifico($idusuarioresponsavel);
+                                foreach($usuarioResponsavel as $rowUsuario){
+                                    $nomeUsuario = $rowUsuario['nome'];
+                                }
+                                echo "<tr>";
+                                    echo "<td>".$roweventopai['descricao']."</td>";
+                                    echo "<td>".date("d/m/Y", strtotime($roweventopai['data_inicio']))."</td>";
+                                    echo "<td>".date("d/m/Y", strtotime($roweventopai['data_fim']))."</td>";
+                                    echo "<td>".$roweventopai['codigo']."</td>";
+                                    echo "<td>".$nomeUsuario."</td>";
+                                    echo "<td><a href="."painelcontrole.php?idEvento=".$roweventopai['idEventopai']."&acao=excluirEventoPai><i class='far fa-trash-alt' title='Excluir evento principal'></i></a></td>";
+                                echo "</tr>";
+                            }
+                    echo "</tbody>
+                    </table>";
+            }
+
+            if($acao == 'excluirEventoPai'){
+                $eventopai->ExcluiEventoPai($idEvento);
+                header("Location: painelcontrole.php?acao=eventoprincipal");
             }
 
             if($acao == 'cadastrarEvento'){
@@ -239,7 +274,7 @@
                             <a href='painelcontrole.php?acao=exibirEventosValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos validados</a>
                             <a href='painelcontrole.php?acao=exibirEventosNaoValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos não validados</a>
                     </div>";
-                require_once "formularios/cadastroevento.php";
+                require_once "formularios/cadastroevento.html";
                 
                 if(isset($_POST['cadastrarEvento'])){
 
@@ -250,6 +285,9 @@
                     $datafim = $campos['data_fim'];
                     $datacriacao = date('Y-m-d');
                     $tipo = $campos['tipo'];
+                    $eventopaicodigo = strtoupper($_POST['ideventopai']);
+
+                    $verificaSeCodigoExiste = $eventopai->VerificaSeCodigoExiste($eventopaicodigo);
                     
                     //Iniciando todas as variáveis que são geradas dinamicamente no formulario
                     $extensao = '';
@@ -546,7 +584,14 @@
                     $outrasocorrencias = $campos['ocorrencias'];
                     $curso = $campos['cursos'];
                     $iduser = $_SESSION['idUsuario'];
-                    $evento->NovoEvento($descricao,$cargahoraria,$datainicio,$datafim,$datacriacao,$tipo,$extensao,$pesquisa,$bolsista_projeto,$orientador_projeto,$voluntario_projeto,$colaborador_projeto,$organizador_evento,$palestrante_evento,$ministrante_evento,$apresentador_evento,$monitor_evento,$mediador_evento,$participante_evento,$avaliador_evento,$organizador_curso,$ministrante_curso,$participante_curso,$orientador_iniciacao_cientifica,$bolsista_iniciacao_cientifica,$voluntario_iniciacao_cientifica,$orientador_iniciacao_cientifica_jr,$bolsista_iniciacao_cientifica_jr,$voluntario_iniciacao_cientifica_jr,$sigaextensao,$idsiga,$map,$idmap,$colegiado,$numeroata,$dataata,$outrasocorrencias,$curso,$iduser);
+                    $evento->NovoEvento($descricao,$cargahoraria,$datainicio,$datafim,$datacriacao,$tipo,$extensao,$pesquisa,$bolsista_projeto,$orientador_projeto,$voluntario_projeto,$colaborador_projeto,$organizador_evento,$palestrante_evento,$ministrante_evento,$apresentador_evento,$monitor_evento,$mediador_evento,$participante_evento,$avaliador_evento,$organizador_curso,$ministrante_curso,$participante_curso,$orientador_iniciacao_cientifica,$bolsista_iniciacao_cientifica,$voluntario_iniciacao_cientifica,$orientador_iniciacao_cientifica_jr,$bolsista_iniciacao_cientifica_jr,$voluntario_iniciacao_cientifica_jr,$sigaextensao,$idsiga,$map,$idmap,$colegiado,$numeroata,$dataata,$outrasocorrencias,$curso,$iduser,$eventopaicodigo);
+                    if($eventopaicodigo != '' || $eventopaicodigo != null){
+                        if(!$verificaSeCodigoExiste){
+                            echo "<script>
+                                    alert('Não existe correspondência para o Código informado no campo CÓDIGO EVENTO favor verificar o código informado. Entre em contato com o suporte.');
+                                <script>";
+                        }
+                    }
                     header("Location: painelcontrole.php?id=1");
                 }
                 
