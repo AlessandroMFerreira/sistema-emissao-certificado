@@ -293,6 +293,7 @@
                     $tipo = $campos['tipo'];
                     $eventopaicodigo = strtoupper($_POST['ideventopai']);
                     $oficina_minicurso = $_POST['oficina_minicurso'];
+                    $tipoApresentacao = $_POST['extensaoIC'];
 
                     $verificaSeCodigoExiste = $eventopai->VerificaSeCodigoExiste($eventopaicodigo);
                     
@@ -591,7 +592,7 @@
                     $outrasocorrencias = $campos['ocorrencias'];
                     $curso = $campos['cursos'];
                     $iduser = $_SESSION['idUsuario'];
-                    $evento->NovoEvento($descricao,$oficina_minicurso,$cargahoraria,$datainicio,$datafim,$datacriacao,$tipo,$extensao,$pesquisa,$bolsista_projeto,$orientador_projeto,$voluntario_projeto,$colaborador_projeto,$organizador_evento,$palestrante_evento,$ministrante_evento,$apresentador_evento,$monitor_evento,$mediador_evento,$participante_evento,$avaliador_evento,$organizador_curso,$ministrante_curso,$participante_curso,$orientador_iniciacao_cientifica,$bolsista_iniciacao_cientifica,$voluntario_iniciacao_cientifica,$orientador_iniciacao_cientifica_jr,$bolsista_iniciacao_cientifica_jr,$voluntario_iniciacao_cientifica_jr,$sigaextensao,$idsiga,$map,$idmap,$colegiado,$numeroata,$dataata,$outrasocorrencias,$curso,$iduser,$eventopaicodigo);
+                    $evento->NovoEvento($descricao,$oficina_minicurso,$tipoApresentacao,$cargahoraria,$datainicio,$datafim,$datacriacao,$tipo,$extensao,$pesquisa,$bolsista_projeto,$orientador_projeto,$voluntario_projeto,$colaborador_projeto,$organizador_evento,$palestrante_evento,$ministrante_evento,$apresentador_evento,$monitor_evento,$mediador_evento,$participante_evento,$avaliador_evento,$organizador_curso,$ministrante_curso,$participante_curso,$orientador_iniciacao_cientifica,$bolsista_iniciacao_cientifica,$voluntario_iniciacao_cientifica,$orientador_iniciacao_cientifica_jr,$bolsista_iniciacao_cientifica_jr,$voluntario_iniciacao_cientifica_jr,$sigaextensao,$idsiga,$map,$idmap,$colegiado,$numeroata,$dataata,$outrasocorrencias,$curso,$iduser,$eventopaicodigo);
                     if($eventopaicodigo != '' || $eventopaicodigo != null){
                         if(!$verificaSeCodigoExiste){
                             echo "<script>
@@ -925,7 +926,7 @@
                     if($rowEvento['data_fim'] >= date("Y-m-d")){
                         echo "
                             <tr>";
-                            echo "<td><a target='_blank' href="."'"."emitircertificado.php?idEvento=".$rowEvento['idEvento']."&descricaoPai=".$descricaoEventoPai."&oficinaMinicurso=".$rowEvento['oficina_minicurso']."'"." style='color:red;'><i class='fas fa-print' title='Emitir Certificado'></i></a></td>";
+                            echo "<td><a target='_blank' href="."'"."emitircertificado.php?idEvento=".$rowEvento['idEvento']."&descricaoPai=".urlencode($descricaoEventoPai)."&oficinaMinicurso=".$rowEvento['oficina_minicurso']."&apresentacao=".$rowEvento['extencao_ou_ic']."'"." style='color:red;'><i class='fas fa-print' title='Emitir Certificado'></i></a></td>";
                             echo "<td><a target='_blank' href="."gerarqrcode.php?idEvento=".$rowEvento['idEvento']."&evento=".$rowEvento['descricao']." title='Emitir QRcode'><i class='fas fa-qrcode'></i></a></td>";
                                 foreach($dataEventoPai as $rowEventoPai){
                                     if($rowEvento['codigo_evento_pai'] == $rowEventoPai['codigo']){

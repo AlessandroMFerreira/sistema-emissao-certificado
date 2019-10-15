@@ -28,6 +28,7 @@ create table evento(
     validado boolean not null,
     permiteemimssaocertificado boolean not null,
     oficina_minicurso enum ('','oficina','minicurso'),
+    extencao_ou_ic enum ('', 'extensionista','iniciacaoCientifica'),
     descricao varchar(250) not null,
     carga_horaria time,
     data_inicio date not null,

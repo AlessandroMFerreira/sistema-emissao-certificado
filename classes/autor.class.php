@@ -14,8 +14,8 @@
             $data = $stmt->fetchALl();
             return $data;
         }
-
         public function ExibeAutorEventoEspecifico($idEvento){
+            
             $sql = "SELECT * FROM autor WHERE id_evento = ".$idEvento;
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();

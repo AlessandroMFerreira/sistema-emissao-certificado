@@ -168,7 +168,7 @@
 
             $this->Output('I',true);
         }
-        public function CertificadoEventoApresentador($idEvento){
+        public function CertificadoEventoApresentador($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria,$apresentacao,$nomeAutores,$descricaoEventoPai){
 
             $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
             $inicio = explode("-",$dataInicio);
@@ -186,16 +186,29 @@
             $textoCertificado = "CERTIFICADO";
             $this->MultiCell(200,10,utf8_decode($textoCertificado),'','J',0);
             $this->SetFont('Arial', '', 10);
-            $texto = "Certificamos que ".$nomeUsuario." atuou como bolsista pelo Programa Institucional de Apoio à Extensão (PAEx/UEMG) para desenvolvimento do Projeto de Extensão intitulado ".$nomeEvento.", sob a orientação do(a) professor(a) ".strtoupper($orientador).", durante o(s) mês(meses) de ".$mesInicio." a ".$mesFim." de ".$anoRealizacao.", atuando 20 horas semanais para cumprimento das atividades do referido projeto.";
+            $textoExtra1 = "em parceria pela Coordenação de Extensão e Coordenação de Pesquisa";
+            $textoExtra2 = "pela Coordenação do Curso de Graduação em ".$cursoGraduacao;
+            if($apresentacao == 'extensionista'){
+                $textoExtra3 = 'extensionista';
+            }else{
+                $textoExtra3 = 'de iniciação científica';
+            }
+            if($colaboracao == "coordenacao"){
+                $texto = "Certificamos que ".$nomeUsuario." apresentou o trabalho ".$textoExtra3." intitulado ".$nomeEvento." durante o evento intitulado ".strtoupper($descricaoEventoPai).", promovido ".$textoExtra1." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". São autores do trabalho ".strtoupper($nomeAutores).".";
+            }else{
+                $texto = "Certificamos que ".$nomeUsuario." apresentou o trabalho ".$textoExtra3." intitulado ".$nomeEvento." durante o evento intitulado ".strtoupper($descricaoEventoPai).", promovido ".$textoExtra2." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". São autores do trabalho ".strtoupper($nomeAutores).".";
+            }
             $this->SetXY(50,64);            
             $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
             $this->SetFont('Arial', 'B', 10);
             $texto2 = "Ituiutaba, ".$mesEmissao." de ".date('Y');
             $this->SetXY(125,119);
             $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
-            $this->Image('img/ass_allison.png',40,144,'PNG');
-            $this->Image('img/ass_conrado.png',180,146,'PNG');
+            $this->Image('img/ass_allison.png',40,140,'PNG');
+            $this->Image('img/ass_conrado.png',110,165,'PNG');
+            $this->Image('img/ass_amanda.png',200,142,'PNG');
 
+            $this->Output('I',true);
         }
         public function CertificadoEventoAvaliador($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$numeroPosteres,$tipoPoster){
 

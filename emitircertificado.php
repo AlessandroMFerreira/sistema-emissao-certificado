@@ -8,7 +8,8 @@
     $participante = new Classes\participante();
     $usuario = new Classes\usuario();
 
-    $descricaoEventoPai = $_GET['descricaoPai'];
+    $apresentacao = $_GET['apresentacao'];
+    $descricaoEventoPai = urldecode($_GET['descricaoPai']);
     $oficina_minicurso = $_GET['oficinaMinicurso'];
     $idEvento = intval($_GET['idEvento']);
     $idUsuario = intval($_SESSION['idUsuario']);
@@ -17,7 +18,6 @@
     $dataInicio  = '';
     $dataFim = '';
     $cargaHoraria = '';
-    $autor = '';
     $tipoEvento = '';
     $extensao = '';
     $pesquisa = '';
@@ -47,6 +47,18 @@
     $pesquisa_projeto_icj_voluntario = '';
     $bolsista = '';
 
+    //foreach para preencher os autores
+    $dataAutor = $autor->ExibeAutorEventoEspecifico($idEvento);
+    $nomeAutores = '';
+    $contador = 0; //contar a quantidade de autores
+    foreach($dataAutor as $rowAutor){
+        $contador ++;
+        if($contador <= 1){
+            $nomeAutores = $rowAutor['nome'];
+        }else{
+            $nomeAutores .= ", ".$rowAutor['nome'];
+        }
+    }
 
     $dataEvento = $evento->ExibeEventoExpecifico($idEvento);
     $dataParticipante = $participante->BuscaParticipanteExpecificoEventoExpecifico($idUsuario,$idEvento);
@@ -177,13 +189,11 @@
         $certificado->CertificadoEventoMinistrante($cursoGraduacao,$nomeEvento,$descricaoEventoPai,$oficina_minicurso,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
     }
 
-    //refazer o certificado de palestrante...vai ter que vincular a um evento maior e tbm a oficinas e minicursos
-
     //APRESENTADOR
-    //REFAZER
+    //asasdasdasd
     else if($tipoEvento == 'extensao' && $extensao == 'evento' && $evento_apresentador == 1 && $tipoParticipante == 'apresentador' && $validado == 1 && $permiteCertificado == 1){
 
-        $certificado->CertificadoEventoPalestrante($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
+        $certificado->CertificadoEventoApresentador($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria,$apresentacao,$nomeAutores,$descricaoEventoPai);
     }
 
     //MONITOR
