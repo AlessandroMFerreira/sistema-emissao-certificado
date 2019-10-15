@@ -27,6 +27,7 @@ create table evento(
 	idEvento int primary key auto_increment,
     validado boolean not null,
     permiteemimssaocertificado boolean not null,
+    oficina_minicurso enum ('','oficina','minicurso'),
     descricao varchar(250) not null,
     carga_horaria time,
     data_inicio date not null,

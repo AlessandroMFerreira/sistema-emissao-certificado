@@ -8,6 +8,8 @@
     $participante = new Classes\participante();
     $usuario = new Classes\usuario();
 
+    $descricaoEventoPai = $_GET['descricaoPai'];
+    $oficina_minicurso = $_GET['oficinaMinicurso'];
     $idEvento = intval($_GET['idEvento']);
     $idUsuario = intval($_SESSION['idUsuario']);
     $nomeUsuario = $_SESSION['nomeUsuario'];
@@ -163,17 +165,16 @@
     }
 
     //PALESTRANTE
-    //REFAZER
     else if($tipoEvento == 'extensao' && $extensao == 'evento' && $evento_palestrante == 1 && $tipoParticipante == 'palestrante' && $validado == 1 && $permiteCertificado == 1){
 
-        $certificado->CertificadoEventoPalestrante($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
+        $certificado->CertificadoEventoPalestrante($cursoGraduacao,$nomeEvento,$descricaoEventoPai,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
     }
 
     //MINISTRANTE
-    //REFAZER
+
     else if($tipoEvento == 'extensao' && $extensao == 'evento' && $evento_ministrante == 1 && $tipoParticipante == 'ministrante' && $validado == 1 && $permiteCertificado == 1){
 
-        $certificado->CertificadoEventoPalestrante($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
+        $certificado->CertificadoEventoMinistrante($cursoGraduacao,$nomeEvento,$descricaoEventoPai,$oficina_minicurso,$colaboracao,$dataInicio,$dataFim,$cargaHoraria);
     }
 
     //refazer o certificado de palestrante...vai ter que vincular a um evento maior e tbm a oficinas e minicursos

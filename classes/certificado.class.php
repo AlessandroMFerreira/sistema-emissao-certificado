@@ -294,7 +294,7 @@
 
 
         }
-        public function CertificadoEventoMinistrante($idEvento){
+        public function CertificadoEventoMinistrante($cursoGraduacao,$nomeEvento,$descricaoEventoPai,$oficina_minicurso,$colaboracao,$dataInicio,$dataFim,$cargaHoraria){
             $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
             $inicio = explode("-",$dataInicio);
             $fim = explode("-",$dataFim);
@@ -313,10 +313,15 @@
             $this->SetFont('Arial', '', 10);
             $textoExtra1 = "em parceria pela Coordenação de Extensão e Coordenação de Pesquisa";
             $textoExtra2 = "pela Coordenação do Curso de Graduação em ".$cursoGraduacao;
-            if($colaboracao == "coordenacao"){
-                $texto = "Certificamos que ".$nomeUsuario." proferiu palestra intitulada ".$nomeEvento." durante o evento intitulado ".$nomeEvento.", promovido ".$textoExtra1." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".substr($cargaHoraria,0,5)." horas.";
+            if($oficina_minicurso == 'oficina'){
+                $textoExtra3 = "oficina intitulada";
             }else{
-                $texto = "Certificamos que ".$nomeUsuario." proferiu palestra intitulada ".$nomeEvento." durante o evento intitulado ".$nomeEvento.", promovido ".$textoExtra2." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".substr($cargaHoraria,0,5)." horas.";
+                $textoExtra3 = "minicurso intitulado";
+            }
+            if($colaboracao == "coordenacao"){
+                $texto = "Certificamos que ".$nomeUsuario." ministrou ".$textoExtra3." ".$nomeEvento." durante o evento intitulado ".strtoupper($descricaoEventoPai).", promovido ".$textoExtra1." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da atividade foi de ".substr($cargaHoraria,0,5)." horas.";
+            }else{
+                $texto = "Certificamos que ".$nomeUsuario." ministrou ".$textoExtra3." ".$nomeEvento." durante o evento intitulado ".strtoupper($descricaoEventoPai).", promovido ".$textoExtra2." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da atividade foi de ".substr($cargaHoraria,0,5)." horas.";
             }
             $this->SetXY(50,64);            
             $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
@@ -444,7 +449,7 @@
             $this->Output('I',true);
 
         }
-        public function CertificadoEventoPalestrante($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim, $cargaHoraria){
+        public function CertificadoEventoPalestrante($cursoGraduacao,$nomeEvento,$descricaoEventoPai,$colaboracao,$dataInicio,$dataFim, $cargaHoraria){
 
             $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
             $inicio = explode("-",$dataInicio);
@@ -465,9 +470,9 @@
             $textoExtra1 = "em parceria pela Coordenação de Extensão e Coordenação de Pesquisa";
             $textoExtra2 = "pela Coordenação do Curso de Graduação em ".$cursoGraduacao;
             if($colaboracao == "coordenacao"){
-                $texto = "Certificamos que ".$nomeUsuario." proferiu palestra intitulada ".$nomeEvento." durante o evento intitulado ".$nomeEvento.", promovido ".$textoExtra1." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".substr($cargaHoraria,0,5)." horas.";
+                $texto = "Certificamos que ".$nomeUsuario." proferiu palestra intitulada ".$nomeEvento." durante o evento intitulado ".$descricaoEventoPai.", promovido ".$textoExtra1." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".substr($cargaHoraria,0,5)." horas.";
             }else{
-                $texto = "Certificamos que ".$nomeUsuario." proferiu palestra intitulada ".$nomeEvento." durante o evento intitulado ".$nomeEvento.", promovido ".$textoExtra2." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".substr($cargaHoraria,0,5)." horas.";
+                $texto = "Certificamos que ".$nomeUsuario." proferiu palestra intitulada ".$nomeEvento." durante o evento intitulado ".$descricaoEventoPai.", promovido ".$textoExtra2." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".substr($cargaHoraria,0,5)." horas.";
             }
             $this->SetXY(50,64);            
             $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
