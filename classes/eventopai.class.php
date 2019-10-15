@@ -60,6 +60,15 @@
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();
         }
+
+        public function BuscaEventoPaiPorCodigo($codigo){
+            $sql = "SELECT * FROM eventopai WHERE codigo = "."'".$codigo."'";
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll();
+
+            return $data;
+        }
     }
 
 ?>

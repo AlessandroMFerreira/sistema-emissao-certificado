@@ -900,7 +900,6 @@
 
                 $dataEvento = $evento->ListarEventosValidados();
                 $dataUsuario = $usuario->ListaTodosOsUsuarios();
-                $dataEventoPai = $eventopai->ExibeTodosEventosPai();
 
                 echo "<table class='table'>
                     <tr>
@@ -917,11 +916,11 @@
                         <th></th>
                     </tr>            
                 ";
+                $descricaoEventoPai = '';
                 foreach($dataEvento as $rowEvento){
+                    $dataEventoPai = $eventopai->BuscaEventoPaiPorCodigo($rowEvento['codigo_evento_pai']);
                     foreach($dataEventoPai as $rowEventoPai){
-                        if($rowEvento['codigo_evento_pai'] == $rowEventoPai['codigo']){
-                            $descricaoEventoPai = $rowEventoPai['descricao'];
-                        }
+                        $descricaoEventoPai = $rowEventoPai['descricao'];
                     }
                     if($rowEvento['data_fim'] >= date("Y-m-d")){
                         echo "

@@ -258,7 +258,7 @@
 
             $this->Output('I',true);
         }
-        public function CertificadoEventoDebatedorMediador($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim, $cargaHoraria,$tipoParticipante){
+        public function CertificadoEventoDebatedorMediador($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim, $cargaHoraria,$tipoParticipante,$descricaoEventoPai){
             $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
             $inicio = explode("-",$dataInicio);
             $fim = explode("-",$dataFim);
@@ -280,16 +280,16 @@
             if($tipoParticipante == 'debatedor'){
                 $tipo = "participou como debatedor da";
                 if($colaboracao == "coordenacao"){
-                    $texto = "Certificamos que ".$nomeUsuario." ".$tipo." mesa redonda intitulada ".$nomeEvento." durante o evento intitulado ".$nomeEvento.", promovido ".$textoExtra1." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".substr($cargaHoraria,0,5)." horas.";
+                    $texto = "Certificamos que ".$nomeUsuario." ".$tipo." mesa redonda intitulada ".$nomeEvento." durante o evento intitulado ".$descricaoEventoPai.", promovido ".$textoExtra1." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".substr($cargaHoraria,0,5)." horas.";
                 }else{
-                    $texto = "Certificamos que ".$nomeUsuario." ".$tipo." mesa redonda intitulada ".$nomeEvento." durante o evento intitulado ".$nomeEvento.", promovido ".$textoExtra2." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".substr($cargaHoraria,0,5)." horas."; 
+                    $texto = "Certificamos que ".$nomeUsuario." ".$tipo." mesa redonda intitulada ".$nomeEvento." durante o evento intitulado ".$descricaoEventoPai.", promovido ".$textoExtra2." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".substr($cargaHoraria,0,5)." horas."; 
                 }
             }else{
                  $tipo = "mediou a";
                  if($colaboracao == "coordenacao"){
-                    $texto = "Certificamos que ".$nomeUsuario." ".$tipo." mesa redonda intitulada ".$nomeEvento." durante o evento intitulado ".$nomeEvento.", promovido ".$textoExtra1." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".substr($cargaHoraria,0,5)." horas.";
+                    $texto = "Certificamos que ".$nomeUsuario." ".$tipo." mesa redonda intitulada ".$nomeEvento." durante o evento intitulado ".$descricaoEventoPai.", promovido ".$textoExtra1." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".substr($cargaHoraria,0,5)." horas.";
                 }else{
-                    $texto = "Certificamos que ".$nomeUsuario." ".$tipo." mesa redonda intitulada ".$nomeEvento." durante o evento intitulado ".$nomeEvento.", promovido ".$textoExtra2." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".substr($cargaHoraria,0,5)." horas."; 
+                    $texto = "Certificamos que ".$nomeUsuario." ".$tipo." mesa redonda intitulada ".$nomeEvento." durante o evento intitulado ".$descricaoEventoPai.", promovido ".$textoExtra2." da UEMG, Unidade Ituiutaba. O evento ocorreu no período de ".date('d/m/Y',strtotime($dataInicio))." a ".date('d/m/Y',strtotime($dataFim)).". A carga horária total da palestra foi de ".substr($cargaHoraria,0,5)." horas."; 
                 }
             }
             
