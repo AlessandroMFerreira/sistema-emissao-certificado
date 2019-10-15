@@ -7,13 +7,14 @@
     $autor = new Classes\autor();
     $participante = new Classes\participante();
     $usuario = new Classes\usuario();
+    $eventopai = new Classes\eventopai();
 
     $apresentacao = $_GET['apresentacao'];
-    $descricaoEventoPai = urldecode($_GET['descricaoPai']);
     $oficina_minicurso = $_GET['oficinaMinicurso'];
     $idEvento = intval($_GET['idEvento']);
     $idUsuario = intval($_SESSION['idUsuario']);
     $nomeUsuario = $_SESSION['nomeUsuario'];
+    $descricaoEventoPai = '';
     $nomeEvento = '';
     $dataInicio  = '';
     $dataFim = '';
@@ -135,6 +136,13 @@
         $pesquisa_projeto_icj_voluntario = $rowEvento['pesquisa_projeto_icj_voluntario'];
         $colaboracao = $rowEvento['colaboracao'];
         $cursoGraduacao = $rowEvento['curso'];
+        $codigo = $rowEvento['codigo_evento_pai'];
+    }
+
+    //estrutura para pegar a descrição do evento pai
+    $dataEventoPai = $eventopai->BuscaEventoPaiPorCodigo($codigo);
+    foreach($dataEventoPai as $rowEventoPai){
+        $descricaoEventoPai = $rowEventoPai['descricao'];
     }
     /*================================================================================
     ABAIXO ESTÃO AS VALIDAÇÕES PARA O TIPO DE EVENTO "EXTENSÃO" ENQUADRAMENTO "PROJETO"

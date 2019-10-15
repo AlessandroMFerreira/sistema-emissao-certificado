@@ -889,7 +889,6 @@
             //Estrutura para exibir apenas os eventos que foram validados.
 
             if($acao == 'exibirEventosValidados'){
-                $codigoEventoPai = '';
                 $descricaoEventoPai = '';
                 echo "<div class='divBtnCadastrarEvento'>
                             <a href='painelcontrole.php?id=1' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Pendências</a>
@@ -900,6 +899,7 @@
 
                 $dataEvento = $evento->ListarEventosValidados();
                 $dataUsuario = $usuario->ListaTodosOsUsuarios();
+                $dataEventoPai = $eventopai->ExibeTodosEventosPai();
 
                 echo "<table class='table'>
                     <tr>
@@ -916,21 +916,16 @@
                         <th></th>
                     </tr>            
                 ";
-                $descricaoEventoPai = '';
-                foreach($dataEvento as $rowEvento){
-                    $dataEventoPai = $eventopai->BuscaEventoPaiPorCodigo($rowEvento['codigo_evento_pai']);
-                    foreach($dataEventoPai as $rowEventoPai){
-                        $descricaoEventoPai = $rowEventoPai['descricao'];
-                    }
+                foreach($dataEvento as $rowEvento){                    
                     if($rowEvento['data_fim'] >= date("Y-m-d")){
                         echo "
                             <tr>";
-                            echo "<td><a target='_blank' href="."'"."emitircertificado.php?idEvento=".$rowEvento['idEvento']."&descricaoPai=".urlencode($descricaoEventoPai)."&oficinaMinicurso=".$rowEvento['oficina_minicurso']."&apresentacao=".$rowEvento['extencao_ou_ic']."'"." style='color:red;'><i class='fas fa-print' title='Emitir Certificado'></i></a></td>";
+                            echo "<td><a target='_blank' href="."'"."emitircertificado.php?idEvento=".$rowEvento['idEvento']."&oficinaMinicurso=".$rowEvento['oficina_minicurso']."&apresentacao=".$rowEvento['extencao_ou_ic']."'"." style='color:red;'><i class='fas fa-print' title='Emitir Certificado'></i></a></td>";
                             echo "<td><a target='_blank' href="."gerarqrcode.php?idEvento=".$rowEvento['idEvento']."&evento=".$rowEvento['descricao']." title='Emitir QRcode'><i class='fas fa-qrcode'></i></a></td>";
                                 foreach($dataEventoPai as $rowEventoPai){
                                     if($rowEvento['codigo_evento_pai'] == $rowEventoPai['codigo']){
                                         echo "<td>".$rowEventoPai['descricao']."</td>";
-                                    }else{
+                                    }else if(){
                                         echo "<td>-</td>";
                                     }
                                 }
