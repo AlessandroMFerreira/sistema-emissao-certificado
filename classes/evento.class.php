@@ -46,7 +46,7 @@
         }
 
         public function ExibeTodosEventos(){
-            $sql = "SELECT * FROM evento ORDER BY data_inicio, curso";
+            $sql = "SELECT * FROM evento ORDER BY codigo_evento_pai,data_inicio,curso";
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();
             $data = $stmt->fetchAll();

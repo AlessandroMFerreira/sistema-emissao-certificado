@@ -561,10 +561,8 @@
 
         var colegiado  = document.getElementsByName('colegiado');
         var divColegiadoCurso = document.getElementById('divColegiadoCurso');
-        console.log(colegiado);
 
         for(var i = 0; i < colegiado.length; i ++){
-            console.log(colegiado[i]['value']);
             if(colegiado[i]['checked'] == true && colegiado[i]['value'] == 'sim'){
 
                 divColegiadoCurso.innerHTML = "";
@@ -596,7 +594,7 @@
                 divColegiadoCurso.appendChild(labelDataAta);
                 divColegiadoCurso.appendChild(inputDataAta);
             }
-            if(colegiado[i]['checked'] == true && colegiado[i]['value'] == 'naoColegiado'){
+            if(colegiado[i]['checked'] == true && colegiado[i]['value'] == 'nao'){
                 divColegiadoCurso.innerHTML = "";
             }
 
