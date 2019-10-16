@@ -613,9 +613,6 @@
                 $evento->ExcluirEvento($idEvento);
                 if($tela == 'validado'){
                     header('Location: painelcontrole.php?acao=exibirEventosValidados');
-                }
-                else if($tela == 'naovalidados'){
-                    header('Location: painelcontrole.php?acao=exibirEventosNaoValidados');
                 }else{
                     header('Location: painelcontrole.php?id=1');
                 }
