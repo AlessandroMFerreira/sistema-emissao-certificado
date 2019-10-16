@@ -137,6 +137,7 @@
         $colaboracao = $rowEvento['colaboracao'];
         $cursoGraduacao = $rowEvento['curso'];
         $codigo = $rowEvento['codigo_evento_pai'];
+        $fomento = $rowEvento['fomento'];
     }
 
     //estrutura para pegar a descrição do evento pai
@@ -262,4 +263,47 @@
 
     //ORIENTADOR
 
+    else if($tipoEvento == 'pesquisa' && $pesquisa == 'iniciacao cientifica' && $pesquisa_projeto_ic_orientador == 1 && $tipoParticipante == 'orientador' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoIcOrientador($bolsista,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria,$fomento);
+    }
+
+    //BOLSISTA
+
+    else if($tipoEvento == 'pesquisa' && $pesquisa == 'iniciacao cientifica' && $pesquisa_projeto_ic_bolsista == 1 && $tipoParticipante == 'bolsista' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoIcBolsista($orientador,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria,$fomento);
+    }
+
+    //VOLUNTARIO
+
+    else if($tipoEvento == 'pesquisa' && $pesquisa == 'iniciacao cientifica' && $pesquisa_projeto_ic_voluntario == 1 && $tipoParticipante == 'voluntario' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoIcVoluntario($orientador,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria,$fomento);
+    }
+
+    /*====================================================================================================
+    ABAIXO ESTÃO AS VALIDAÇÕES PARA O TIPO DE EVENTO "PESQUISA" ENQUADRAMENTO "INICIAÇÃO CINTÍFICA JÚNIOR"
+    ====================================================================================================*/
+
+    //ORIENTADOR
+
+    else if($tipoEvento == 'pesquisa' && $pesquisa == 'iniciacao cientifica junior' && $pesquisa_projeto_icj_orientador == 1 && $tipoParticipante == 'orientador' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoIcjOrientador($bolsista,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria,$fomento);
+    }
+
+    //BOLSISTA
+
+    else if($tipoEvento == 'pesquisa' && $pesquisa == 'iniciacao cientifica junior' && $pesquisa_projeto_icj_bolsista == 1 && $tipoParticipante == 'bolsista' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoIcjBolsista($orientador,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria,$fomento);
+    }
+
+    //VOLUNTARIO
+
+    else if($tipoEvento == 'pesquisa' && $pesquisa == 'iniciacao cientifica junior' && $pesquisa_projeto_icj_voluntario == 1 && $tipoParticipante == 'voluntario' && $validado == 1 && $permiteCertificado == 1){
+
+        $certificado->CertificadoIcjVoluntario($orientador,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria,$fomento);
+    }
 ?>

@@ -620,23 +620,188 @@
 
             $this->Output('I',true);
         }
-        public function CertificadoIcBolsista($idEvento){
+        public function CertificadoIcBolsista($orientador,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria,$fomento){
+
+            $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
+            $inicio = explode("-",$dataInicio);
+            $fim = explode("-",$dataFim);
+            $mesInicio = $this->mes($inicio[1]);
+            $mesFim = $this->mes($fim[1]);
+            $ano = explode("-",$dataInicio);
+            $anoRealizacao = $ano[0];
+            $mesEmissao = $this->mes(date('m'));
+
+            $this->addPage("L");
+            $this->Image('img/logo_uemg.jpg',190,10,'JPG');
+            $this->SetFont('Arial', 'B', 30);
+            $this->SetXY(115,50);
+            $textoCertificado = "CERTIFICADO";
+            $this->MultiCell(200,10,utf8_decode($textoCertificado),'','J',0);
+            $this->SetFont('Arial', '', 10);
+            $texto = "Certificamos que ".$nomeUsuario." atuou como bolsista pelo(a) ".strtoupper($fomento).", para desenvolvimento do Projeto de Iniciação Científica intitulado ".$nomeEvento.", sob a orientação do(a) professor(a) ".strtoupper($orientador).", durante o(s) mês(meses) de ".$mesInicio." a ".$mesFim." de ".$anoRealizacao.", atuando cerca de 20 horas semanais para cumprimento das atividades do referido projeto.";
+            $this->SetXY(50,64);            
+            $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
+            $this->SetFont('Arial', 'B', 10);
+            $texto2 = "Ituiutaba, ".$mesEmissao." de ".date('Y');
+            $this->SetXY(125,119);
+            $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
+            $this->Image('img/ass_amanda.png',40,149,'PNG');
+            $this->Image('img/ass_conrado.png',180,151,'PNG');
+
+            $this->Output('I',true);
 
         }
-        public function CertificadoIcOrientador($idEvento){
+        public function CertificadoIcOrientador($bolsista,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria,$fomento){
+            
+            $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
+            $inicio = explode("-",$dataInicio);
+            $fim = explode("-",$dataFim);
+            $mesInicio = $this->mes($inicio[1]);
+            $mesFim = $this->mes($fim[1]);
+            $ano = explode("-",$dataInicio);
+            $anoRealizacao = $ano[0];
+            $mesEmissao = $this->mes(date('m'));
+
+            $this->addPage("L");
+            $this->Image('img/logo_uemg.jpg',190,10,'JPG');
+            $this->SetFont('Arial', 'B', 30);
+            $this->SetXY(115,50);
+            $textoCertificado = "CERTIFICADO";
+            $this->MultiCell(200,10,utf8_decode($textoCertificado),'','J',0);
+            $this->SetFont('Arial', '', 10);
+            $texto = "Certificamos que ".$nomeUsuario." atuou como orientador(a) do(a) acadêmico(a) ".strtoupper($bolsista).", com bolsa aprovada e financiada pelo(a) ".strtoupper($fomento).", para desenvolvimento do Projeto de Iniciação Científica intitulado ".$nomeEvento.", durante o(s) mês(meses) de ".$mesInicio." a ".$mesFim." de ".$anoRealizacao.", atuando cerca de 20 horas semanais para cumprimento das atividades do referido projeto.";
+            $this->SetXY(50,64);            
+            $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
+            $this->SetFont('Arial', 'B', 10);
+            $texto2 = "Ituiutaba, ".$mesEmissao." de ".date('Y');
+            $this->SetXY(125,119);
+            $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
+            $this->Image('img/ass_amanda.png',40,149,'PNG');
+            $this->Image('img/ass_conrado.png',180,151,'PNG');
+
+            $this->Output('I',true);
 
         }
-        public function CertificadoIcVoluntario($idEvento){
+        public function CertificadoIcVoluntario($orientador,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria,$fomento){
+
+            $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
+            $inicio = explode("-",$dataInicio);
+            $fim = explode("-",$dataFim);
+            $mesInicio = $this->mes($inicio[1]);
+            $mesFim = $this->mes($fim[1]);
+            $ano = explode("-",$dataInicio);
+            $anoRealizacao = $ano[0];
+            $mesEmissao = $this->mes(date('m'));
+
+            $this->addPage("L");
+            $this->Image('img/logo_uemg.jpg',190,10,'JPG');
+            $this->SetFont('Arial', 'B', 30);
+            $this->SetXY(115,50);
+            $textoCertificado = "CERTIFICADO";
+            $this->MultiCell(200,10,utf8_decode($textoCertificado),'','J',0);
+            $this->SetFont('Arial', '', 10);
+            $texto = "Certificamos que ".$nomeUsuario." atuou como voluntário(a) no desenvolvimento do Projeto de Iniciação Científica intitulado ".$nomeEvento.", sob a orientação do(a) professor(a) ".strtoupper($orientador).", durante o(s) mês(meses) de ".$mesInicio." a ".$mesFim." de ".$anoRealizacao.", atuando cerca de 20 horas semanais para cumprimento das atividades do referido projeto.";
+            $this->SetXY(50,64);            
+            $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
+            $this->SetFont('Arial', 'B', 10);
+            $texto2 = "Ituiutaba, ".$mesEmissao." de ".date('Y');
+            $this->SetXY(125,119);
+            $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
+            $this->Image('img/ass_amanda.png',40,149,'PNG');
+            $this->Image('img/ass_conrado.png',180,151,'PNG');
+
+            $this->Output('I',true);
+        }
+        public function CertificadoIcjBolsista($orientador,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria,$fomento){
+
+            $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
+            $inicio = explode("-",$dataInicio);
+            $fim = explode("-",$dataFim);
+            $mesInicio = $this->mes($inicio[1]);
+            $mesFim = $this->mes($fim[1]);
+            $ano = explode("-",$dataInicio);
+            $anoRealizacao = $ano[0];
+            $mesEmissao = $this->mes(date('m'));
+
+            $this->addPage("L");
+            $this->Image('img/logo_uemg.jpg',190,10,'JPG');
+            $this->SetFont('Arial', 'B', 30);
+            $this->SetXY(115,50);
+            $textoCertificado = "CERTIFICADO";
+            $this->MultiCell(200,10,utf8_decode($textoCertificado),'','J',0);
+            $this->SetFont('Arial', '', 10);
+            $texto = "Certificamos que ".$nomeUsuario." atuou como bolsista pelo(a) ".strtoupper($fomento).", para desenvolvimento do Projeto de Iniciação Científica Júnior intitulado ".$nomeEvento.", sob a orientação do(a) professor(a) ".strtoupper($orientador).", durante o(s) mês(meses) de ".$mesInicio." a ".$mesFim." de ".$anoRealizacao.", atuando cerca de 20 horas semanais para cumprimento das atividades do referido projeto.";
+            $this->SetXY(50,64);            
+            $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
+            $this->SetFont('Arial', 'B', 10);
+            $texto2 = "Ituiutaba, ".$mesEmissao." de ".date('Y');
+            $this->SetXY(125,119);
+            $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
+            $this->Image('img/ass_amanda.png',40,149,'PNG');
+            $this->Image('img/ass_conrado.png',180,151,'PNG');
+
+            $this->Output('I',true);
 
         }
-        public function CertificadoIcjBolsista($idEvento){
+        public function CertificadoIcjOrientador($bolsista,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria,$fomento){
 
+            $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
+            $inicio = explode("-",$dataInicio);
+            $fim = explode("-",$dataFim);
+            $mesInicio = $this->mes($inicio[1]);
+            $mesFim = $this->mes($fim[1]);
+            $ano = explode("-",$dataInicio);
+            $anoRealizacao = $ano[0];
+            $mesEmissao = $this->mes(date('m'));
+
+            $this->addPage("L");
+            $this->Image('img/logo_uemg.jpg',190,10,'JPG');
+            $this->SetFont('Arial', 'B', 30);
+            $this->SetXY(115,50);
+            $textoCertificado = "CERTIFICADO";
+            $this->MultiCell(200,10,utf8_decode($textoCertificado),'','J',0);
+            $this->SetFont('Arial', '', 10);
+            $texto = "Certificamos que ".$nomeUsuario." atuou como orientador(a) do(a) acadêmico(a) ".strtoupper($bolsista).", com bolsa aprovada e financiada pelo(a) ".strtoupper($fomento).", para desenvolvimento do Projeto de Iniciação Científica Júnior intitulado ".$nomeEvento.", durante o(s) mês(meses) de ".$mesInicio." a ".$mesFim." de ".$anoRealizacao.", atuando cerca de 20 horas semanais para cumprimento das atividades do referido projeto.";
+            $this->SetXY(50,64);            
+            $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
+            $this->SetFont('Arial', 'B', 10);
+            $texto2 = "Ituiutaba, ".$mesEmissao." de ".date('Y');
+            $this->SetXY(125,119);
+            $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
+            $this->Image('img/ass_amanda.png',40,149,'PNG');
+            $this->Image('img/ass_conrado.png',180,151,'PNG');
+
+            $this->Output('I',true);
         }
-        public function CertificadoIcjOrientador($idEvento){
+        public function CertificadoIcjVoluntario($orientador,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria,$fomento){
 
-        }
-        public function CertificadoIcjVoluntario($idEvento){
+            $nomeUsuario = strtoupper($_SESSION['nomeUsuario']);
+            $inicio = explode("-",$dataInicio);
+            $fim = explode("-",$dataFim);
+            $mesInicio = $this->mes($inicio[1]);
+            $mesFim = $this->mes($fim[1]);
+            $ano = explode("-",$dataInicio);
+            $anoRealizacao = $ano[0];
+            $mesEmissao = $this->mes(date('m'));
 
+            $this->addPage("L");
+            $this->Image('img/logo_uemg.jpg',190,10,'JPG');
+            $this->SetFont('Arial', 'B', 30);
+            $this->SetXY(115,50);
+            $textoCertificado = "CERTIFICADO";
+            $this->MultiCell(200,10,utf8_decode($textoCertificado),'','J',0);
+            $this->SetFont('Arial', '', 10);
+            $texto = "Certificamos que ".$nomeUsuario." atuou como voluntário(a) no desenvolvimento do Projeto de Iniciação Científica Júnior intitulado ".$nomeEvento.", sob a orientação do(a) professor(a) ".strtoupper($orientador).", durante o(s) mês(meses) de ".$mesInicio." a ".$mesFim." de ".$anoRealizacao.", atuando cerca de 20 horas semanais para cumprimento das atividades do referido projeto.";
+            $this->SetXY(50,64);            
+            $this->MultiCell(200,10,utf8_decode($texto),'','J',0);
+            $this->SetFont('Arial', 'B', 10);
+            $texto2 = "Ituiutaba, ".$mesEmissao." de ".date('Y');
+            $this->SetXY(125,119);
+            $this->MultiCell(200,10,utf8_decode($texto2),'','J',0);
+            $this->Image('img/ass_amanda.png',40,149,'PNG');
+            $this->Image('img/ass_conrado.png',180,151,'PNG');
+
+            $this->Output('I',true);
         }
     }
 

@@ -69,7 +69,8 @@ create table evento(
     curso varchar(250),
     colaboracao enum('coordenacao','curso',''),
     id_usuario_responsavel int not null, /*Id do usuario que criou o evento*/ 
-    codigo_evento_pai varchar(250)   
+    codigo_evento_pai varchar(250),
+    fomento varchar(250)  
 );
 
 create table eventopai(
