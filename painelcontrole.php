@@ -926,9 +926,9 @@
                                 foreach($dataEventoPai as $rowEventoPai){
                                     if($rowEvento['codigo_evento_pai'] == $rowEventoPai['codigo']){
                                         echo "<td>".$rowEventoPai['descricao']."</td>";
-                                    }/*else if(){
+                                    }else if($rowEvento['codigo_evento_pai'] == '' || $rowEvento['codigo_evento_pai'] == null){
                                         echo "<td>-</td>";
-                                    }*/
+                                    }
                                 }
                                 echo "<td>".$rowEvento['descricao']."</td>
                                 <td>".$rowEvento['carga_horaria']."</td>
