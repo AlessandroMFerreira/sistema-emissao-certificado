@@ -163,7 +163,7 @@
                                     echo "<td>Sim</td>";
                                 }
                             echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=excluirEvento><i class='far fa-trash-alt' title='Excluir evento'></i></a></td>";   
-                            echo "<td><a href='painelcontrole.php?acao=visualizardocumentos' title='Visualizar documentos preenchidos'><i class='fas fa-list'></i></a></td>";
+                            echo "<td><a href="."painelcontrole.php?idEvento =".$rowEvento['idEvento']."&acao=visualizardocumentos' title='Visualizar documentos preenchidos'><i class='fas fa-list'></i></a></td>";
                             echo "</tr>";
                     }
                 }
