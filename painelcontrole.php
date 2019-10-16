@@ -117,6 +117,7 @@
                         <th scope='col'>Validado</th>
                         <th scope='col'>Permite emissão de certificado</th>
                         <th></th>
+                        <th></th>
                     </tr>            
                 ";
                 foreach($dataEvento as $rowEvento){
@@ -133,11 +134,12 @@
                                 }else{
                                     echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=permitirCertificado><i class='far fa-file-alt' title='Permitir emissão de certificado'></i></a></td>";
                                 }
-                                foreach($dataEventoPai as $rowEventoPai){
-                                    if($rowEvento['codigo_evento_pai'] == $rowEventoPai['codigo']){
-                                        echo "<td>".$rowEventoPai['descricao']."</td>";
-                                    }else{
-                                        echo "<td>-</td>";
+                                if($rowEvento['codigo_evento_pai'] == '' || $rowEvento['codigo_evento_pai'] == null){
+                                    echo "<td>-</td>";
+                                }else{
+                                    $dataPai = $eventopai->BuscaEventoPaiPorCodigo($rowEvento['codigo_evento_pai']);
+                                    foreach($dataPai as $rowPai){
+                                        echo "<td>".$rowPai['descricao']."</td>";
                                     }
                                 }
                                 echo "<td>".$rowEvento['curso']."</td>";
@@ -161,6 +163,7 @@
                                     echo "<td>Sim</td>";
                                 }
                             echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=excluirEvento><i class='far fa-trash-alt' title='Excluir evento'></i></a></td>";   
+                            echo "<td><a href='painelcontrole.php?acao=visualizardocumentos' title='Visualizar documentos preenchidos'><i class='fas fa-list'></i></a></td>";
                             echo "</tr>";
                     }
                 }
@@ -217,6 +220,10 @@
             /*============================================================
             ABAIXO ESTÃO TODAS AS AÇÕES QUE PODEM SER FEITAS COM EVENTOS
             ============================================================*/
+
+            if($acao ==  'visualizardocumentos'){
+
+            }
 
             if($acao ==  'eventoprincipal'){
                 echo "<div class='divBtnCadastrarEvento'>

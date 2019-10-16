@@ -64,10 +64,10 @@
                     $stmt->execute();
                     echo "<script>
                         alert('Cadastro realizado com sucesso!');
-                        window.location.href='../index.php';
+                        window.location.href='index.php';
                     </script>";
                 }
-                else if($_SESSION['tipo'] == 'administrador'){
+                else if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'administrador'){
                     $sql = "INSERT INTO usuario(isadm,isprofessor,isparticipante,nome,usuario,sexo,senha,cpf,email,endereco,numero,bairro,cidade,estado,cep,telefone) VALUES(0,0,1,"."'".$this->nome."',"."'".$this->usuario."',"."'".$this->sexo."',"."'".$this->senha."',"."'".$this->cpf."',"."'".$this->email."',"."'".$this->endereco."',"."'".$this->numero."',"."'".$this->bairro."',"."'".$this->cidade."',"."'".$this->estado."',"."'".$this->cep."',"."'".$this->telefone."'".")";
                     $stmt = $this->con()->prepare($sql);
                     $stmt->execute();
@@ -77,7 +77,7 @@
                     </script>";
                 }
             }else{
-                if($_SESSION['tipo']=='administrador'){
+                if(isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'administrador'){
 
                     if($verificaArray['usuario'] == 1){
                         echo "<script>
@@ -98,25 +98,30 @@
                             </script>";
                     }
                 }
-                if($_SESSION['tipo'] == 'participante'){
+                else if(!isset($_SESSION['tipo'])){
                     if($verificaArray['usuario'] == 1){
                         echo "<script>
                             alert('Este usuario ja está sendo utilizado');
-                                window.location.href='cadastrousuario.php';
+                                window.location.href='formularios/cadastronovousuario.html';
                             </script>";
                     }
                     if($verificaArray['cpf'] == 1){
                         echo "<script>
                                 alert('Cpf já cadastrado');
-                                window.location.href='cadastrousuario.php';
+                                window.location.href='formularios/cadastronovousuario.html';
                             </script>";
                     }
                     if($verificaArray['email'] == 1){
                         echo "<script>
                                 alert('Email já cadastrado');
-                                window.location.href='cadastrousuario.php';
+                                window.location.href='formularios/cadastronovousuario.html';
                             </script>";
                     }
+                }
+                else if($_SESSION['tipo'] == '' || $_SESSION['tipo'] == null){
+                    echo "<script>
+                            window.location.href='formularios/cadastronovousuario.html';
+                        </script>";
                 }
             }
         }

@@ -24,7 +24,7 @@
                 </div>
                 <p><strong>ou</strong></p>
                 <div class="btnEntrar">
-                    <a href="formularios/cadastrousuario.php" id="linkCadastre">Cadastre-se</a>
+                    <a href="formularios/cadastronovousuario.html" id="linkCadastre">Cadastre-se</a>
                 </div>
             </form>
             </div>
