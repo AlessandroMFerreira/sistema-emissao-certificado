@@ -212,7 +212,7 @@
     }
 
     //DEBATEDOR - MEDIADOR
-    //REFAZER
+    
     else if($tipoEvento == 'extensao' && $extensao == 'evento' && $evento_mediador == 1 && $tipoParticipante == 'mediador' || $tipoParticipante == 'debatedor' && $validado == 1 && $permiteCertificado == 1){
         $certificado->CertificadoEventoDebatedorMediador($cursoGraduacao,$nomeEvento,$colaboracao,$dataInicio,$dataFim,$cargaHoraria,$tipoParticipante,$descricaoEventoPai);
     }
