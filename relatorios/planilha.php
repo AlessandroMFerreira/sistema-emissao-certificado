@@ -138,6 +138,7 @@
                             }
         echo    "</table>
                 </div>
+                <div style='display:flex;position:relative;justify-content:center;margin-top: 10px;'><a href="."painelcontrole.php?idEvento=".$idEvento."&acao=validarEvento>Validar evento</a></div>;
                 <div style='display:flex;position:relative;justify-content:center;margin-top: 10px;'><a href='#' onclick='imprimirTela()' id='btnImprimir'>Imprmir</a></div>";
 
     }
