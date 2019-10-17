@@ -100,8 +100,8 @@
                     </div>";
                 
                 $dataEvento = $evento->ExibeTodosEventos();
-                $dataUsuario = $usuario->ListaTodosOsUsuarios();
-                $dataEventoPai = $eventopai->ExibeTodosEventosPai();
+                $dataUsuario = '';
+                $dataEventoPai = '';
 
                 echo "<table class='table'>
                     <tr>
@@ -137,9 +137,9 @@
                                 if($rowEvento['codigo_evento_pai'] == '' || $rowEvento['codigo_evento_pai'] == null){
                                     echo "<td>-</td>";
                                 }else{
-                                    $dataPai = $eventopai->BuscaEventoPaiPorCodigo($rowEvento['codigo_evento_pai']);
-                                    foreach($dataPai as $rowPai){
-                                        echo "<td>".$rowPai['descricao']."</td>";
+                                    $dataEventoPai = $eventopai->BuscaEventoPaiPorCodigo($rowEvento['codigo_evento_pai']);
+                                    foreach($dataEventoPai as $rowEventoPai){
+                                        echo "<td>".$rowEventoPai['descricao']."</td>";
                                     }
                                 }
                                 echo "<td>".$rowEvento['curso']."</td>";
@@ -147,10 +147,10 @@
                                 <td>".$rowEvento['carga_horaria']."</td>
                                 <td>".date("d/m/Y",strtotime($rowEvento['data_inicio']))."</td>
                                 <td>".date("d/m/Y",strtotime($rowEvento['data_fim']))."</td>";
+                                //aqui
+                                $dataUsuario = $usuario->ListaUsuarioExpecifico($rowEvento['id_usuario_responsavel']);
                                 foreach($dataUsuario as $rowUsuario){
-                                    if($rowEvento['id_usuario_responsavel'] == $rowUsuario['idUsuario']){
-                                        echo "<td>".$rowUsuario['nome']."</td>";
-                                    }
+                                    echo "<td>".$rowUsuario['nome']."</td>";
                                 }
                                 if($rowEvento['validado'] == 0){
                                     echo "<td>Não</td>";
@@ -627,7 +627,7 @@
 
             if($acao == 'cadastrarPlanilha'){
                 $dataEvento = $evento->ExibeEventoExpecifico($idEvento);
-                $dataUsario = $usuario->ListaTodosOsUsuarios();
+                $dataUsuario = $usuario->ListaTodosOsUsuarios();
                 $dataParticipante = $participante->ExibeParticipanteEventoEspecifico($idEvento);
                 $posteres = '';
                 $dataInscricao = '';
@@ -655,7 +655,7 @@
                                 </thead>
                                 <tbody>";
                     foreach($dataParticipante as $rowParticipante){
-                        foreach($dataUsario as $rowUsuario){
+                        foreach($dataUsuario as $rowUsuario){
                             if($rowParticipante['tipo'] == 'orientador' || $rowParticipante['tipo'] == 'bolsista' || $rowParticipante['tipo'] == 'voluntario' || $rowParticipante['tipo'] == 'colaborador' || $rowParticipante['tipo'] == 'organizador' || $rowParticipante['tipo'] == 'monitor' || $rowParticipante['tipo'] == 'palestrante' || $rowParticipante['tipo'] == 'mediador' || $rowParticipante['tipo'] == 'debatedor' || $rowParticipante['tipo'] == 'ministrante' || $rowParticipante['tipo'] == 'ouvinte' || $rowParticipante['tipo'] == 'apresentador' || $rowParticipante['tipo'] == 'avaliador'){
                                 if($rowParticipante['id_usuario'] == $rowUsuario['idUsuario']){
                                     echo "<tr>";
@@ -708,7 +708,7 @@
             if($acao == 'colab'){
 
                 $dataEvento = $evento->ExibeEventoExpecifico($idEvento);
-                $dataUsario = $usuario->ListaTodosOsUsuarios();
+                $dataUsuario = $usuario->ListaTodosOsUsuarios();
                 $dataParticipante = $participante->ExibeParticipanteEventoEspecifico($idEvento);
                 $posteres = '';
                 $dataInscricao = '';
@@ -752,7 +752,7 @@
             if($acao == 'todosInscritosPlanilha'){
                 $eventoID = intval($idEvento);
                 $dataEvento = $evento->ExibeEventoExpecifico($eventoID);
-                $dataUsario = $usuario->ListaTodosOsUsuarios();
+                $dataUsuario = $usuario->ListaTodosOsUsuarios();
                 $dataParticipante = $participante->ExibeParticipanteEventoEspecifico($idEvento);
 
                 foreach($dataEvento as $rowEvento){
@@ -777,7 +777,7 @@
                                 </thead>
                                 <tbody>";
                     foreach($dataParticipante as $rowParticipante){
-                        foreach($dataUsario as $rowUsuario){
+                        foreach($dataUsuario as $rowUsuario){
                             if($rowParticipante['id_usuario'] == $rowUsuario['idUsuario']){
                                 echo "<tr>";
                                             echo "<td>".$rowUsuario['nome']."</td>";
@@ -903,8 +903,8 @@
                     </div>";
 
                 $dataEvento = $evento->ListarEventosValidados();
-                $dataUsuario = $usuario->ListaTodosOsUsuarios();
-                $dataEventoPai = $eventopai->ExibeTodosEventosPai();
+                $dataUsuario = '';
+                $dataEventoPai = '';
 
                 echo "<table class='table'>
                     <tr>
@@ -927,21 +927,22 @@
                             <tr>";
                             echo "<td><a target='_blank' href="."'"."emitircertificado.php?idEvento=".$rowEvento['idEvento']."&oficinaMinicurso=".$rowEvento['oficina_minicurso']."&apresentacao=".$rowEvento['extencao_ou_ic']."'"." style='color:red;'><i class='fas fa-print' title='Emitir Certificado'></i></a></td>";
                             echo "<td><a target='_blank' href="."gerarqrcode.php?idEvento=".$rowEvento['idEvento']."&evento=".$rowEvento['descricao']." title='Emitir QRcode'><i class='fas fa-qrcode'></i></a></td>";
-                                foreach($dataEventoPai as $rowEventoPai){
-                                    if($rowEvento['codigo_evento_pai'] == $rowEventoPai['codigo']){
+                                $dataEventoPai = $eventopai->BuscaEventoPaiPorCodigo($rowEvento['codigo_evento_pai']);
+                                if($rowEvento['codigo_evento_pai'] != '' || $rowEvento['codigo_evento_pai'] != null){
+                                    foreach($dataEventoPai as $rowEventoPai){
                                         echo "<td>".$rowEventoPai['descricao']."</td>";
-                                    }else if($rowEvento['codigo_evento_pai'] == '' || $rowEvento['codigo_evento_pai'] == null){
-                                        echo "<td>-</td>";
                                     }
+                                } else{
+                                    echo "<td>-</td>";
                                 }
+                            
                                 echo "<td>".$rowEvento['descricao']."</td>
                                 <td>".$rowEvento['carga_horaria']."</td>
                                 <td>".date("d/m/Y",strtotime($rowEvento['data_inicio']))."</td>
                                 <td>".date("d/m/Y",strtotime($rowEvento['data_fim']))."</td>";
+                                $dataUsuario = $usuario->ListaUsuarioExpecifico($rowEvento['id_usuario_responsavel']);
                                 foreach($dataUsuario as $rowUsuario){
-                                    if($rowEvento['id_usuario_responsavel'] == $rowUsuario['idUsuario']){
-                                        echo "<td>".$rowUsuario['nome']."</td>";
-                                    }
+                                    echo "<td>".$rowUsuario['nome']."</td>";
                                 }
                                 if($rowEvento['validado'] == 0){
                                     echo "<td>Não</td>";
