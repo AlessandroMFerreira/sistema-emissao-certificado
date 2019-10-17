@@ -59,7 +59,7 @@ create table evento(
     pesquisa_projeto_icj_bolsista boolean,
     pesquisa_projeto_icj_voluntario boolean,
     sigaextensao boolean,
-    id_siga_extansao varchar(250),
+    id_siga_extensao varchar(250),
     map boolean,
     idmap varchar(250),
     informado_ao_colegiado_do_curso boolean not null,

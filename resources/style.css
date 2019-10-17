@@ -181,3 +181,18 @@ p{
     font-weight: bolder;
     color: #3c6178;
 }
+
+#tabelaPlanilha{
+    margin-top: 5%;
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+
+#tabelaPlanilha tr{
+    width: 100%;
+}
+
+#tabelaPlanilha td{
+    padding: 10px;
+}
