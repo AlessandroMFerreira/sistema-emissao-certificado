@@ -97,6 +97,7 @@
                             <a href='painelcontrole.php?acao=eventoprincipal' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Evento principal</a>
                             <a href='painelcontrole.php?acao=cadastrarEvento' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar novo evento</a>
                             <a href='painelcontrole.php?acao=exibirEventosValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos validados</a>
+                            <a href='painelcontrole.php?acao=eventosDoUsuario' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Meus eventos</a>
                     </div>";
                 
                 $dataEvento = $evento->ExibeTodosEventos();
@@ -147,7 +148,7 @@
                                 <td>".$rowEvento['carga_horaria']."</td>
                                 <td>".date("d/m/Y",strtotime($rowEvento['data_inicio']))."</td>
                                 <td>".date("d/m/Y",strtotime($rowEvento['data_fim']))."</td>";
-                                //aqui
+                                
                                 $dataUsuario = $usuario->ListaUsuarioExpecifico($rowEvento['id_usuario_responsavel']);
                                 foreach($dataUsuario as $rowUsuario){
                                     echo "<td>".$rowUsuario['nome']."</td>";

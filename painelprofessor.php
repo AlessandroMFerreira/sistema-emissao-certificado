@@ -96,11 +96,13 @@
                             <a href='painelprofessor.php?acao=eventoprincipal' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Evento principal</a>
                             <a href='painelprofessor.php?acao=cadastrarEvento' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar novo evento</a>
                             <a href='painelprofessor.php?acao=exibirEventosValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos validados</a>
+                            <a href='painelprofessor.php?acao=eventosDoUsuario' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Meus eventos</a>
+                            <a href='painelprofessor.php?acao=inscrito' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Minhas inscrições</a>
                     </div>";
                 
-                $dataEvento = $evento->ExibeTodosEventos();
-                $dataUsuario = $usuario->ListaTodosOsUsuarios();
-                $dataEventoPai = $eventopai->ExibeTodosEventosPai();
+                    $dataEvento = $evento->ExibeTodosEventos();
+                    $dataUsuario = '';
+                    $dataEventoPai = '';
 
                 echo "<table class='table'>
                     <tr>
@@ -120,22 +122,22 @@
                     if($rowEvento['validado'] == 0 || $rowEvento['permiteemimssaocertificado'] == 0){
                         echo "
                             <tr>";
+                            if($rowEvento['codigo_evento_pai'] == '' || $rowEvento['codigo_evento_pai'] == null){
+                                echo "<td>-</td>";
+                            }else{
+                                $dataEventoPai = $eventopai->BuscaEventoPaiPorCodigo($rowEvento['codigo_evento_pai']);
                                 foreach($dataEventoPai as $rowEventoPai){
-                                    if($rowEvento['codigo_evento_pai'] == $rowEventoPai['codigo']){
-                                        echo "<td>".$rowEventoPai['descricao']."</td>";
-                                    }else{
-                                        echo "<td>-</td>";
-                                    }
+                                    echo "<td>".$rowEventoPai['descricao']."</td>";
                                 }
+                            }
                                 echo "<td>".$rowEvento['curso']."</td>";
                                 echo "<td><a href="."painelprofessor.php?idEvento=".$rowEvento['idEvento']."&acao=cadastrarPlanilha title='Clique para ver a planilha de participantes associados ao evento'>".$rowEvento['descricao']."</a></td>
                                 <td>".$rowEvento['carga_horaria']."</td>
                                 <td>".date("d/m/Y",strtotime($rowEvento['data_inicio']))."</td>
                                 <td>".date("d/m/Y",strtotime($rowEvento['data_fim']))."</td>";
+                                $dataUsuario = $usuario->ListaUsuarioExpecifico($rowEvento['id_usuario_responsavel']);
                                 foreach($dataUsuario as $rowUsuario){
-                                    if($rowEvento['id_usuario_responsavel'] == $rowUsuario['idUsuario']){
-                                        echo "<td>".$rowUsuario['nome']."</td>";
-                                    }
+                                    echo "<td>".$rowUsuario['nome']."</td>";
                                 }
                                 if($rowEvento['validado'] == 0){
                                     echo "<td>Não</td>";
@@ -176,6 +178,8 @@
                             <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Evento principal</a>
                             <a href='painelprofessor.php?acao=cadastrarEvento' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar novo evento</a>
                             <a href='painelprofessor.php?acao=exibirEventosValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos validados</a>
+                            <a href='painelprofessor.php?acao=eventosDoUsuario' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Meus eventos</a>
+                            <a href='painelprofessor.php?acao=inscrito' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Minhas inscrições</a>
                     </div>";
                     include_once "formularios/cadastroeventopai.html";
                     if(isset($_POST['cadastrar'])){
@@ -220,6 +224,123 @@
                     </table>";
             }
 
+            if($acao == 'inscrito'){
+                $dataEvento = '';
+                $dataEventoPai = '';
+                $dataUsarioEvento = $participante->BuscaEventosDoUsuarioEspecifico($idUsuario);
+
+                echo "<div class='divBtnCadastrarEvento'>
+                            <a href='painelprofessor.php?id=1' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Pendências</a>
+                            <a href='painelprofessor.php?acao=eventoprincipal' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Evento principal</a>
+                            <a href='painelprofessor.php?acao=cadastrarEvento' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar novo evento</a>
+                            <a href='painelprofessor.php?acao=exibirEventosValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos validados</a>
+                            <a href='painelprofessor.php?acao=eventosDoUsuario' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Meus eventos</a>
+                            <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Minhas inscrições</a>
+                    </div>";
+
+                echo "<table class='table'>
+                    <tr>
+                        <th scope='col'>Evento principal</th>
+                        <th scope='col'>Curso</th>
+                        <th scope='col'>Descrição</th>
+                        <th scope='col'>Carga horária</th>
+                        <th scope='col'>Data inicio</th>
+                        <th scope='col'>Data fim</th>
+                        <th></th>
+                    </tr>            
+                ";
+                foreach($dataUsarioEvento as $rowUsuarioEvento){
+                    $dataEvento = $evento->ExibeEventoExpecifico($rowUsuarioEvento['id_evento']);
+                    foreach($dataEvento as $rowEvento){
+                        echo "<tr>";
+                        if($rowEvento['codigo_evento_pai'] == '' || $rowEvento['codigo_evento_pai'] == null){
+                            echo "<td>-</td>";
+                        }else{
+                            $dataEventoPai = $eventopai->BuscaEventoPaiPorCodigo($rowEvento['codigo_evento_pai']);
+                            foreach($dataEventoPai as $rowEventoPai){
+                                echo "<td>".$rowEventoPai['descricao']."</td>";
+                            }
+                        }
+                        echo "<td>".$rowEvento['curso']."</td>";
+                        echo "<td>".$rowEvento['descricao']."</td>
+                        <td>".$rowEvento['carga_horaria']."</td>
+                        <td>".date("d/m/Y",strtotime($rowEvento['data_inicio']))."</td>
+                        <td>".date("d/m/Y",strtotime($rowEvento['data_fim']))."</td>
+                        <td><a href="."painelprofessor.php?acao=cancelarinscricao&idEvento=".$rowEvento['idEvento']." title='Cancelar inscrição'><i class='far fa-times-circle'></i></a></td>";
+                        echo "</tr>";
+                    }
+                }
+                echo "</table>";
+            }
+            if($acao == 'cancelarinscricao'){
+                $participante->CancelarInscricao($idEvento,$idUsuario);
+                header('Location: painelprofessor.php?acao=inscrito');
+            }
+
+            if($acao == 'eventosDoUsuario'){
+                echo "<div class='divBtnCadastrarEvento'>
+                            <a href='painelprofessor.php?id=1' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Pendências</a>
+                            <a href='painelprofessor.php?acao=eventoprincipal' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Evento principal</a>
+                            <a href='painelprofessor.php?acao=cadastrarEvento' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar novo evento</a>
+                            <a href='painelprofessor.php?acao=exibirEventosValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos validados</a>
+                            <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Meus eventos</a>
+                            <a href='painelprofessor.php?acao=inscrito' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Minhas inscrições</a>
+                    </div>";
+                
+                    $dataEventoUsuario = $evento->ListaEventosPorUsuarioResponsavel($idUsuario);
+                    $dataUsuario = '';
+                    $dataEventoPai = '';
+
+                echo "<table class='table'>
+                    <tr>
+                        <th scope='col'>Evento principal</th>
+                        <th scope='col'>Curso</th>
+                        <th scope='col'>Descrição</th>
+                        <th scope='col'>Carga horária</th>
+                        <th scope='col'>Data inicio</th>
+                        <th scope='col'>Data fim</th>
+                        <th scope='col'>Responsável</th>
+                        <th scope='col'>Validado</th>
+                        <th scope='col'>Permite emissão de certificado</th>
+                        <th></th>
+                    </tr>            
+                ";
+                foreach($dataEventoUsuario as $rowEventoUsuario){
+                    echo "
+                        <tr>";
+                        if($rowEventoUsuario['codigo_evento_pai'] == '' || $rowEventoUsuario['codigo_evento_pai'] == null){
+                            echo "<td>-</td>";
+                        }else{
+                            $dataEventoPai = $eventopai->BuscaEventoPaiPorCodigo($rowEvento['codigo_evento_pai']);
+                            foreach($dataEventoPai as $rowEventoPai){
+                                echo "<td>".$rowEventoPai['descricao']."</td>";
+                            }
+                        }
+                            echo "<td>".$rowEventoUsuario['curso']."</td>";
+                            echo "<td><a href="."painelprofessor.php?idEvento=".$rowEventoUsuario['idEvento']."&acao=cadastrarPlanilha title='Clique para ver a planilha de participantes associados ao evento'>".$rowEventoUsuario['descricao']."</a></td>
+                            <td>".$rowEventoUsuario['carga_horaria']."</td>
+                            <td>".date("d/m/Y",strtotime($rowEventoUsuario['data_inicio']))."</td>
+                            <td>".date("d/m/Y",strtotime($rowEventoUsuario['data_fim']))."</td>";
+                            $dataUsuario = $usuario->ListaUsuarioExpecifico($rowEventoUsuario['id_usuario_responsavel']);
+                            foreach($dataUsuario as $rowUsuario){
+                                echo "<td>".$rowUsuario['nome']."</td>";
+                            }
+                            if($rowEventoUsuario['validado'] == 0){
+                                echo "<td>Não</td>";
+                            }else{
+                                echo "<td>Sim</td>";
+                            }
+                            if($rowEventoUsuario['permiteemimssaocertificado'] == 0){
+                                echo "<td>Não</td>";
+                            }else{
+                                echo "<td>Sim</td>";
+                            }
+                        echo "<td><a href="."painelprofessor.php?idEvento=".$rowEventoUsuario['idEvento']."&acao=excluirEvento><i class='far fa-trash-alt' title='Excluir evento'></i></a></td>";   
+                        echo "</tr>";
+                }
+                echo "</table>";
+            }
+
             if($acao == 'excluirEventoPai'){
                 $eventopai->ExcluiEventoPai($idEvento);
                 header("Location: painelprofessor.php?acao=eventoprincipal");
@@ -231,6 +352,8 @@
                             <a href='painelprofessor.php?acao=eventoprincipal' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Evento principal</a>
                             <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Cadastrar novo evento</a>
                             <a href='painelprofessor.php?acao=exibirEventosValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos validados</a>
+                            <a href='painelprofessor.php?acao=eventosDoUsuario' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Meus eventos</a>
+                            <a href='painelprofessor.php?acao=inscrito' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Minhas inscrições</a>
                     </div>";
                 require_once "formularios/cadastroevento.html";
                 
@@ -795,11 +918,13 @@
                             <a href='painelprofessor.php?acao=eventoprincipal' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Evento principal</a>
                             <a href='painelprofessor.php?acao=cadastrarEvento' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar novo evento</a>
                             <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Listar eventos validados</a>
+                            <a href='painelprofessor.php?acao=eventosDoUsuario' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Meus eventos</a>
+                            <a href='painelprofessor.php?acao=inscrito' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Minhas inscrições</a>
                     </div>";
 
-                $dataEvento = $evento->ListarEventosValidados();
-                $dataUsuario = $usuario->ListaTodosOsUsuarios();
-                $dataEventoPai = $eventopai->ExibeTodosEventosPai();
+                    $dataEvento = $evento->ListarEventosValidados();
+                    $dataUsuario = '';
+                    $dataEventoPai = '';
 
                 echo "<table class='table'>
                     <tr>
@@ -822,21 +947,21 @@
                             <tr>";
                             echo "<td><a target='_blank' href="."'"."emitircertificado.php?idEvento=".$rowEvento['idEvento']."&oficinaMinicurso=".$rowEvento['oficina_minicurso']."&apresentacao=".$rowEvento['extencao_ou_ic']."'"." style='color:red;'><i class='fas fa-print' title='Emitir Certificado'></i></a></td>";
                             echo "<td><a target='_blank' href="."gerarqrcode.php?idEvento=".$rowEvento['idEvento']."&evento=".$rowEvento['descricao']." title='Emitir QRcode'><i class='fas fa-qrcode'></i></a></td>";
+                            $dataEventoPai = $eventopai->BuscaEventoPaiPorCodigo($rowEvento['codigo_evento_pai']);
+                            if($rowEvento['codigo_evento_pai'] != '' || $rowEvento['codigo_evento_pai'] != null){
                                 foreach($dataEventoPai as $rowEventoPai){
-                                    if($rowEvento['codigo_evento_pai'] == $rowEventoPai['codigo']){
-                                        echo "<td>".$rowEventoPai['descricao']."</td>";
-                                    }else if($rowEvento['codigo_evento_pai'] == '' || $rowEvento['codigo_evento_pai'] == null){
-                                        echo "<td>-</td>";
-                                    }
+                                    echo "<td>".$rowEventoPai['descricao']."</td>";
                                 }
+                            } else{
+                                echo "<td>-</td>";
+                            }
                                 echo "<td>".$rowEvento['descricao']."</td>
                                 <td>".$rowEvento['carga_horaria']."</td>
                                 <td>".date("d/m/Y",strtotime($rowEvento['data_inicio']))."</td>
                                 <td>".date("d/m/Y",strtotime($rowEvento['data_fim']))."</td>";
+                                $dataUsuario = $usuario->ListaUsuarioExpecifico($rowEvento['id_usuario_responsavel']);
                                 foreach($dataUsuario as $rowUsuario){
-                                    if($rowEvento['id_usuario_responsavel'] == $rowUsuario['idUsuario']){
-                                        echo "<td>".$rowUsuario['nome']."</td>";
-                                    }
+                                    echo "<td>".$rowUsuario['nome']."</td>";
                                 }
                                 if($rowEvento['validado'] == 0){
                                     echo "<td>Não</td>";

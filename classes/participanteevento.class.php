@@ -41,6 +41,22 @@
             $data = $stmt->fetchALl();
             return $data;
         }
+        public function BuscaEventosDoUsuarioEspecifico($idUsuario){
+            $sql = "SELECT * FROM participanteevento WHERE id_usuario = ".$idUsuario;
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+
+            $data = $stmt->fetchAll();
+
+            return $data;
+        }
+
+        public function CancelarInscricao($idEvento, $idUsuario){
+            $sql = "DELETE FROM participanteevento WHERE id_usuario = ".$idUsuario." AND id_evento = ".$idEvento;
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+
+        }
     }
 
 ?>

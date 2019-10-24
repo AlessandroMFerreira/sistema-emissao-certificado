@@ -306,4 +306,10 @@
 
         $certificado->CertificadoIcjVoluntario($orientador,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria,$fomento);
     }
+    else{
+        echo "<script>
+                    alert('Certificado não permitido para este tipo de usuario!');
+                    window.close();
+                </script>";
+    }
 ?>

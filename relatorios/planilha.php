@@ -117,9 +117,11 @@
                                 </tr>
                                 <tr><td><b style='color: red;'>PARTICIPANTES DO EVENTO</b></td></tr>
                                 <tr>
-                                    <td><b>Nome:</b></td>
-                                    <td><b>CPF:</b></td>
-                                    <td><b>Tipo:</b></td>
+                                    <td><b>Nome</b></td>
+                                    <td><b>CPF</b></td>
+                                    <td><b>Tipo</b></td>
+                                    <td><b>Quantidade pôsteres</b></td>
+                                    <td><b>Natreza dos pôsteres</b></td>
                                 </tr>";
 
                             foreach($dataParticipante as $rowParticipante){
@@ -129,7 +131,19 @@
                                         echo "<tr><td>".$rowUsuario['nome']."</td>";
                                         echo "<td>".$rowUsuario['cpf']."</td>";
                                     }
-                                    echo "<td>".$rowParticipante['tipo']."</td></tr>";
+                                    echo "<td>".$rowParticipante['tipo']."</td>";
+                                    if($rowParticipante['numero_posteres'] == '' || $rowParticipante['numero_posteres'] == null || $rowParticipante['numero_posteres'] == 0){
+                                        echo "<td>Não se aplica</td>";
+                                    }else{
+                                        echo "<td>".$rowParticipante['numero_posteres']."</td>";
+                                    }
+                                    if($rowParticipante['tipoPoster'] == 'extensao'){
+                                        echo "<td>Extensão</td></tr>";
+                                    }else if($rowParticipante['tipoPoster'] == 'iniciacaoCientifica'){
+                                        echo "<td>Iniciação Científica</td></tr>";
+                                    }else{
+                                        echo "<td>Não se aplica</td></tr>";
+                                    }
                                 }
                             }
                             echo  "<tr><td><b style='color: red;'>AUTORES</b></td></tr>";

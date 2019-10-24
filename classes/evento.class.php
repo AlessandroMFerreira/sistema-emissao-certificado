@@ -107,6 +107,15 @@
             $stmt->execute();
         }
 
+        public function ListaEventosPorUsuarioResponsavel($idUsuario){
+            $sql = "SELECT * FROM evento WHERE id_usuario_responsavel = ".$idUsuario." ORDER BY data_inicio";
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll();
+
+            return $data;
+        }
+
         public function mes($mes){
             if($mes == '1' || $mes == 1){
                 $mes = "Janeiro";
