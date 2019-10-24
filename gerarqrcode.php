@@ -5,7 +5,7 @@
     use chillerlan\QRCode\QRCode;
     
     $idEvento = $_GET['idEvento'];
-    $nomeEvento = $_GET['evento'];
+    $nomeEvento = urldecode($_GET['evento']);
     var_dump($nomeEvento);
 
     $data = "idEvento=".$idEvento."&start";
