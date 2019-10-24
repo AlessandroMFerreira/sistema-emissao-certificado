@@ -58,8 +58,8 @@
             <div class='col-1' id='painel_controle_menu_esquerda'>
                 <div id='menu'>
                     <ul>
-                        <li><a href='painelcontrole.php?acao=exibirEventosValidados'>Eventos</a></li>
-                        <li><a href='painelcontrole.php?id=3'>Sair</a></li>
+                        <li><a href='painelusuario.php?acao=exibirEventosValidados'>Eventos</a></li>
+                        <li><a href='painelusuario.php?id=3'>Sair</a></li>
                     </ul>
                 </div>
             </div>
@@ -104,11 +104,7 @@
                 $dataUsarioEvento = $participante->BuscaEventosDoUsuarioEspecifico($idUsuario);
 
                 echo "<div class='divBtnCadastrarEvento'>
-                            <a href='painelcontrole.php?id=1' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Pendências</a>
-                            <a href='painelcontrole.php?acao=eventoprincipal' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Evento principal</a>
-                            <a href='painelcontrole.php?acao=cadastrarEvento' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar novo evento</a>
-                            <a href='painelcontrole.php?acao=exibirEventosValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos validados</a>
-                            <a href='painelcontrole.php?acao=eventosDoUsuario' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Meus eventos</a>
+                            <a href='painelusuario.php?acao=exibirEventosValidados' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Listar eventos disponíveis</a>
                             <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Minhas inscrições</a>
                     </div>";
 
@@ -144,7 +140,7 @@
                         <td>".date("d/m/Y",strtotime($rowEvento['data_inicio']))."</td>
                         <td>".date("d/m/Y",strtotime($rowEvento['data_fim']))."</td>";
                         echo "<td>".$rowUsuarioEvento['tipo']."</td>";
-                        echo "<td><a href="."painelcontrole.php?acao=cancelarinscricao&idEvento=".$rowEvento['idEvento']." title='Cancelar inscrição'><i class='far fa-times-circle'></i></a></td>";
+                        echo "<td><a href="."painelusuario.php?acao=cancelarinscricao&idEvento=".$rowEvento['idEvento']." title='Cancelar inscrição'><i class='far fa-times-circle'></i></a></td>";
                         echo "</tr>";
                     }
                 }
@@ -153,7 +149,7 @@
             
             if($acao == 'cancelarinscricao'){
                 $participante->CancelarInscricao($idEvento,$idUsuario);
-                header('Location: painelcontrole.php?acao=inscrito');
+                header('Location: painelusuario.php?acao=inscrito');
             }
 
 
@@ -162,12 +158,8 @@
             if($acao == 'exibirEventosValidados'){
                 $descricaoEventoPai = '';
                 echo "<div class='divBtnCadastrarEvento'>
-                            <a href='painelcontrole.php?id=1' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Pendências</a>
-                            <a href='painelcontrole.php?acao=eventoprincipal' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Evento principal</a>
-                            <a href='painelcontrole.php?acao=cadastrarEvento' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Cadastrar novo evento</a>
-                            <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Listar eventos validados</a>
-                            <a href='painelcontrole.php?acao=eventosDoUsuario' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Meus eventos</a>
-                            <a href='painelcontrole.php?acao=inscrito' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Minhas inscrições</a>
+                            <a href='#' style='text-decoration: none; color:blue;' class='linksMenuPrincipalSelecionado'>Listar eventos disponíveis</a>
+                            <a href='painelusuario.php?acao=inscrito' style='text-decoration: none; color:blue;' class='linksMenuPrincipal'>Minhas inscrições</a>
                     </div>";
 
                 $dataEvento = $evento->ListarEventosValidados();
@@ -176,8 +168,6 @@
 
                 echo "<table class='table'>
                     <tr>
-                        <th></th>
-                        <th></th>
                         <th scope='col'>Evento principal</th>
                         <th scope='col'>Descrição</th>
                         <th scope='col'>Carga horária</th>
@@ -202,8 +192,6 @@
                     if($rowEvento['data_fim'] >= date("Y-m-d")){
                         echo "
                             <tr>";
-                            echo "<td><a target='_blank' href="."'"."emitircertificado.php?idEvento=".$rowEvento['idEvento']."&oficinaMinicurso=".$rowEvento['oficina_minicurso']."&apresentacao=".$rowEvento['extencao_ou_ic']."'"." style='color:red;'><i class='fas fa-print' title='Emitir Certificado'></i></a></td>";
-                            echo "<td><a target='_blank' href="."gerarqrcode.php?idEvento=".$rowEvento['idEvento']."&evento=".$rowEvento['descricao']." title='Emitir QRcode'><i class='fas fa-qrcode'></i></a></td>";
                                 $dataEventoPai = $eventopai->BuscaEventoPaiPorCodigo($rowEvento['codigo_evento_pai']);
                                 if($rowEvento['codigo_evento_pai'] != '' || $rowEvento['codigo_evento_pai'] != null){
                                     foreach($dataEventoPai as $rowEventoPai){
@@ -234,11 +222,10 @@
                             if($rowEvento['tipo'] == 'extensao'){
                                 if($rowEvento['extensao'] == 'evento' || $rowEvento['extensao'] == 'curso'){
                                     if($rowEvento['evento_participante'] == 1 || $rowEvento['curso_participante'] == 1){
-                                        echo "<td><a href="."painelcontrole.php?acao=realizarInscricao&idEvento=".$rowEvento['idEvento']." title='Inscrever-se'><i class='fas fa-user-check'></i></a></td>";
+                                        echo "<td><a href="."painelusuario.php?acao=realizarInscricao&idEvento=".$rowEvento['idEvento']." title='Inscrever-se'><i class='fas fa-user-check'></i></a></td>";
                                     }
                                 }
                             }
-                            echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=excluirEvento&tela=validado><i class='far fa-trash-alt' title='Excluir evento'></i></a></td>";   
                             echo "</tr>";
                     }
                 }
@@ -255,11 +242,11 @@
                     }
                     echo "<script>
                             alert('Você já está inscrito neste evento como ".$tipo."');
-                            window.location.href='painelcontrole.php?acao=exibirEventosValidados';
+                            window.location.href='painelusuario.php?acao=exibirEventosValidados';
                         </script>";
                 }else{
                     $participante->InscreverParticipante($idEvento, $idUsuario);
-                    header('Location: painelcontrole.php?acao=inscrito');
+                    header('Location: painelusuario.php?acao=inscrito');
                 }
             }
 
