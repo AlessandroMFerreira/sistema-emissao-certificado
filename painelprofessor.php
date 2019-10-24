@@ -240,12 +240,14 @@
 
                 echo "<table class='table'>
                     <tr>
+                        <th></th>
                         <th scope='col'>Evento principal</th>
                         <th scope='col'>Curso</th>
                         <th scope='col'>Descrição</th>
                         <th scope='col'>Carga horária</th>
                         <th scope='col'>Data inicio</th>
                         <th scope='col'>Data fim</th>
+                        <th scope='col'>Tipo</th>
                         <th></th>
                     </tr>            
                 ";
@@ -253,6 +255,7 @@
                     $dataEvento = $evento->ExibeEventoExpecifico($rowUsuarioEvento['id_evento']);
                     foreach($dataEvento as $rowEvento){
                         echo "<tr>";
+                        echo "<td><a target='_blank' href="."'"."emitircertificado.php?idEvento=".$rowEvento['idEvento']."&oficinaMinicurso=".$rowEvento['oficina_minicurso']."&apresentacao=".$rowEvento['extencao_ou_ic']."'"." style='color:red;'><i class='fas fa-print' title='Emitir Certificado'></i></a></td>";
                         if($rowEvento['codigo_evento_pai'] == '' || $rowEvento['codigo_evento_pai'] == null){
                             echo "<td>-</td>";
                         }else{
@@ -265,13 +268,15 @@
                         echo "<td>".$rowEvento['descricao']."</td>
                         <td>".$rowEvento['carga_horaria']."</td>
                         <td>".date("d/m/Y",strtotime($rowEvento['data_inicio']))."</td>
-                        <td>".date("d/m/Y",strtotime($rowEvento['data_fim']))."</td>
-                        <td><a href="."painelprofessor.php?acao=cancelarinscricao&idEvento=".$rowEvento['idEvento']." title='Cancelar inscrição'><i class='far fa-times-circle'></i></a></td>";
+                        <td>".date("d/m/Y",strtotime($rowEvento['data_fim']))."</td>";
+                        echo "<td>".$rowUsuarioEvento['tipo']."</td>";
+                        echo "<td><a href="."painelprofessor.php?acao=cancelarinscricao&idEvento=".$rowEvento['idEvento']." title='Cancelar inscrição'><i class='far fa-times-circle'></i></a></td>";
                         echo "</tr>";
                     }
                 }
                 echo "</table>";
             }
+            
             if($acao == 'cancelarinscricao'){
                 $participante->CancelarInscricao($idEvento,$idUsuario);
                 header('Location: painelprofessor.php?acao=inscrito');
@@ -293,6 +298,7 @@
 
                 echo "<table class='table'>
                     <tr>
+                        <th></th>
                         <th scope='col'>Evento principal</th>
                         <th scope='col'>Curso</th>
                         <th scope='col'>Descrição</th>
@@ -308,6 +314,7 @@
                 foreach($dataEventoUsuario as $rowEventoUsuario){
                     echo "
                         <tr>";
+                        echo "<td><a target='_blank' href="."'"."emitircertificado.php?idEvento=".$rowEventoUsuario['idEvento']."&oficinaMinicurso=".$rowEventoUsuario['oficina_minicurso']."&apresentacao=".$rowEventoUsuario['extencao_ou_ic']."'"." style='color:red;'><i class='fas fa-print' title='Emitir Certificado'></i></a></td>";
                         if($rowEventoUsuario['codigo_evento_pai'] == '' || $rowEventoUsuario['codigo_evento_pai'] == null){
                             echo "<td>-</td>";
                         }else{
@@ -335,7 +342,7 @@
                             }else{
                                 echo "<td>Sim</td>";
                             }
-                        echo "<td><a href="."painelprofessor.php?idEvento=".$rowEventoUsuario['idEvento']."&acao=excluirEvento><i class='far fa-trash-alt' title='Excluir evento'></i></a></td>";   
+                        echo "<td><a href="."painelprofessor.php?idEvento=".$rowEventoUsuario['idEvento']."&acao=excluirEvento&tela=eventosDoUsuario><i class='far fa-trash-alt' title='Excluir evento'></i></a></td>";   
                         echo "</tr>";
                 }
                 echo "</table>";
@@ -688,6 +695,9 @@
                 $evento->ExcluirEvento($idEvento);
                 if($tela == 'validado'){
                     header('Location: painelprofessor.php?acao=exibirEventosValidados');
+                }
+                else if($tela == 'eventosDoUsuario'){
+                    header('Location: painelprofessor.php?acao=eventosDoUsuario');
                 }else{
                     header('Location: painelprofessor.php?id=1');
                 }
@@ -937,8 +947,17 @@
                         <th scope='col'>Data fim</th>
                         <th scope='col'>Responsável</th>
                         <th scope='col'>Validado</th>
-                        <th scope='col'>Permite emissão de certificado</th>
-                        <th></th>
+                        <th scope='col'>Permite emissão de certificado</th>";
+                        foreach($dataEvento as $rowEvento){
+                            if($rowEvento['tipo'] == 'extensao'){
+                                if($rowEvento['extensao'] == 'evento' || $rowEvento['extensao'] == 'curso'){
+                                    if($rowEvento['evento_participante'] == 1 || $rowEvento['curso_participante'] == 1){
+                                        echo "<th></th>";
+                                    }
+                                }
+                            }
+                        }
+                        echo "<th></th>
                     </tr>            
                 ";
                 foreach($dataEvento as $rowEvento){                    
@@ -973,11 +992,35 @@
                                 }else{
                                     echo "<td>Sim</td>";
                                 }
+                            if($rowEvento['tipo'] == 'extensao'){
+                                if($rowEvento['extensao'] == 'evento' || $rowEvento['extensao'] == 'curso'){
+                                    if($rowEvento['evento_participante'] == 1 || $rowEvento['curso_participante'] == 1){
+                                        echo "<td><a href="."painelcontrole.php?acao=realizarInscricao&idEvento=".$rowEvento['idEvento']." title='Inscrever-se'><i class='fas fa-user-check'></i></a></td>";
+                                    }
+                                }
+                            }
                             echo "<td><a href="."painelprofessor.php?idEvento=".$rowEvento['idEvento']."&acao=excluirEvento&tela=validado><i class='far fa-trash-alt' title='Excluir evento'></i></a></td>";   
                             echo "</tr>";
                     }
                 }
                 echo "</table>";
+            }
+            if($acao == 'realizarInscricao'){
+                $verificaParticipante = $participante->VerificaSeUsuarioJaInscrito($idEvento,$idUsuario);
+                if($verificaParticipante){
+                    $dataParticipante = $participante->BuscaEventosDoUsuarioEspecifico($idUsuario);
+                    $tipo = '';
+                    foreach($dataParticipante as $rowParticipante){
+                        $tipo = $rowParticipante['tipo'];
+                    }
+                    echo "<script>
+                            alert('Você já está inscrito neste evento como ".$tipo."');
+                            window.location.href='painelprofessor.php?acao=exibirEventosValidados';
+                        </script>";
+                }else{
+                    $participante->InscreverParticipante($idEvento, $idUsuario);
+                    header('Location: painelprofessor.php?acao=inscrito');
+                }
             }
 
     echo    "</div>

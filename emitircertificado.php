@@ -306,6 +306,19 @@
 
         $certificado->CertificadoIcjVoluntario($orientador,$nomeEvento,$dataInicio,$dataFim,$cargaHoraria,$fomento);
     }
+
+    else if($validado == 0){
+        echo "<script>
+                    alert('Evento ainda não validado!');
+                    window.close();
+                </script>";
+    }
+    else if($permiteCertificado == 0){
+        echo "<script>
+                    alert('A emissão de certificados para este evento ainda não foi liberada. Entre em contato com a secretaria da Universidade!');
+                    window.close();
+                </script>";
+    }
     else{
         echo "<script>
                     alert('Certificado não permitido para este tipo de usuario!');

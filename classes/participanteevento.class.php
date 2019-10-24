@@ -57,6 +57,25 @@
             $stmt->execute();
 
         }
+
+        public function InscreverParticipante($idEvento, $idUsuario){
+            $sql = "INSERT INTO participanteevento (tipo,data_inscricao,entrada,saida,id_usuario,id_evento) VALUES ('ouvinte',"."'".\date('Y-m-d')."',"."'00:00:00','00:00:00',".$idUsuario.",".$idEvento.")";
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+        }
+        public function VerificaSeUsuarioJaInscrito($idEvento, $idUsuario){
+            $sql = "SELECT * FROM participanteevento WHERE id_usuario = ".$idUsuario." AND id_evento = ".$idEvento;
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+
+            $tuplas = $stmt->fetchColumn();
+
+            if($tuplas > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 
 ?>
