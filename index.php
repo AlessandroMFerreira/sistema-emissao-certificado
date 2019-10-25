@@ -1,16 +1,30 @@
-<?php
-    session_start();
-    require_once dirname(__FILE__).DIRECTORY_SEPARATOR."vendor".DIRECTORY_SEPARATOR."autoload.php";
-    require "header.html";
-
-    $usuario = new Classes\usuario();
-?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="fontAwesome/css/all.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="resources/style.css">
+    <title>Gerenciador de Eventos</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row" id="cabecalho" style="height: 25px;">
+        </div>
+        <div class="row" id="row_cabecalho_2">
+            <div id="cabecalho2">
+                <a href="//www.uemg.br"><img src="img/logo30site.png" alt="logo_30_anos"></a>
+            </div>
+        </div>
         <div class="row" id="content">
             <div class="col-2" id="div_esquerda">
 
             </div>
             <div class="col-8" id="div_centro">
-            <form id="formLogin" method="POST" action="#">
+            <form id="formLogin" method="POST" action="login.php">
                 <div class="form-group">
                     <label for="usuario"><strong>Usuario</strong></label>
                     <input name="login" type="text" class="form-control" placeholder="Usuario">
@@ -32,24 +46,8 @@
 
             </div>
         </div>
-<?php
-    if(isset($_POST['entrar'])){
-        $login = $_POST['login'];
-        $senha = $_POST['senha'];
-        $_SESSION['tipo'] = '';
-
-        $usuarioId = $usuario->UsuarioLogin($login, $senha);
-        $_SESSION['idUsuario'] = $usuarioId['idUsuario'];
-        $_SESSION['nomeUsuario'] = $usuarioId['nomeUsuario'];
-        if($usuarioId['adm'] == 1){
-            $_SESSION['tipo'] = "administrador";
-        }
-        if($usuarioId['professor'] == 1){
-            $_SESSION['tipo'] = "professor";
-        }
-        if($usuarioId['participante'] == 1){
-            $_SESSION['tipo'] = "participante";
-        }
-    }
-    require 'footer.html';
-?>
+    </div>
+</body>
+<script src="resources/script.js"></script>
+</html>
+    
