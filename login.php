@@ -14,12 +14,15 @@
         $_SESSION['nomeUsuario'] = $usuarioId['nomeUsuario'];
         if($usuarioId['adm'] == 1){
             $_SESSION['tipo'] = "administrador";
+            header('Location: painelcontrole.php');
         }
         if($usuarioId['professor'] == 1){
             $_SESSION['tipo'] = "professor";
+            header('Location: painelprofessor.php');
         }
         if($usuarioId['participante'] == 1){
             $_SESSION['tipo'] = "participante";
+            header('Location: painelusuario.php');
         }
     }
     require 'footer.html';

@@ -4,7 +4,11 @@
     class conexao{
 
         protected function con(){
-            $con = new \PDO("mysql:host=localhost;dbname=tcc", "root", "");
+            try{
+                $con = new \PDO("mysql:host=localhost;dbname=tcc", "root", "");
+            }catch(Exception $e){
+                die("Erro ao conectar com banco de dados! Contate o suporte.");
+            }
             return $con;
         }
     }

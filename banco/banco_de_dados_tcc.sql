@@ -1,6 +1,6 @@
-create database tcc;
+#create database tcc;
 
-use tcc;
+#use tcc;
 
 create table usuario (
     idUsuario int(11) primary key auto_increment,
