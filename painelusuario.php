@@ -190,7 +190,7 @@
                         <th scope='col'>Validado</th>
                         <th scope='col'>Permite emissão de certificado</th>";
                         foreach($dataEvento as $rowEvento){
-                            if($rowEvento['tipo'] == 'extensao' && $jaFoiInscrito == 0){
+                            if($rowEvento['tipo'] == 'extensao'){
                                 if($rowEvento['extensao'] == 'evento' || $rowEvento['extensao'] == 'curso'){
                                     if($rowEvento['evento_participante'] == 1 || $rowEvento['curso_participante'] == 1){
                                         echo "<th></th>";
@@ -202,7 +202,7 @@
                     </tr>            
                 ";
                 foreach($dataEvento as $rowEvento){                    
-                    if($rowEvento['data_fim'] >= date("Y-m-d")){
+                    if($rowEvento['data_fim'] >= date("Y-m-d")  && $jaFoiInscrito == 0){
                         echo "
                             <tr>";
                                 $dataEventoPai = $eventopai->BuscaEventoPaiPorCodigo($rowEvento['codigo_evento_pai']);
