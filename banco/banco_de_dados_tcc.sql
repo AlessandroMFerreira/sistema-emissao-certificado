@@ -103,6 +103,12 @@ create table autor(
     id_evento int not null
 );
 
+create table inscricao_participante(
+    idInscricaoParticipante  int primary key auto_increment,
+    inscrito boolean,
+    id_evento int not null,
+    id_usuario int not null
+);
 /*FOREIGN KEYS*/
 alter table eventopai add constraint fk_id_usuario_responsavel_eventopai foreign key(id_usuario_responsavel) references usuario(idUsuario) on delete cascade;
 alter table evento add constraint fk_id_usuario_responsavel_evento foreign key(id_usuario_responsavel) references usuario(idUsuario) on delete cascade;
@@ -110,3 +116,5 @@ alter table evento add constraint fk_id_evento_pai foreign key(id_evento_pai) re
 alter table participanteevento add constraint fk_id_usuario_participanteevento foreign key(id_usuario) references usuario(idUsuario) on delete cascade;
 alter table participanteevento add constraint fk_id_evento_participanteevento foreign key(id_evento) references evento(idEvento) on delete cascade;
 alter table autor add constraint fk_id_evento_autor foreign key(id_evento) references evento(idEvento) on delete cascade;
+alter table inscricao_participante add constraint fk_id_evento_inscricao_participante foreign key(id_evento) references evento(idEvento) on delete cascade;
+alter table inscricao_participante add constraint fk_id_usuario_inscricao_participante foreign key(id_usuario) references usuario(idUsuario) on delete cascade;

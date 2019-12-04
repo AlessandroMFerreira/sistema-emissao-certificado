@@ -1095,7 +1095,7 @@
                                     echo "<td>-</td>";
                                 }
                             
-                                echo "<td>".$rowEvento['descricao']."</td>
+                                echo "<td><a href="."painelcontrole.php?idEvento=".$rowEvento['idEvento']."&acao=cadastrarPlanilha title='Clique para ver a planilha de participantes associados ao evento'>".$rowEvento['descricao']."</a></td>
                                 <td>".$rowEvento['carga_horaria']."</td>
                                 <td>".date("d/m/Y",strtotime($rowEvento['data_inicio']))."</td>
                                 <td>".date("d/m/Y",strtotime($rowEvento['data_fim']))."</td>";

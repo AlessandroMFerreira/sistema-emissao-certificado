@@ -76,6 +76,21 @@
                 return false;
             }
         }
+        public function gravaParticipacao($idEvento,$idUsuario){
+            $sql = "INSERT INTO inscricao_participante (id_evento, id_usuario,inscrito) VALUES(".$idEvento.",".$idUsuario.",1)";
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+        }
+
+        public function buscaSeUsuarioJaFoiCadastrado($idEvento,$idUsuario){
+            $sql = "SELECT id_evento, id_usuario,inscrito FROM inscricao_participante WHERE id_evento = ".$idEvento." AND id_usuario = ".$idUsuario;
+            $stmt = $this->con()->prepare($sql);
+            $stmt->execute();
+
+            $data = $stmt->fetchAll();
+            
+            return $data;
+        }
     }
 
 ?>

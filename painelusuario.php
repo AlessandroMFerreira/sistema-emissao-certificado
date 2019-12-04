@@ -165,6 +165,19 @@
                 $dataEvento = $evento->ListarEventosValidados();
                 $dataUsuario = '';
                 $dataEventoPai = '';
+                $controleEvento = '';
+                $jaFoiInscrito = 0;
+                
+
+                /*Esta parte valida se o usuario ja se inscreveu no evento alguma vez, se sim e se ja foi excluido 
+                servirá para que o mesmo não possa se inscrever novamente*/
+                foreach($dataEvento as $rowEvento){
+                    $controleEvento = $rowEvento["idEvento"];
+                }
+                $validacao = $participante->buscaSeUsuarioJaFoiCadastrado($controleEvento,$idUsuario);
+                foreach($validacao as $rowValidacao){
+                    $jaFoiInscrito = $rowValidacao["inscrito"];
+                }
 
                 echo "<table class='table'>
                     <tr>
@@ -177,7 +190,7 @@
                         <th scope='col'>Validado</th>
                         <th scope='col'>Permite emissão de certificado</th>";
                         foreach($dataEvento as $rowEvento){
-                            if($rowEvento['tipo'] == 'extensao'){
+                            if($rowEvento['tipo'] == 'extensao' && $jaFoiInscrito == 0){
                                 if($rowEvento['extensao'] == 'evento' || $rowEvento['extensao'] == 'curso'){
                                     if($rowEvento['evento_participante'] == 1 || $rowEvento['curso_participante'] == 1){
                                         echo "<th></th>";
@@ -246,6 +259,7 @@
                         </script>";
                 }else{
                     $participante->InscreverParticipante($idEvento, $idUsuario);
+                    $participante->gravaParticipacao($idEvento,$idUsuario);
                     header('Location: painelusuario.php?acao=inscrito');
                 }
             }
