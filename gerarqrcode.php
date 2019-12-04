@@ -6,7 +6,6 @@
     
     $idEvento = $_GET['idEvento'];
     $nomeEvento = urldecode($_GET['evento']);
-    var_dump($nomeEvento);
 
     $data = "idEvento=".$idEvento."&start";
 
@@ -15,11 +14,20 @@
                 <div class='col-3'>
                 </div>
                 <div class='col-6'>
-                <div>";
+                <div style=\"font-size: 40px; text-align: center; margin-top: 20%;\">";
                 echo $nomeEvento;
-                echo "</div>";
+                echo "<div style=\"font-size: 40px; text-align: center;\">";
                 echo '<img src="'.(new QRCode)->render($data).'" />';
                 echo "</div>
+                <div class='col-3'>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-3'>
+                </div>
+                <div class='col-6'>
+                <div style=\" text-align: center; margin-top: 10%;\">
+                <a href='#' onclick='imprimirTela()' id='btnImprimir'>Imprmir</a>
                 <div class='col-3'>
                 </div>
             </div>
