@@ -95,9 +95,6 @@
             }
             $stmt3 = $this->con()->prepare($sql3);
             $stmt3->execute();
-
-            error_log($sql3);
-
         }
         public function VerificaSeUsuarioJaInscrito($idEvento, $idUsuario){
             $sql = "SELECT * FROM participanteevento WHERE id_usuario = ".$idUsuario." AND id_evento = ".$idEvento;
