@@ -1,6 +1,6 @@
-create database tcc;
+#create database tcc;
 
-use tcc;
+#use tcc;
 
 create table usuario (
     idUsuario int(11) primary key auto_increment,
@@ -109,6 +109,16 @@ create table inscricao_participante(
     id_evento int not null,
     id_usuario int not null
 );
+
+create table presenca_usuario(
+    idPresenca int primary key auto_increment,
+    data_corrente DATE,
+    entrada DATETIME,
+    saida DATETIME,
+    id_usuario int,
+    id_evento int
+);
+
 /*FOREIGN KEYS*/
 alter table eventopai add constraint fk_id_usuario_responsavel_eventopai foreign key(id_usuario_responsavel) references usuario(idUsuario) on delete cascade;
 alter table evento add constraint fk_id_usuario_responsavel_evento foreign key(id_usuario_responsavel) references usuario(idUsuario) on delete cascade;
@@ -118,3 +128,5 @@ alter table participanteevento add constraint fk_id_evento_participanteevento fo
 alter table autor add constraint fk_id_evento_autor foreign key(id_evento) references evento(idEvento) on delete cascade;
 alter table inscricao_participante add constraint fk_id_evento_inscricao_participante foreign key(id_evento) references evento(idEvento) on delete cascade;
 alter table inscricao_participante add constraint fk_id_usuario_inscricao_participante foreign key(id_usuario) references usuario(idUsuario) on delete cascade;
+alter table presenca_usuario add constraint fk_id_usuario_presenca_usuario foreign key(id_usuario) references usuario(idUsuario) on delete cascade;
+alter table presenca_usuario add constraint fk_id_evento_presenca_usuario foreign key(id_evento) references evento(idEvento) on delete cascade;

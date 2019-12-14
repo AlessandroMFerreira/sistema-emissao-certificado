@@ -62,6 +62,42 @@
             $sql = "INSERT INTO participanteevento (tipo,data_inscricao,entrada,saida,id_usuario,id_evento) VALUES ('ouvinte',"."'".\date('Y-m-d')."',"."'00:00:00','00:00:00',".$idUsuario.",".$idEvento.")";
             $stmt = $this->con()->prepare($sql);
             $stmt->execute();
+
+            $sql2 = "SELECT data_inicio, data_fim FROM evento WHERE idEvento =".$idEvento;
+            $stmt2 = $this->con()->prepare($sql2);
+            $stmt2->execute();
+            $data = $stmt2->fetchAll();
+
+            $inicio = null;
+            $fim = null;
+            $sql3 = null;
+            
+            foreach($data as $row){
+                $inicio = $row["data_inicio"];
+                $fim = $row["data_fim"];
+            }
+
+            $dataEvento = $inicio;
+            $diferenca = strtotime($fim) - strtotime($inicio);
+            $dias = floor($diferenca/(60*60*24));
+
+            if($dias == 0){
+                $sql3 = "INSERT INTO presenca_usuario(data_corrente,id_usuario,id_evento) VALUES("."'".$inicio."',".$idUsuario.",".$idEvento.")";
+            }else{
+                for($i = 0; $i <= $dias; $i++){
+                    if($i == 0){
+                        $sql3 .= "INSERT INTO presenca_usuario(data_corrente,id_usuario,id_evento) VALUES("."'".$inicio."',".$idUsuario.",".$idEvento.")";
+                    }else{
+                        $dataEvento = date("Y-m-d",strtotime("+1 day",strtotime($dataEvento)));
+                        $sql3 .= ",("."'".$dataEvento."',".$idUsuario.",".$idEvento.")";
+                    }
+                }
+            }
+            $stmt3 = $this->con()->prepare($sql3);
+            $stmt3->execute();
+
+            error_log($sql3);
+
         }
         public function VerificaSeUsuarioJaInscrito($idEvento, $idUsuario){
             $sql = "SELECT * FROM participanteevento WHERE id_usuario = ".$idUsuario." AND id_evento = ".$idEvento;
