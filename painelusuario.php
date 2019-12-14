@@ -140,7 +140,7 @@
                         <td>".date("d/m/Y",strtotime($rowEvento['data_inicio']))."</td>
                         <td>".date("d/m/Y",strtotime($rowEvento['data_fim']))."</td>";
                         echo "<td>".$rowUsuarioEvento['tipo']."</td>";
-                        echo "<td><a href="."painelusuario.php?acao=cancelarinscricao&idEvento=".$rowEvento['idEvento']." title='Cancelar inscrição'><i class='far fa-times-circle'></i></a></td>";
+                        echo "<td><a href='#divModal' rel='modal:open' title='Cancelar inscrição' id=\"cancelarInscricaoUSER\" name=\"".$rowEvento['idEvento']."\"><i class='far fa-times-circle'></i></a></td>";
                         echo "</tr>";
                     }
                 }

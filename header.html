@@ -8,9 +8,20 @@
     <link rel="stylesheet" href="fontAwesome/css/all.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="resources/style.css">
+    <script src="resources/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <title>Gerenciador de Eventos</title>
 </head>
 <body>
+        <div id="divModal" class="modal" style="width: 40%; height: 40%;">
+                <p style="color: red; font-weight: bold;">Deseja realmente cancelar sua inscrição?</p>
+                <small>Você não poderá mais se inscrever neste evento e também não poderá emitir certificados do mesmo!</small>
+                <div style="text-align: center; margin-top: 10%;" id="btnCancelar">
+                        
+                </div>
+        </div>
+
         <div class="container-fluid">
             <div class="row" id="cabecalho" style="height: 25px;">
             </div>

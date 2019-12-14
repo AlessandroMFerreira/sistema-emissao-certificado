@@ -717,4 +717,25 @@
         window.print();
 
     }
-    
+
+    $("#cancelarInscricaoADM").click(function(){
+        var idEvento = $("#cancelarInscricaoADM").prop("name");
+        if($("#divModal").length){
+            $("#btnCancelar").html("");
+            $("#btnCancelar").append("<a href="+"painelcontrole.php?acao=cancelarinscricao&idEvento="+idEvento+"><button type='button' class='btn btn-danger'>Cancelar</button></a>");
+        }
+    });
+    $("#cancelarInscricaoPROF").click(function(){
+        var idEvento = $("#cancelarInscricaoPROF").prop("name");
+        if($("#divModal").length){
+            $("#btnCancelar").html("");
+            $("#btnCancelar").append("<a href="+"painelprofessor.php?acao=cancelarinscricao&idEvento="+idEvento+"><button type='button' class='btn btn-danger'>Cancelar</button></a>");
+        }
+    });
+    $("#cancelarInscricaoUSER").click(function(){
+        var idEvento = $("#cancelarInscricaoUSER").prop("name");
+        if($("#divModal").length){
+            $("#btnCancelar").html("");
+            $("#btnCancelar").append("<a href="+"painelusuario.php?acao=cancelarinscricao&idEvento="+idEvento+"><button type='button' class='btn btn-danger'>Cancelar</button></a>");
+        }
+    });
