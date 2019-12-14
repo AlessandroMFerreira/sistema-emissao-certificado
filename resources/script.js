@@ -718,6 +718,20 @@
 
     }
 
+    $("#btnCadastrarEvento").click(function(){
+        var inicio = new Date($("#dataInicio").val());
+        var fim = new Date($("#dataFim").val());
+        var hoje = new Date();
+        if(inicio.getTime() > fim.getTime()){
+            alert("A data inicial não pode ser maior que a final");
+            $("#dataFim").focus();
+        }
+        else if((inicio.getTime() < hoje.getTime()) || (fim.getTime() < hoje.getTime())){
+            alert("O evento deve ter uma data maior ou igual à data atual.");
+            $("#dataFim").focus();
+        }
+    });
+
     $("#cancelarInscricaoADM").click(function(){
         var idEvento = $("#cancelarInscricaoADM").prop("name");
         if($("#divModal").length){
