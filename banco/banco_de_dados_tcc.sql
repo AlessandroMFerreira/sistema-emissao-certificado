@@ -122,7 +122,7 @@ create table presenca_usuario(
 /*FOREIGN KEYS*/
 alter table eventopai add constraint fk_id_usuario_responsavel_eventopai foreign key(id_usuario_responsavel) references usuario(idUsuario) on delete cascade;
 alter table evento add constraint fk_id_usuario_responsavel_evento foreign key(id_usuario_responsavel) references usuario(idUsuario) on delete cascade;
-alter table evento add constraint fk_id_evento_pai foreign key(id_evento_pai) references evento(idEvento) on delete cascade;
+alter table evento add constraint fk_id_evento_pai foreign key(id_evento_pai) references eventopai(idEventopai) on delete cascade;
 alter table participanteevento add constraint fk_id_usuario_participanteevento foreign key(id_usuario) references usuario(idUsuario) on delete cascade;
 alter table participanteevento add constraint fk_id_evento_participanteevento foreign key(id_evento) references evento(idEvento) on delete cascade;
 alter table autor add constraint fk_id_evento_autor foreign key(id_evento) references evento(idEvento) on delete cascade;
